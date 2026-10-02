@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn tập Từ vựng & Phát âm</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f4f8;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        .word {
+            font-size: 36px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .meaning {
+            font-size: 20px;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            transition: transform 0.1s, opacity 0.3s;
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        button:hover {
+            opacity: 0.85;
+        }
+        .btn-listen { background-color: #27ae60; color: white; }
+        .btn-speak { background-color: #2980b9; color: white; }
+        .btn-next { background-color: #f39c12; color: white; margin-top: 20px; width: 100%; }
+        
+        #result {
+            margin-top: 25px;
+            font-weight: bold;
+            font-size: 18px;
+            min-height: 27px;
+        }
+        .correct { color: #27ae60; }
+        .incorrect { color: #c0392b; }
+        .listening { color: #2980b9; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="word" id="wordDisplay">Loading...</div>
+    <div class="meaning" id="meaningDisplay">Đang tải...</div>
+    
+    <div>
+        <button class="btn-listen" onclick="listenWord()">🔊 Nghe mẫu</button>
+        <button class="btn-speak" onclick="speakWord()">🎙️ Đọc thử</button>
+    </div>
+    
+    <p id="result"></p>
+    
+    <button class="btn-next" onclick="nextWord()">⏭️ Chuyển từ tiếp theo</button>
+</div>
+
+<script>
+    // Ngân hàng từ vựng (Giáo viên có thể thêm/bớt từ tại đây)
+    const vocabList = [
+        { word: "Environment", meaning: "Môi trường" },
+        { word: "Education", meaning: "Giáo dục" },
+        { word: "Knowledge", meaning: "Kiến thức" },
+        { word: "Development", meaning: "Sự phát triển" },
+        { word: "Opportunity", meaning: "Cơ hội" }
+    ];
+
+    let currentIndex = 0;
+
+    // Tải từ vựng lên giao diện
+    function loadWord() {
+        document.getElementById("wordDisplay").innerText = vocabList[currentIndex].word;
+        document.getElementById("meaningDisplay").innerText = vocabList[currentIndex].meaning;
+        document.getElementById("result").innerText = "";
+    }
+
+    // Tính năng đọc phát âm mẫu
+    function listenWord() {
+        const word = vocabList[currentIndex].word;
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = 'en-US'; 
+        utterance.rate = 0.9; // Tốc độ đọc hơi chậm lại để học sinh dễ nghe
+        window.speechSynthesis.speak(utterance);
+    }
+
+    // Tính năng ghi âm và chấm điểm
+    function speakWord() {
+        const resultDisplay = document.getElementById("result");
+        resultDisplay.innerText = "Đang nghe... (Hãy nói vào micro)";
+        resultDisplay.className = "listening";
+
+        // Khởi tạo bộ nhận diện giọng nói của trình duyệt
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            resultDisplay.innerText = "Trình duyệt không hỗ trợ micro. Vui lòng dùng Google Chrome!";
+            resultDisplay.className = "incorrect";
+            return;
+        }
+
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.start();
+
+        recognition.onresult = function(event) {
+            // Lấy từ học sinh vừa đọc, chuyển thành chữ thường và xóa khoảng trắng/dấu câu
+            const spokenWord = event.results[0][0].transcript.toLowerCase().trim().replace(/[^a-z]/g, '');
+            const targetWord = vocabList[currentIndex].word.toLowerCase().trim().replace(/[^a-z]/g, '');
+
+            if (spokenWord === targetWord) {
+                resultDisplay.innerText = "🎉 Tuyệt vời! Bạn phát âm rất chuẩn.";
+                resultDisplay.className = "correct";
+            } else {
+                resultDisplay.innerText = `Chưa đúng. Trình duyệt nghe thành: "${event.results[0][0].transcript}". Thử lại nhé!`;
+                resultDisplay.className = "incorrect";
+            }
+        };
+
+        recognition.onerror = function(event) {
+            resultDisplay.innerText = "Không nghe rõ tiếng, hãy bấm nút và thử lại!";
+            resultDisplay.className = "incorrect";
+        };
+    }
+
+    // Chuyển sang từ tiếp theo
+    function nextWord() {
+        currentIndex = (currentIndex + 1) % vocabList.length;
+        loadWord();
+    }
+
+    // Gọi hàm loadWord ngay khi mở trang web
+    window.onload = loadWord;
+</script>
+
+</body>
+</html>
