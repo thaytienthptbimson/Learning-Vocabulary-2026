@@ -5,92 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hệ thống Ôn tập Từ vựng 6 Cấp độ</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f4f8;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .container {
-            max-width: 500px;
-            width: 100%;
-        }
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .header-controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        select, input {
-            width: 100%;
-            padding: 10px;
-            font-size: 15px;
-            border: 2px solid #bdc3c7;
-            border-radius: 8px;
-            background-color: #ecf0f1;
-            font-weight: bold;
-            color: #2c3e50;
-            box-sizing: border-box;
-        }
+        /* CSS giữ nguyên như phiên bản trước */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f4f8; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .container { max-width: 500px; width: 100%; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); text-align: center; margin-bottom: 20px; }
+        .header-controls { display: flex; gap: 10px; margin-bottom: 15px; }
+        select, input { width: 100%; padding: 10px; font-size: 15px; border: 2px solid #bdc3c7; border-radius: 8px; background-color: #ecf0f1; font-weight: bold; color: #2c3e50; box-sizing: border-box; }
         select:focus, input:focus { outline: none; border-color: #3498db; }
-
-        .content-area {
-            min-height: 160px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin-bottom: 20px;
-            padding: 20px;
-            background: #fdfdfd;
-            border-radius: 10px;
-            border: 1px dashed #ccc;
-        }
-
+        .content-area { min-height: 160px; display: flex; flex-direction: column; justify-content: center; margin-bottom: 20px; padding: 20px; background: #fdfdfd; border-radius: 10px; border: 1px dashed #ccc; }
         .word { font-size: 38px; font-weight: bold; color: #2c3e50; margin-bottom: 5px; }
         .ipa { font-size: 22px; color: #e67e22; font-family: 'Times New Roman', Times, serif; margin-bottom: 10px; }
         .meaning { font-size: 20px; color: #7f8c8d; }
-        
-        button {
-            padding: 12px 15px;
-            font-size: 15px;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            margin: 5px;
-            transition: 0.2s;
-        }
+        button { padding: 12px 15px; font-size: 15px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; margin: 5px; transition: 0.2s; }
         button:active { transform: scale(0.95); }
         button:hover { opacity: 0.85; }
-        
         .btn-listen { background-color: #27ae60; color: white; width: 45%; }
         .btn-speak { background-color: #2980b9; color: white; width: 45%; }
         .btn-next { background-color: #8e44ad; color: white; margin-top: 15px; width: 100%; }
         .btn-toggle-teacher { background-color: #34495e; color: white; width: 100%; margin-top: 10px;}
-        
         #result { margin-top: 15px; font-weight: bold; font-size: 16px; min-height: 40px; }
         .correct { color: #27ae60; }
         .incorrect { color: #c0392b; }
-        
-        /* Khu vực dành cho giáo viên */
-        .teacher-area {
-            background: #fff3cd;
-            padding: 20px;
-            border-radius: 15px;
-            border: 2px solid #ffe69c;
-            display: none; /* Ẩn mặc định */
-            text-align: left;
-        }
+        .teacher-area { background: #fff3cd; padding: 20px; border-radius: 15px; border: 2px solid #ffe69c; display: none; text-align: left; }
         .teacher-area h3 { margin-top: 0; color: #856404; text-align: center; }
         .form-group { margin-bottom: 10px; }
         .btn-add { background-color: #d35400; color: white; width: 100%; margin-top: 10px; }
@@ -101,7 +37,6 @@
 <div class="container">
     <div class="card">
         <div class="header-controls">
-            <!-- Chọn Cấp độ -->
             <select id="levelSelect" onchange="changeLevel()">
                 <option value="1 (A1)">Cấp độ 1 (A1)</option>
                 <option value="2 (A2)">Cấp độ 2 (A2)</option>
@@ -112,13 +47,12 @@
             </select>
         </div>
         
-        <!-- Chọn Chủ điểm -->
         <select id="topicSelect" onchange="changeTopic()"></select>
         
         <div class="content-area">
             <div class="word" id="wordDisplay">Loading...</div>
             <div class="ipa" id="ipaDisplay">/.../</div>
-            <div class="meaning" id="meaningDisplay">Đang tải...</div>
+            <div class="meaning" id="meaningDisplay">Đang tải dữ liệu...</div>
         </div>
         
         <div>
@@ -132,89 +66,24 @@
         <p id="counterDisplay" style="color: #95a5a6; font-size: 14px;"></p>
     </div>
 
-    <!-- Nút Bật/Tắt khu vực nhập liệu -->
-    <button class="btn-toggle-teacher" onclick="toggleTeacherArea()">👨‍🏫 Bật/Tắt Chế độ Giáo viên (Thêm từ)</button>
-
     <!-- Khu vực nhập liệu của Giáo viên -->
+    <button class="btn-toggle-teacher" onclick="toggleTeacherArea()">👨‍🏫 Bật/Tắt Chế độ Giáo viên (Thêm từ)</button>
     <div class="teacher-area" id="teacherArea">
         <h3>Thêm Từ Vựng Mới</h3>
-        
-        <div class="form-group">
-            <label>1. Chọn Cấp độ:</label>
-            <select id="newLevel">
-                <option value="1 (A1)">Cấp độ 1 (A1)</option>
-                <option value="2 (A2)">Cấp độ 2 (A2)</option>
-                <option value="3 (B1)">Cấp độ 3 (B1)</option>
-                <option value="4 (B2)">Cấp độ 4 (B2)</option>
-                <option value="5 (C1)">Cấp độ 5 (C1)</option>
-                <option value="6 (C2)">Cấp độ 6 (C2)</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>2. Tên Chủ điểm (Ví dụ: Ôn thi THPT - Khối 12):</label>
-            <input type="text" id="newTopic" placeholder="Nhập tên chủ đề mới hoặc có sẵn...">
-        </div>
-
-        <div class="form-group">
-            <label>3. Từ tiếng Anh:</label>
-            <input type="text" id="newWord" placeholder="VD: Dialogue">
-        </div>
-
-        <div class="form-group">
-            <label>4. Phiên âm IPA:</label>
-            <input type="text" id="newIpa" placeholder="VD: /ˈdaɪ.ə.lɒɡ/">
-        </div>
-
-        <div class="form-group">
-            <label>5. Nghĩa tiếng Việt:</label>
-            <input type="text" id="newMeaning" placeholder="VD: Đoạn hội thoại">
-        </div>
-
+        <div class="form-group"><label>1. Chọn Cấp độ:</label><select id="newLevel"><option value="1 (A1)">Cấp độ 1 (A1)</option><option value="2 (A2)">Cấp độ 2 (A2)</option><option value="3 (B1)">Cấp độ 3 (B1)</option><option value="4 (B2)">Cấp độ 4 (B2)</option><option value="5 (C1)">Cấp độ 5 (C1)</option><option value="6 (C2)">Cấp độ 6 (C2)</option></select></div>
+        <div class="form-group"><label>2. Tên Chủ đề:</label><input type="text" id="newTopic" placeholder="VD: Khối 12 - Unit 1"></div>
+        <div class="form-group"><label>3. Từ tiếng Anh:</label><input type="text" id="newWord" placeholder="VD: Dialogue"></div>
+        <div class="form-group"><label>4. Phiên âm IPA:</label><input type="text" id="newIpa" placeholder="VD: /ˈdaɪ.ə.lɒɡ/"></div>
+        <div class="form-group"><label>5. Nghĩa tiếng Việt:</label><input type="text" id="newMeaning" placeholder="VD: Đoạn hội thoại"></div>
         <button class="btn-add" onclick="addNewWord()">➕ Lưu Từ Vựng</button>
         <p id="saveMsg" style="color: #27ae60; text-align: center; font-weight: bold; font-size: 14px;"></p>
     </div>
 </div>
 
-<script>
-    // 1. DỮ LIỆU MẶC ĐỊNH SẴN CÓ
-    const defaultData = {
-        "1 (A1)": {
-            "Greeting (Chào hỏi)": [
-                { word: "Hello", ipa: "/həˈləʊ/", meaning: "Xin chào" },
-                { word: "Morning", ipa: "/ˈmɔː.nɪŋ/", meaning: "Buổi sáng" }
-            ]
-        },
-        "2 (A2)": {
-            "School (Trường học)": [
-                { word: "Student", ipa: "/ˈstjuː.dənt/", meaning: "Học sinh" },
-                { word: "Teacher", ipa: "/ˈtiː.tʃər/", meaning: "Giáo viên" }
-            ]
-        },
-        "3 (B1)": {
-            "Luyện thi - Tình huống giao tiếp": [
-                { word: "Dialogue", ipa: "/ˈdaɪ.ə.lɒɡ/", meaning: "Đoạn hội thoại" },
-                { word: "Response", ipa: "/rɪˈspɒns/", meaning: "Phản hồi/ Trả lời" }
-            ]
-        },
-        "4 (B2)": {
-            "Environment (Môi trường)": [
-                { word: "Pollution", ipa: "/pəˈluː.ʃən/", meaning: "Sự ô nhiễm" }
-            ]
-        },
-        "5 (C1)": {
-            "Advanced Academic (Học thuật)": [
-                { word: "Hypothesis", ipa: "/haɪˈpɒθ.ə.sɪs/", meaning: "Giả thuyết" }
-            ]
-        },
-        "6 (C2)": {
-            "Idioms (Thành ngữ)": [
-                { word: "Flawless", ipa: "/ˈflɔː.ləs/", meaning: "Hoàn hảo, không tì vết" }
-            ]
-        }
-    };
+<!-- GỌI TỆP DỮ LIỆU TỪ VỰNG TỪ BÊN NGOÀI -->
+<script src="data.js"></script>
 
-    // 2. KHỞI TẠO VÀ GHÉP NỐI DỮ LIỆU
+<script>
     let vocabData = {};
     let currentLevel = "";
     let currentTopic = "";
@@ -222,14 +91,12 @@
     let currentIndex = 0;
 
     function loadDataFromStorage() {
-        // Lấy dữ liệu mặc định
+        // defaultData giờ được load từ file data.js
         vocabData = JSON.parse(JSON.stringify(defaultData));
         
-        // Kéo dữ liệu do giáo viên thêm từ LocalStorage (nếu có)
         const savedData = localStorage.getItem('teacherVocab');
         if (savedData) {
             const parsedSaved = JSON.parse(savedData);
-            // Gộp dữ liệu giáo viên vào dữ liệu hệ thống
             for (const level in parsedSaved) {
                 if (!vocabData[level]) vocabData[level] = {};
                 for (const topic in parsedSaved[level]) {
@@ -242,14 +109,13 @@
 
     function initApp() {
         loadDataFromStorage();
-        changeLevel(); // Tải cấp độ đầu tiên
+        changeLevel();
     }
 
-    // 3. ĐIỀU HƯỚNG GIAO DIỆN HỌC
     function changeLevel() {
         currentLevel = document.getElementById("levelSelect").value;
         const topicSelect = document.getElementById("topicSelect");
-        topicSelect.innerHTML = ""; // Xóa danh sách chủ đề cũ
+        topicSelect.innerHTML = ""; 
 
         const topics = vocabData[currentLevel] || {};
         const topicNames = Object.keys(topics);
@@ -302,7 +168,6 @@
         }
     }
 
-    // 4. TÍNH NĂNG ĐỌC & GHI ÂM (Như cũ)
     function listenWord() {
         if (vocabList.length === 0) return;
         const utterance = new SpeechSynthesisUtterance(vocabList[currentIndex].word);
@@ -341,7 +206,6 @@
         };
     }
 
-    // 5. CÁC TÍNH NĂNG DÀNH CHO GIÁO VIÊN
     function toggleTeacherArea() {
         const area = document.getElementById("teacherArea");
         area.style.display = area.style.display === "none" || area.style.display === "" ? "block" : "none";
@@ -355,23 +219,18 @@
         const meaning = document.getElementById("newMeaning").value.trim();
 
         if (!topic || !word || !meaning) {
-            alert("Vui lòng điền đầy đủ Chủ điểm, Từ tiếng Anh và Nghĩa!");
+            alert("Vui lòng điền đầy đủ Chủ đề, Từ tiếng Anh và Nghĩa!");
             return;
         }
 
-        // Lấy dữ liệu giáo viên hiện có từ LocalStorage (hoặc tạo mới)
         let savedData = JSON.parse(localStorage.getItem('teacherVocab') || '{}');
         
         if (!savedData[level]) savedData[level] = {};
         if (!savedData[level][topic]) savedData[level][topic] = [];
         
-        // Thêm từ mới
         savedData[level][topic].push({ word, ipa, meaning });
-        
-        // Lưu lại vào trình duyệt
         localStorage.setItem('teacherVocab', JSON.stringify(savedData));
 
-        // Báo thành công và reset form
         document.getElementById("saveMsg").innerText = "✔ Đã thêm từ vựng thành công!";
         document.getElementById("newWord").value = "";
         document.getElementById("newIpa").value = "";
@@ -379,10 +238,7 @@
         
         setTimeout(() => document.getElementById("saveMsg").innerText = "", 3000);
 
-        // Tải lại giao diện học để hiển thị ngay từ vừa thêm
         loadDataFromStorage();
-        
-        // Trỏ giao diện học về đúng chỗ vừa thêm
         document.getElementById("levelSelect").value = level;
         changeLevel();
         document.getElementById("topicSelect").value = topic;
