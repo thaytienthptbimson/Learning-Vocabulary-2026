@@ -1,0 +1,2527 @@
+[
+  {
+    "topic": "Family & Relationships",
+    "words": [
+      {
+        "word": "family",
+        "ipa": "/ˈfæm.əl.i/",
+        "meaning": "(n) gia đình"
+      },
+      {
+        "word": "mother",
+        "ipa": "/ˈmʌð.ɚ/",
+        "meaning": "(n) mẹ"
+      },
+      {
+        "word": "father",
+        "ipa": "/ˈfɑː.ðɚ/",
+        "meaning": "(n) bố, cha"
+      },
+      {
+        "word": "parent",
+        "ipa": "/ˈper.ənt/",
+        "meaning": "(n) cha hoặc mẹ"
+      },
+      {
+        "word": "brother",
+        "ipa": "/ˈbrʌð.ɚ/",
+        "meaning": "(n) anh/em trai"
+      },
+      {
+        "word": "sister",
+        "ipa": "/ˈsɪs.tɚ/",
+        "meaning": "(n) chị/em gái"
+      },
+      {
+        "word": "son",
+        "ipa": "/sʌn/",
+        "meaning": "(n) con trai"
+      },
+      {
+        "word": "daughter",
+        "ipa": "/ˈdɑː.t̬ɚ/",
+        "meaning": "(n) con gái"
+      },
+      {
+        "word": "baby",
+        "ipa": "/ˈbeɪ.bi/",
+        "meaning": "(n) em bé"
+      },
+      {
+        "word": "child",
+        "ipa": "/tʃaɪld/",
+        "meaning": "(n) đứa trẻ"
+      },
+      {
+        "word": "grandmother",
+        "ipa": "/ˈɡræn.mʌð.ɚ/",
+        "meaning": "(n) bà"
+      },
+      {
+        "word": "grandfather",
+        "ipa": "/ˈɡræn.fɑː.ðɚ/",
+        "meaning": "(n) ông"
+      },
+      {
+        "word": "husband",
+        "ipa": "/ˈhʌz.bənd/",
+        "meaning": "(n) chồng"
+      },
+      {
+        "word": "wife",
+        "ipa": "/waɪf/",
+        "meaning": "(n) vợ"
+      },
+      {
+        "word": "friend",
+        "ipa": "/frend/",
+        "meaning": "(n) bạn bè"
+      },
+      {
+        "word": "uncle",
+        "ipa": "/ˈʌŋ.kəl/",
+        "meaning": "(n) chú, bác, cậu"
+      },
+      {
+        "word": "aunt",
+        "ipa": "/ænt/",
+        "meaning": "(n) cô, dì, thím"
+      },
+      {
+        "word": "cousin",
+        "ipa": "/ˈkʌz.ən/",
+        "meaning": "(n) anh/chị/em họ"
+      },
+      {
+        "word": "boy",
+        "ipa": "/bɔɪ/",
+        "meaning": "(n) cậu bé"
+      },
+      {
+        "word": "girl",
+        "ipa": "/ɡɝːl/",
+        "meaning": "(n) cô bé"
+      },
+      {
+        "word": "man",
+        "ipa": "/mæn/",
+        "meaning": "(n) đàn ông"
+      },
+      {
+        "word": "woman",
+        "ipa": "/ˈwʊm.ən/",
+        "meaning": "(n) phụ nữ"
+      },
+      {
+        "word": "people",
+        "ipa": "/ˈpiː.pəl/",
+        "meaning": "(n) mọi người"
+      },
+      {
+        "word": "neighbor",
+        "ipa": "/ˈneɪ.bɚ/",
+        "meaning": "(n) hàng xóm"
+      },
+      {
+        "word": "married",
+        "ipa": "/ˈmer.id/",
+        "meaning": "(adj) đã kết hôn"
+      },
+      {
+        "word": "relative",
+        "ipa": "/ˈrel.ə.t̬ɪv/",
+        "meaning": "(n) họ hàng"
+      },
+      {
+        "word": "grandparent",
+        "ipa": "/ˈɡræn.per.ənt/",
+        "meaning": "(n) ông hoặc bà"
+      },
+      {
+        "word": "grandchild",
+        "ipa": "/ˈɡræn.tʃaɪld/",
+        "meaning": "(n) cháu (của ông bà)"
+      },
+      {
+        "word": "twin",
+        "ipa": "/twɪn/",
+        "meaning": "(n) anh/chị/em sinh đôi"
+      },
+      {
+        "word": "teenager",
+        "ipa": "/ˈtiːn.eɪ.dʒɚ/",
+        "meaning": "(n) thanh thiếu niên"
+      },
+      {
+        "word": "adult",
+        "ipa": "/əˈdʌlt/",
+        "meaning": "(n) người lớn"
+      },
+      {
+        "word": "couple",
+        "ipa": "/ˈkʌp.əl/",
+        "meaning": "(n) cặp đôi"
+      },
+      {
+        "word": "boyfriend",
+        "ipa": "/ˈbɔɪ.frend/",
+        "meaning": "(n) bạn trai"
+      },
+      {
+        "word": "girlfriend",
+        "ipa": "/ˈɡɝːl.frend/",
+        "meaning": "(n) bạn gái"
+      },
+      {
+        "word": "partner",
+        "ipa": "/ˈpɑːrt.nɚ/",
+        "meaning": "(n) bạn đời, đối tác"
+      },
+      {
+        "word": "birthday",
+        "ipa": "/ˈbɝːθ.deɪ/",
+        "meaning": "(n) sinh nhật"
+      },
+      {
+        "word": "wedding",
+        "ipa": "/ˈwed.ɪŋ/",
+        "meaning": "(n) đám cưới"
+      },
+      {
+        "word": "marry",
+        "ipa": "/ˈmer.i/",
+        "meaning": "(v) kết hôn"
+      },
+      {
+        "word": "divorce",
+        "ipa": "/dɪˈvɔːrs/",
+        "meaning": "(n, v) ly hôn"
+      },
+      {
+        "word": "single",
+        "ipa": "/ˈsɪŋ.ɡəl/",
+        "meaning": "(adj) độc thân"
+      },
+      {
+        "word": "lonely",
+        "ipa": "/ˈloʊn.li/",
+        "meaning": "(adj) cô đơn"
+      },
+      {
+        "word": "nephew",
+        "ipa": "/ˈnef.juː/",
+        "meaning": "(n) cháu trai"
+      },
+      {
+        "word": "niece",
+        "ipa": "/niːs/",
+        "meaning": "(n) cháu gái"
+      },
+      {
+        "word": "stepfather",
+        "ipa": "/ˈstepˌfɑː.ðɚ/",
+        "meaning": "(n) bố dượng"
+      },
+      {
+        "word": "stepmother",
+        "ipa": "/ˈstepˌmʌð.ɚ/",
+        "meaning": "(n) mẹ kế"
+      },
+      {
+        "word": "engaged",
+        "ipa": "/ɪnˈɡeɪdʒd/",
+        "meaning": "(adj) đã đính hôn"
+      },
+      {
+        "word": "classmate",
+        "ipa": "/ˈklæs.meɪt/",
+        "meaning": "(n) bạn cùng lớp"
+      },
+      {
+        "word": "roommate",
+        "ipa": "/ˈruːm.meɪt/",
+        "meaning": "(n) bạn cùng phòng"
+      },
+      {
+        "word": "guest",
+        "ipa": "/ɡest/",
+        "meaning": "(n) khách"
+      },
+      {
+        "word": "host",
+        "ipa": "/hoʊst/",
+        "meaning": "(n) chủ nhà"
+      },
+      {
+        "word": "relationship",
+        "ipa": "/rɪˈleɪ.ʃən.ʃɪp/",
+        "meaning": "(n) mối quan hệ"
+      },
+      {
+        "word": "generation",
+        "ipa": "/ˌdʒen.əˈreɪ.ʃən/",
+        "meaning": "(n) thế hệ"
+      },
+      {
+        "word": "ancestor",
+        "ipa": "/ˈæn.ses.tɚ/",
+        "meaning": "(n) tổ tiên"
+      },
+      {
+        "word": "sibling",
+        "ipa": "/ˈsɪb.lɪŋ/",
+        "meaning": "(n) anh chị em ruột"
+      },
+      {
+        "word": "orphan",
+        "ipa": "/ˈɔːr.fən/",
+        "meaning": "(n) trẻ mồ côi"
+      },
+      {
+        "word": "widow",
+        "ipa": "/ˈwɪd.oʊ/",
+        "meaning": "(n) góa phụ"
+      },
+      {
+        "word": "bride",
+        "ipa": "/braɪd/",
+        "meaning": "(n) cô dâu"
+      },
+      {
+        "word": "groom",
+        "ipa": "/ɡruːm/",
+        "meaning": "(n) chú rể"
+      },
+      {
+        "word": "honeymoon",
+        "ipa": "/ˈhʌn.i.muːn/",
+        "meaning": "(n) tuần trăng mật"
+      },
+      {
+        "word": "anniversary",
+        "ipa": "/ˌæn.əˈvɝː.sɚ.i/",
+        "meaning": "(n) ngày kỷ niệm"
+      },
+      {
+        "word": "argument",
+        "ipa": "/ˈɑːrɡ.jə.mənt/",
+        "meaning": "(n) cuộc cãi vã"
+      },
+      {
+        "word": "forgive",
+        "ipa": "/fɚˈɡɪv/",
+        "meaning": "(v) tha thứ"
+      },
+      {
+        "word": "trust",
+        "ipa": "/trʌst/",
+        "meaning": "(n, v) niềm tin; tin tưởng"
+      },
+      {
+        "word": "respect",
+        "ipa": "/rɪˈspekt/",
+        "meaning": "(n, v) sự tôn trọng; tôn trọng"
+      },
+      {
+        "word": "household",
+        "ipa": "/ˈhaʊs.hoʊld/",
+        "meaning": "(n) hộ gia đình"
+      },
+      {
+        "word": "elderly",
+        "ipa": "/ˈel.dɚ.li/",
+        "meaning": "(adj) cao tuổi"
+      },
+      {
+        "word": "spouse",
+        "ipa": "/spaʊs/",
+        "meaning": "(n) vợ hoặc chồng"
+      },
+      {
+        "word": "acquaintance",
+        "ipa": "/əˈkweɪn.təns/",
+        "meaning": "(n) người quen"
+      },
+      {
+        "word": "colleague",
+        "ipa": "/ˈkɑː.liːɡ/",
+        "meaning": "(n) đồng nghiệp"
+      },
+      {
+        "word": "jealous",
+        "ipa": "/ˈdʒel.əs/",
+        "meaning": "(adj) ghen tị"
+      },
+      {
+        "word": "ancestry",
+        "ipa": "/ˈæn.ses.tri/",
+        "meaning": "(n) dòng dõi"
+      },
+      {
+        "word": "descendant",
+        "ipa": "/dɪˈsen.dənt/",
+        "meaning": "(n) hậu duệ"
+      },
+      {
+        "word": "offspring",
+        "ipa": "/ˈɑːf.sprɪŋ/",
+        "meaning": "(n) con cái, hậu duệ"
+      },
+      {
+        "word": "custody",
+        "ipa": "/ˈkʌs.t̬ə.di/",
+        "meaning": "(n) quyền nuôi con"
+      },
+      {
+        "word": "adoption",
+        "ipa": "/əˈdɑːp.ʃən/",
+        "meaning": "(n) sự nhận nuôi"
+      },
+      {
+        "word": "guardian",
+        "ipa": "/ˈɡɑːr.di.ən/",
+        "meaning": "(n) người giám hộ"
+      },
+      {
+        "word": "bachelor",
+        "ipa": "/ˈbætʃ.əl.ɚ/",
+        "meaning": "(n) đàn ông độc thân"
+      },
+      {
+        "word": "separation",
+        "ipa": "/ˌsep.əˈreɪ.ʃən/",
+        "meaning": "(n) sự ly thân, chia cách"
+      },
+      {
+        "word": "reconcile",
+        "ipa": "/ˈrek.ən.saɪl/",
+        "meaning": "(v) hòa giải, làm lành"
+      },
+      {
+        "word": "commitment",
+        "ipa": "/kəˈmɪt.mənt/",
+        "meaning": "(n) sự cam kết"
+      },
+      {
+        "word": "rivalry",
+        "ipa": "/ˈraɪ.vəl.ri/",
+        "meaning": "(n) sự ganh đua"
+      },
+      {
+        "word": "inherit",
+        "ipa": "/ɪnˈher.ɪt/",
+        "meaning": "(v) thừa kế"
+      },
+      {
+        "word": "inheritance",
+        "ipa": "/ɪnˈher.ə.t̬əns/",
+        "meaning": "(n) tài sản thừa kế"
+      },
+      {
+        "word": "nurture",
+        "ipa": "/ˈnɝː.tʃɚ/",
+        "meaning": "(v) nuôi dưỡng"
+      },
+      {
+        "word": "mentor",
+        "ipa": "/ˈmen.tɔːr/",
+        "meaning": "(n) người cố vấn"
+      },
+      {
+        "word": "betray",
+        "ipa": "/bɪˈtreɪ/",
+        "meaning": "(v) phản bội"
+      },
+      {
+        "word": "estranged",
+        "ipa": "/ɪˈstreɪndʒd/",
+        "meaning": "(adj) xa cách, không còn liên lạc"
+      },
+      {
+        "word": "devoted",
+        "ipa": "/dɪˈvoʊ.t̬ɪd/",
+        "meaning": "(adj) tận tụy, hết lòng"
+      },
+      {
+        "word": "lineage",
+        "ipa": "/ˈlɪn.i.ɪdʒ/",
+        "meaning": "(n) dòng dõi"
+      },
+      {
+        "word": "matriarch",
+        "ipa": "/ˈmeɪ.tri.ɑːrk/",
+        "meaning": "(n) nữ gia trưởng"
+      },
+      {
+        "word": "patriarch",
+        "ipa": "/ˈpeɪ.tri.ɑːrk/",
+        "meaning": "(n) gia trưởng"
+      },
+      {
+        "word": "kinship",
+        "ipa": "/ˈkɪn.ʃɪp/",
+        "meaning": "(n) quan hệ họ hàng"
+      },
+      {
+        "word": "familial",
+        "ipa": "/fəˈmɪl.i.əl/",
+        "meaning": "(adj) thuộc về gia đình"
+      },
+      {
+        "word": "solidarity",
+        "ipa": "/ˌsɑː.ləˈder.ə.t̬i/",
+        "meaning": "(n) sự đoàn kết"
+      },
+      {
+        "word": "camaraderie",
+        "ipa": "/ˌkɑː.məˈrɑː.dɚ.i/",
+        "meaning": "(n) tình đồng đội"
+      },
+      {
+        "word": "rapport",
+        "ipa": "/ræpˈɔːr/",
+        "meaning": "(n) mối quan hệ hòa hợp"
+      },
+      {
+        "word": "affinity",
+        "ipa": "/əˈfɪn.ə.t̬i/",
+        "meaning": "(n) sự gắn kết, đồng cảm"
+      },
+      {
+        "word": "bereavement",
+        "ipa": "/bɪˈriːv.mənt/",
+        "meaning": "(n) sự mất người thân"
+      },
+      {
+        "word": "cohabit",
+        "ipa": "/koʊˈhæb.ɪt/",
+        "meaning": "(v) sống chung như vợ chồng"
+      },
+      {
+        "word": "monogamy",
+        "ipa": "/məˈnɑː.ɡə.mi/",
+        "meaning": "(n) chế độ một vợ một chồng"
+      }
+    ]
+  },
+  {
+    "topic": "Food & Drink",
+    "words": [
+      {
+        "word": "food",
+        "ipa": "/fuːd/",
+        "meaning": "(n) thức ăn"
+      },
+      {
+        "word": "drink",
+        "ipa": "/drɪŋk/",
+        "meaning": "(n, v) đồ uống; uống"
+      },
+      {
+        "word": "eat",
+        "ipa": "/iːt/",
+        "meaning": "(v) ăn"
+      },
+      {
+        "word": "water",
+        "ipa": "/ˈwɑː.t̬ɚ/",
+        "meaning": "(n) nước"
+      },
+      {
+        "word": "milk",
+        "ipa": "/mɪlk/",
+        "meaning": "(n) sữa"
+      },
+      {
+        "word": "coffee",
+        "ipa": "/ˈkɑː.fi/",
+        "meaning": "(n) cà phê"
+      },
+      {
+        "word": "tea",
+        "ipa": "/tiː/",
+        "meaning": "(n) trà"
+      },
+      {
+        "word": "juice",
+        "ipa": "/dʒuːs/",
+        "meaning": "(n) nước ép"
+      },
+      {
+        "word": "bread",
+        "ipa": "/bred/",
+        "meaning": "(n) bánh mì"
+      },
+      {
+        "word": "rice",
+        "ipa": "/raɪs/",
+        "meaning": "(n) gạo, cơm"
+      },
+      {
+        "word": "egg",
+        "ipa": "/eɡ/",
+        "meaning": "(n) trứng"
+      },
+      {
+        "word": "meat",
+        "ipa": "/miːt/",
+        "meaning": "(n) thịt"
+      },
+      {
+        "word": "fish",
+        "ipa": "/fɪʃ/",
+        "meaning": "(n) cá"
+      },
+      {
+        "word": "chicken",
+        "ipa": "/ˈtʃɪk.ɪn/",
+        "meaning": "(n) thịt gà"
+      },
+      {
+        "word": "apple",
+        "ipa": "/ˈæp.əl/",
+        "meaning": "(n) quả táo"
+      },
+      {
+        "word": "banana",
+        "ipa": "/bəˈnæn.ə/",
+        "meaning": "(n) quả chuối"
+      },
+      {
+        "word": "orange",
+        "ipa": "/ˈɔːr.ɪndʒ/",
+        "meaning": "(n) quả cam"
+      },
+      {
+        "word": "cake",
+        "ipa": "/keɪk/",
+        "meaning": "(n) bánh ngọt"
+      },
+      {
+        "word": "breakfast",
+        "ipa": "/ˈbrek.fəst/",
+        "meaning": "(n) bữa sáng"
+      },
+      {
+        "word": "lunch",
+        "ipa": "/lʌntʃ/",
+        "meaning": "(n) bữa trưa"
+      },
+      {
+        "word": "dinner",
+        "ipa": "/ˈdɪn.ɚ/",
+        "meaning": "(n) bữa tối"
+      },
+      {
+        "word": "hungry",
+        "ipa": "/ˈhʌŋ.ɡri/",
+        "meaning": "(adj) đói"
+      },
+      {
+        "word": "thirsty",
+        "ipa": "/ˈθɝː.sti/",
+        "meaning": "(adj) khát"
+      },
+      {
+        "word": "cheese",
+        "ipa": "/tʃiːz/",
+        "meaning": "(n) pho mát"
+      },
+      {
+        "word": "soup",
+        "ipa": "/suːp/",
+        "meaning": "(n) súp, canh"
+      },
+      {
+        "word": "beef",
+        "ipa": "/biːf/",
+        "meaning": "(n) thịt bò"
+      },
+      {
+        "word": "pork",
+        "ipa": "/pɔːrk/",
+        "meaning": "(n) thịt lợn"
+      },
+      {
+        "word": "vegetable",
+        "ipa": "/ˈvedʒ.tə.bəl/",
+        "meaning": "(n) rau củ"
+      },
+      {
+        "word": "fruit",
+        "ipa": "/fruːt/",
+        "meaning": "(n) trái cây"
+      },
+      {
+        "word": "potato",
+        "ipa": "/pəˈteɪ.toʊ/",
+        "meaning": "(n) khoai tây"
+      },
+      {
+        "word": "tomato",
+        "ipa": "/təˈmeɪ.toʊ/",
+        "meaning": "(n) cà chua"
+      },
+      {
+        "word": "onion",
+        "ipa": "/ˈʌn.jən/",
+        "meaning": "(n) hành tây"
+      },
+      {
+        "word": "carrot",
+        "ipa": "/ˈker.ət/",
+        "meaning": "(n) cà rốt"
+      },
+      {
+        "word": "noodle",
+        "ipa": "/ˈnuː.dəl/",
+        "meaning": "(n) mì, bún, phở"
+      },
+      {
+        "word": "sandwich",
+        "ipa": "/ˈsæn.wɪtʃ/",
+        "meaning": "(n) bánh mì kẹp"
+      },
+      {
+        "word": "salad",
+        "ipa": "/ˈsæl.əd/",
+        "meaning": "(n) món salad"
+      },
+      {
+        "word": "sugar",
+        "ipa": "/ˈʃʊɡ.ɚ/",
+        "meaning": "(n) đường"
+      },
+      {
+        "word": "salt",
+        "ipa": "/sɔːlt/",
+        "meaning": "(n) muối"
+      },
+      {
+        "word": "pepper",
+        "ipa": "/ˈpep.ɚ/",
+        "meaning": "(n) hạt tiêu"
+      },
+      {
+        "word": "butter",
+        "ipa": "/ˈbʌt̬.ɚ/",
+        "meaning": "(n) bơ"
+      },
+      {
+        "word": "snack",
+        "ipa": "/snæk/",
+        "meaning": "(n) đồ ăn vặt"
+      },
+      {
+        "word": "menu",
+        "ipa": "/ˈmen.juː/",
+        "meaning": "(n) thực đơn"
+      },
+      {
+        "word": "restaurant",
+        "ipa": "/ˈres.tɚ.ɑːnt/",
+        "meaning": "(n) nhà hàng"
+      },
+      {
+        "word": "delicious",
+        "ipa": "/dɪˈlɪʃ.əs/",
+        "meaning": "(adj) ngon"
+      },
+      {
+        "word": "sweet",
+        "ipa": "/swiːt/",
+        "meaning": "(adj) ngọt"
+      },
+      {
+        "word": "sour",
+        "ipa": "/saʊr/",
+        "meaning": "(adj) chua"
+      },
+      {
+        "word": "spicy",
+        "ipa": "/ˈspaɪ.si/",
+        "meaning": "(adj) cay"
+      },
+      {
+        "word": "cook",
+        "ipa": "/kʊk/",
+        "meaning": "(v) nấu ăn"
+      },
+      {
+        "word": "bottle",
+        "ipa": "/ˈbɑː.t̬əl/",
+        "meaning": "(n) cái chai"
+      },
+      {
+        "word": "plate",
+        "ipa": "/pleɪt/",
+        "meaning": "(n) cái đĩa"
+      },
+      {
+        "word": "ingredient",
+        "ipa": "/ɪnˈɡriː.di.ənt/",
+        "meaning": "(n) nguyên liệu"
+      },
+      {
+        "word": "recipe",
+        "ipa": "/ˈres.ə.pi/",
+        "meaning": "(n) công thức nấu ăn"
+      },
+      {
+        "word": "cuisine",
+        "ipa": "/kwɪˈziːn/",
+        "meaning": "(n) ẩm thực"
+      },
+      {
+        "word": "dessert",
+        "ipa": "/dɪˈzɝːt/",
+        "meaning": "(n) món tráng miệng"
+      },
+      {
+        "word": "appetizer",
+        "ipa": "/ˈæp.ə.taɪ.zɚ/",
+        "meaning": "(n) món khai vị"
+      },
+      {
+        "word": "beverage",
+        "ipa": "/ˈbev.ɚ.ɪdʒ/",
+        "meaning": "(n) đồ uống"
+      },
+      {
+        "word": "seafood",
+        "ipa": "/ˈsiː.fuːd/",
+        "meaning": "(n) hải sản"
+      },
+      {
+        "word": "protein",
+        "ipa": "/ˈproʊ.tiːn/",
+        "meaning": "(n) chất đạm"
+      },
+      {
+        "word": "vitamin",
+        "ipa": "/ˈvaɪ.t̬ə.mɪn/",
+        "meaning": "(n) vitamin"
+      },
+      {
+        "word": "diet",
+        "ipa": "/ˈdaɪ.ət/",
+        "meaning": "(n) chế độ ăn"
+      },
+      {
+        "word": "vegetarian",
+        "ipa": "/ˌvedʒ.əˈter.i.ən/",
+        "meaning": "(n, adj) người ăn chay"
+      },
+      {
+        "word": "fry",
+        "ipa": "/fraɪ/",
+        "meaning": "(v) chiên, rán"
+      },
+      {
+        "word": "boil",
+        "ipa": "/bɔɪl/",
+        "meaning": "(v) luộc, đun sôi"
+      },
+      {
+        "word": "bake",
+        "ipa": "/beɪk/",
+        "meaning": "(v) nướng (bằng lò)"
+      },
+      {
+        "word": "grill",
+        "ipa": "/ɡrɪl/",
+        "meaning": "(v) nướng (trên vỉ)"
+      },
+      {
+        "word": "slice",
+        "ipa": "/slaɪs/",
+        "meaning": "(n, v) lát; thái lát"
+      },
+      {
+        "word": "bitter",
+        "ipa": "/ˈbɪt̬.ɚ/",
+        "meaning": "(adj) đắng"
+      },
+      {
+        "word": "fresh",
+        "ipa": "/freʃ/",
+        "meaning": "(adj) tươi"
+      },
+      {
+        "word": "tasty",
+        "ipa": "/ˈteɪ.sti/",
+        "meaning": "(adj) ngon miệng"
+      },
+      {
+        "word": "takeout",
+        "ipa": "/ˈteɪk.aʊt/",
+        "meaning": "(n) đồ ăn mang đi"
+      },
+      {
+        "word": "nutrition",
+        "ipa": "/nuːˈtrɪʃ.ən/",
+        "meaning": "(n) dinh dưỡng"
+      },
+      {
+        "word": "nutritious",
+        "ipa": "/nuːˈtrɪʃ.əs/",
+        "meaning": "(adj) bổ dưỡng"
+      },
+      {
+        "word": "calorie",
+        "ipa": "/ˈkæl.ɚ.i/",
+        "meaning": "(n) calo"
+      },
+      {
+        "word": "organic",
+        "ipa": "/ɔːrˈɡæn.ɪk/",
+        "meaning": "(adj) hữu cơ"
+      },
+      {
+        "word": "processed",
+        "ipa": "/ˈprɑː.sest/",
+        "meaning": "(adj) đã qua chế biến"
+      },
+      {
+        "word": "nourish",
+        "ipa": "/ˈnɝː.ɪʃ/",
+        "meaning": "(v) nuôi dưỡng"
+      },
+      {
+        "word": "consume",
+        "ipa": "/kənˈsuːm/",
+        "meaning": "(v) tiêu thụ"
+      },
+      {
+        "word": "appetite",
+        "ipa": "/ˈæp.ə.taɪt/",
+        "meaning": "(n) sự thèm ăn"
+      },
+      {
+        "word": "flavor",
+        "ipa": "/ˈfleɪ.vɚ/",
+        "meaning": "(n) hương vị"
+      },
+      {
+        "word": "seasoning",
+        "ipa": "/ˈsiː.zən.ɪŋ/",
+        "meaning": "(n) gia vị nêm"
+      },
+      {
+        "word": "marinate",
+        "ipa": "/ˈmer.ə.neɪt/",
+        "meaning": "(v) ướp"
+      },
+      {
+        "word": "simmer",
+        "ipa": "/ˈsɪm.ɚ/",
+        "meaning": "(v) ninh nhỏ lửa"
+      },
+      {
+        "word": "garnish",
+        "ipa": "/ˈɡɑːr.nɪʃ/",
+        "meaning": "(n, v) đồ trang trí món ăn; trang trí"
+      },
+      {
+        "word": "gourmet",
+        "ipa": "/ɡʊrˈmeɪ/",
+        "meaning": "(adj) dành cho người sành ăn"
+      },
+      {
+        "word": "leftovers",
+        "ipa": "/ˈleft.oʊ.vɚz/",
+        "meaning": "(n) thức ăn thừa"
+      },
+      {
+        "word": "allergy",
+        "ipa": "/ˈæl.ɚ.dʒi/",
+        "meaning": "(n) dị ứng"
+      },
+      {
+        "word": "dairy",
+        "ipa": "/ˈder.i/",
+        "meaning": "(n) sản phẩm từ sữa"
+      },
+      {
+        "word": "vegan",
+        "ipa": "/ˈviː.ɡən/",
+        "meaning": "(n, adj) người ăn thuần chay"
+      },
+      {
+        "word": "culinary",
+        "ipa": "/ˈkʌl.ə.ner.i/",
+        "meaning": "(adj) thuộc về nấu nướng"
+      },
+      {
+        "word": "palatable",
+        "ipa": "/ˈpæl.ə.t̬ə.bəl/",
+        "meaning": "(adj) ngon miệng, dễ chấp nhận"
+      },
+      {
+        "word": "sustenance",
+        "ipa": "/ˈsʌs.tə.nəns/",
+        "meaning": "(n) thức ăn nuôi sống"
+      },
+      {
+        "word": "indulge",
+        "ipa": "/ɪnˈdʌldʒ/",
+        "meaning": "(v) thưởng thức thỏa thích"
+      },
+      {
+        "word": "delicacy",
+        "ipa": "/ˈdel.ɪ.kə.si/",
+        "meaning": "(n) món ngon đặc sản"
+      },
+      {
+        "word": "savory",
+        "ipa": "/ˈseɪ.vɚ.i/",
+        "meaning": "(adj) mặn, đậm đà"
+      },
+      {
+        "word": "ferment",
+        "ipa": "/fɚˈment/",
+        "meaning": "(v) lên men"
+      },
+      {
+        "word": "condiment",
+        "ipa": "/ˈkɑːn.də.mənt/",
+        "meaning": "(n) đồ gia vị chấm"
+      },
+      {
+        "word": "malnutrition",
+        "ipa": "/ˌmæl.nuːˈtrɪʃ.ən/",
+        "meaning": "(n) suy dinh dưỡng"
+      },
+      {
+        "word": "famine",
+        "ipa": "/ˈfæm.ɪn/",
+        "meaning": "(n) nạn đói"
+      },
+      {
+        "word": "gluttony",
+        "ipa": "/ˈɡlʌt̬.ən.i/",
+        "meaning": "(n) thói tham ăn"
+      },
+      {
+        "word": "epicurean",
+        "ipa": "/ˌep.ə.kjʊˈriː.ən/",
+        "meaning": "(adj) sành ăn, hưởng thụ ẩm thực"
+      }
+    ]
+  },
+  {
+    "topic": "School & Education",
+    "words": [
+      {
+        "word": "school",
+        "ipa": "/skuːl/",
+        "meaning": "(n) trường học"
+      },
+      {
+        "word": "teacher",
+        "ipa": "/ˈtiː.tʃɚ/",
+        "meaning": "(n) giáo viên"
+      },
+      {
+        "word": "student",
+        "ipa": "/ˈstuː.dənt/",
+        "meaning": "(n) học sinh, sinh viên"
+      },
+      {
+        "word": "class",
+        "ipa": "/klæs/",
+        "meaning": "(n) lớp học"
+      },
+      {
+        "word": "classroom",
+        "ipa": "/ˈklæs.ruːm/",
+        "meaning": "(n) phòng học"
+      },
+      {
+        "word": "book",
+        "ipa": "/bʊk/",
+        "meaning": "(n) quyển sách"
+      },
+      {
+        "word": "pen",
+        "ipa": "/pen/",
+        "meaning": "(n) cái bút"
+      },
+      {
+        "word": "pencil",
+        "ipa": "/ˈpen.səl/",
+        "meaning": "(n) bút chì"
+      },
+      {
+        "word": "bag",
+        "ipa": "/bæɡ/",
+        "meaning": "(n) cặp, túi"
+      },
+      {
+        "word": "desk",
+        "ipa": "/desk/",
+        "meaning": "(n) bàn học"
+      },
+      {
+        "word": "chair",
+        "ipa": "/tʃer/",
+        "meaning": "(n) cái ghế"
+      },
+      {
+        "word": "board",
+        "ipa": "/bɔːrd/",
+        "meaning": "(n) cái bảng"
+      },
+      {
+        "word": "read",
+        "ipa": "/riːd/",
+        "meaning": "(v) đọc"
+      },
+      {
+        "word": "write",
+        "ipa": "/raɪt/",
+        "meaning": "(v) viết"
+      },
+      {
+        "word": "learn",
+        "ipa": "/lɝːn/",
+        "meaning": "(v) học"
+      },
+      {
+        "word": "study",
+        "ipa": "/ˈstʌd.i/",
+        "meaning": "(v) học, nghiên cứu"
+      },
+      {
+        "word": "lesson",
+        "ipa": "/ˈles.ən/",
+        "meaning": "(n) bài học"
+      },
+      {
+        "word": "homework",
+        "ipa": "/ˈhoʊm.wɝːk/",
+        "meaning": "(n) bài tập về nhà"
+      },
+      {
+        "word": "question",
+        "ipa": "/ˈkwes.tʃən/",
+        "meaning": "(n) câu hỏi"
+      },
+      {
+        "word": "answer",
+        "ipa": "/ˈæn.sɚ/",
+        "meaning": "(n, v) câu trả lời; trả lời"
+      },
+      {
+        "word": "English",
+        "ipa": "/ˈɪŋ.ɡlɪʃ/",
+        "meaning": "(n) tiếng Anh"
+      },
+      {
+        "word": "math",
+        "ipa": "/mæθ/",
+        "meaning": "(n) môn toán"
+      },
+      {
+        "word": "word",
+        "ipa": "/wɝːd/",
+        "meaning": "(n) từ"
+      },
+      {
+        "word": "paper",
+        "ipa": "/ˈpeɪ.pɚ/",
+        "meaning": "(n) giấy"
+      },
+      {
+        "word": "page",
+        "ipa": "/peɪdʒ/",
+        "meaning": "(n) trang"
+      },
+      {
+        "word": "subject",
+        "ipa": "/ˈsʌb.dʒekt/",
+        "meaning": "(n) môn học"
+      },
+      {
+        "word": "history",
+        "ipa": "/ˈhɪs.t̬ɚ.i/",
+        "meaning": "(n) lịch sử"
+      },
+      {
+        "word": "geography",
+        "ipa": "/dʒiˈɑː.ɡrə.fi/",
+        "meaning": "(n) địa lý"
+      },
+      {
+        "word": "science",
+        "ipa": "/ˈsaɪ.əns/",
+        "meaning": "(n) khoa học"
+      },
+      {
+        "word": "art",
+        "ipa": "/ɑːrt/",
+        "meaning": "(n) mỹ thuật"
+      },
+      {
+        "word": "music",
+        "ipa": "/ˈmjuː.zɪk/",
+        "meaning": "(n) âm nhạc"
+      },
+      {
+        "word": "test",
+        "ipa": "/test/",
+        "meaning": "(n) bài kiểm tra"
+      },
+      {
+        "word": "exam",
+        "ipa": "/ɪɡˈzæm/",
+        "meaning": "(n) kỳ thi"
+      },
+      {
+        "word": "mark",
+        "ipa": "/mɑːrk/",
+        "meaning": "(n) điểm số"
+      },
+      {
+        "word": "grade",
+        "ipa": "/ɡreɪd/",
+        "meaning": "(n) điểm; lớp"
+      },
+      {
+        "word": "library",
+        "ipa": "/ˈlaɪ.brer.i/",
+        "meaning": "(n) thư viện"
+      },
+      {
+        "word": "dictionary",
+        "ipa": "/ˈdɪk.ʃə.ner.i/",
+        "meaning": "(n) từ điển"
+      },
+      {
+        "word": "notebook",
+        "ipa": "/ˈnoʊt.bʊk/",
+        "meaning": "(n) vở ghi chép"
+      },
+      {
+        "word": "ruler",
+        "ipa": "/ˈruː.lɚ/",
+        "meaning": "(n) thước kẻ"
+      },
+      {
+        "word": "eraser",
+        "ipa": "/ɪˈreɪ.sɚ/",
+        "meaning": "(n) cục tẩy"
+      },
+      {
+        "word": "playground",
+        "ipa": "/ˈpleɪ.ɡraʊnd/",
+        "meaning": "(n) sân chơi"
+      },
+      {
+        "word": "uniform",
+        "ipa": "/ˈjuː.nə.fɔːrm/",
+        "meaning": "(n) đồng phục"
+      },
+      {
+        "word": "timetable",
+        "ipa": "/ˈtaɪmˌteɪ.bəl/",
+        "meaning": "(n) thời khóa biểu"
+      },
+      {
+        "word": "university",
+        "ipa": "/ˌjuː.nəˈvɝː.sə.t̬i/",
+        "meaning": "(n) trường đại học"
+      },
+      {
+        "word": "college",
+        "ipa": "/ˈkɑː.lɪdʒ/",
+        "meaning": "(n) trường cao đẳng"
+      },
+      {
+        "word": "primary",
+        "ipa": "/ˈpraɪ.mer.i/",
+        "meaning": "(adj) tiểu học, chính"
+      },
+      {
+        "word": "secondary",
+        "ipa": "/ˈsek.ən.der.i/",
+        "meaning": "(adj) trung học"
+      },
+      {
+        "word": "correct",
+        "ipa": "/kəˈrekt/",
+        "meaning": "(adj, v) đúng; sửa"
+      },
+      {
+        "word": "mistake",
+        "ipa": "/mɪˈsteɪk/",
+        "meaning": "(n) lỗi sai"
+      },
+      {
+        "word": "practice",
+        "ipa": "/ˈpræk.tɪs/",
+        "meaning": "(n, v) sự luyện tập; luyện tập"
+      },
+      {
+        "word": "education",
+        "ipa": "/ˌedʒ.əˈkeɪ.ʃən/",
+        "meaning": "(n) giáo dục"
+      },
+      {
+        "word": "knowledge",
+        "ipa": "/ˈnɑː.lɪdʒ/",
+        "meaning": "(n) kiến thức"
+      },
+      {
+        "word": "degree",
+        "ipa": "/dɪˈɡriː/",
+        "meaning": "(n) bằng cấp"
+      },
+      {
+        "word": "diploma",
+        "ipa": "/dɪˈploʊ.mə/",
+        "meaning": "(n) văn bằng"
+      },
+      {
+        "word": "scholarship",
+        "ipa": "/ˈskɑː.lɚ.ʃɪp/",
+        "meaning": "(n) học bổng"
+      },
+      {
+        "word": "tuition",
+        "ipa": "/tuˈɪʃ.ən/",
+        "meaning": "(n) học phí"
+      },
+      {
+        "word": "curriculum",
+        "ipa": "/kəˈrɪk.jə.ləm/",
+        "meaning": "(n) chương trình học"
+      },
+      {
+        "word": "assignment",
+        "ipa": "/əˈsaɪn.mənt/",
+        "meaning": "(n) bài tập được giao"
+      },
+      {
+        "word": "project",
+        "ipa": "/ˈprɑː.dʒekt/",
+        "meaning": "(n) dự án"
+      },
+      {
+        "word": "presentation",
+        "ipa": "/ˌprez.ənˈteɪ.ʃən/",
+        "meaning": "(n) bài thuyết trình"
+      },
+      {
+        "word": "lecture",
+        "ipa": "/ˈlek.tʃɚ/",
+        "meaning": "(n) bài giảng"
+      },
+      {
+        "word": "graduate",
+        "ipa": "/ˈɡrædʒ.u.eɪt/",
+        "meaning": "(v) tốt nghiệp"
+      },
+      {
+        "word": "attend",
+        "ipa": "/əˈtend/",
+        "meaning": "(v) tham dự"
+      },
+      {
+        "word": "revise",
+        "ipa": "/rɪˈvaɪz/",
+        "meaning": "(v) ôn tập"
+      },
+      {
+        "word": "pass",
+        "ipa": "/pæs/",
+        "meaning": "(v) vượt qua, đỗ"
+      },
+      {
+        "word": "fail",
+        "ipa": "/feɪl/",
+        "meaning": "(v) trượt"
+      },
+      {
+        "word": "memorize",
+        "ipa": "/ˈmem.ə.raɪz/",
+        "meaning": "(v) ghi nhớ"
+      },
+      {
+        "word": "skill",
+        "ipa": "/skɪl/",
+        "meaning": "(n) kỹ năng"
+      },
+      {
+        "word": "discipline",
+        "ipa": "/ˈdɪs.ə.plɪn/",
+        "meaning": "(n) kỷ luật"
+      },
+      {
+        "word": "encourage",
+        "ipa": "/ɪnˈkɝː.ɪdʒ/",
+        "meaning": "(v) khuyến khích"
+      },
+      {
+        "word": "academic",
+        "ipa": "/ˌæk.əˈdem.ɪk/",
+        "meaning": "(adj) thuộc học thuật"
+      },
+      {
+        "word": "literacy",
+        "ipa": "/ˈlɪt̬.ɚ.ə.si/",
+        "meaning": "(n) khả năng đọc viết"
+      },
+      {
+        "word": "enroll",
+        "ipa": "/ɪnˈroʊl/",
+        "meaning": "(v) ghi danh"
+      },
+      {
+        "word": "tutor",
+        "ipa": "/ˈtuː.t̬ɚ/",
+        "meaning": "(n) gia sư"
+      },
+      {
+        "word": "seminar",
+        "ipa": "/ˈsem.ə.nɑːr/",
+        "meaning": "(n) hội thảo chuyên đề"
+      },
+      {
+        "word": "thesis",
+        "ipa": "/ˈθiː.sɪs/",
+        "meaning": "(n) luận văn"
+      },
+      {
+        "word": "research",
+        "ipa": "/ˈriː.sɝːtʃ/",
+        "meaning": "(n, v) nghiên cứu"
+      },
+      {
+        "word": "vocational",
+        "ipa": "/voʊˈkeɪ.ʃən.əl/",
+        "meaning": "(adj) thuộc dạy nghề"
+      },
+      {
+        "word": "compulsory",
+        "ipa": "/kəmˈpʌl.sɚ.i/",
+        "meaning": "(adj) bắt buộc"
+      },
+      {
+        "word": "extracurricular",
+        "ipa": "/ˌek.strə.kəˈrɪk.jə.lɚ/",
+        "meaning": "(adj) ngoại khóa"
+      },
+      {
+        "word": "plagiarism",
+        "ipa": "/ˈpleɪ.dʒɚ.ɪ.zəm/",
+        "meaning": "(n) đạo văn"
+      },
+      {
+        "word": "assessment",
+        "ipa": "/əˈses.mənt/",
+        "meaning": "(n) sự đánh giá"
+      },
+      {
+        "word": "feedback",
+        "ipa": "/ˈfiːd.bæk/",
+        "meaning": "(n) phản hồi"
+      },
+      {
+        "word": "deadline",
+        "ipa": "/ˈded.laɪn/",
+        "meaning": "(n) hạn chót"
+      },
+      {
+        "word": "undergraduate",
+        "ipa": "/ˌʌn.dɚˈɡrædʒ.u.ət/",
+        "meaning": "(n) sinh viên đại học"
+      },
+      {
+        "word": "postgraduate",
+        "ipa": "/ˌpoʊstˈɡrædʒ.u.ət/",
+        "meaning": "(n) sau đại học"
+      },
+      {
+        "word": "lecturer",
+        "ipa": "/ˈlek.tʃɚ.ɚ/",
+        "meaning": "(n) giảng viên"
+      },
+      {
+        "word": "campus",
+        "ipa": "/ˈkæm.pəs/",
+        "meaning": "(n) khuôn viên trường"
+      },
+      {
+        "word": "pedagogy",
+        "ipa": "/ˈped.ə.ɡɑː.dʒi/",
+        "meaning": "(n) phương pháp sư phạm"
+      },
+      {
+        "word": "erudite",
+        "ipa": "/ˈer.jə.daɪt/",
+        "meaning": "(adj) uyên bác"
+      },
+      {
+        "word": "scholarly",
+        "ipa": "/ˈskɑː.lɚ.li/",
+        "meaning": "(adj) mang tính học giả"
+      },
+      {
+        "word": "proficiency",
+        "ipa": "/prəˈfɪʃ.ən.si/",
+        "meaning": "(n) sự thành thạo"
+      },
+      {
+        "word": "cognitive",
+        "ipa": "/ˈkɑːɡ.nə.t̬ɪv/",
+        "meaning": "(adj) thuộc nhận thức"
+      },
+      {
+        "word": "interdisciplinary",
+        "ipa": "/ˌɪn.t̬ɚˈdɪs.ə.plɪ.ner.i/",
+        "meaning": "(adj) liên ngành"
+      },
+      {
+        "word": "dissertation",
+        "ipa": "/ˌdɪs.ɚˈteɪ.ʃən/",
+        "meaning": "(n) luận án"
+      },
+      {
+        "word": "tenure",
+        "ipa": "/ˈten.jɚ/",
+        "meaning": "(n) biên chế chính thức; nhiệm kỳ"
+      },
+      {
+        "word": "rigorous",
+        "ipa": "/ˈrɪɡ.ɚ.əs/",
+        "meaning": "(adj) nghiêm ngặt, chặt chẽ"
+      },
+      {
+        "word": "didactic",
+        "ipa": "/daɪˈdæk.tɪk/",
+        "meaning": "(adj) mang tính giáo huấn"
+      },
+      {
+        "word": "syllabus",
+        "ipa": "/ˈsɪl.ə.bəs/",
+        "meaning": "(n) đề cương môn học"
+      },
+      {
+        "word": "accreditation",
+        "ipa": "/əˌkred.ɪˈteɪ.ʃən/",
+        "meaning": "(n) sự kiểm định, công nhận"
+      }
+    ]
+  },
+  {
+    "topic": "Travel & Transport",
+    "words": [
+      {
+        "word": "travel",
+        "ipa": "/ˈtræv.əl/",
+        "meaning": "(v, n) đi du lịch"
+      },
+      {
+        "word": "trip",
+        "ipa": "/trɪp/",
+        "meaning": "(n) chuyến đi"
+      },
+      {
+        "word": "car",
+        "ipa": "/kɑːr/",
+        "meaning": "(n) ô tô"
+      },
+      {
+        "word": "bus",
+        "ipa": "/bʌs/",
+        "meaning": "(n) xe buýt"
+      },
+      {
+        "word": "train",
+        "ipa": "/treɪn/",
+        "meaning": "(n) tàu hỏa"
+      },
+      {
+        "word": "plane",
+        "ipa": "/pleɪn/",
+        "meaning": "(n) máy bay"
+      },
+      {
+        "word": "bike",
+        "ipa": "/baɪk/",
+        "meaning": "(n) xe đạp"
+      },
+      {
+        "word": "boat",
+        "ipa": "/boʊt/",
+        "meaning": "(n) thuyền"
+      },
+      {
+        "word": "taxi",
+        "ipa": "/ˈtæk.si/",
+        "meaning": "(n) xe taxi"
+      },
+      {
+        "word": "road",
+        "ipa": "/roʊd/",
+        "meaning": "(n) con đường"
+      },
+      {
+        "word": "street",
+        "ipa": "/striːt/",
+        "meaning": "(n) phố"
+      },
+      {
+        "word": "city",
+        "ipa": "/ˈsɪt̬.i/",
+        "meaning": "(n) thành phố"
+      },
+      {
+        "word": "town",
+        "ipa": "/taʊn/",
+        "meaning": "(n) thị trấn"
+      },
+      {
+        "word": "country",
+        "ipa": "/ˈkʌn.tri/",
+        "meaning": "(n) đất nước"
+      },
+      {
+        "word": "hotel",
+        "ipa": "/hoʊˈtel/",
+        "meaning": "(n) khách sạn"
+      },
+      {
+        "word": "map",
+        "ipa": "/mæp/",
+        "meaning": "(n) bản đồ"
+      },
+      {
+        "word": "ticket",
+        "ipa": "/ˈtɪk.ɪt/",
+        "meaning": "(n) vé"
+      },
+      {
+        "word": "station",
+        "ipa": "/ˈsteɪ.ʃən/",
+        "meaning": "(n) nhà ga, trạm"
+      },
+      {
+        "word": "airport",
+        "ipa": "/ˈer.pɔːrt/",
+        "meaning": "(n) sân bay"
+      },
+      {
+        "word": "beach",
+        "ipa": "/biːtʃ/",
+        "meaning": "(n) bãi biển"
+      },
+      {
+        "word": "go",
+        "ipa": "/ɡoʊ/",
+        "meaning": "(v) đi"
+      },
+      {
+        "word": "come",
+        "ipa": "/kʌm/",
+        "meaning": "(v) đến"
+      },
+      {
+        "word": "walk",
+        "ipa": "/wɑːk/",
+        "meaning": "(v) đi bộ"
+      },
+      {
+        "word": "drive",
+        "ipa": "/draɪv/",
+        "meaning": "(v) lái xe"
+      },
+      {
+        "word": "holiday",
+        "ipa": "/ˈhɑː.lə.deɪ/",
+        "meaning": "(n) kỳ nghỉ"
+      },
+      {
+        "word": "tourist",
+        "ipa": "/ˈtʊr.ɪst/",
+        "meaning": "(n) khách du lịch"
+      },
+      {
+        "word": "passport",
+        "ipa": "/ˈpæs.pɔːrt/",
+        "meaning": "(n) hộ chiếu"
+      },
+      {
+        "word": "luggage",
+        "ipa": "/ˈlʌɡ.ɪdʒ/",
+        "meaning": "(n) hành lý"
+      },
+      {
+        "word": "suitcase",
+        "ipa": "/ˈsuːt.keɪs/",
+        "meaning": "(n) va li"
+      },
+      {
+        "word": "flight",
+        "ipa": "/flaɪt/",
+        "meaning": "(n) chuyến bay"
+      },
+      {
+        "word": "journey",
+        "ipa": "/ˈdʒɝː.ni/",
+        "meaning": "(n) hành trình"
+      },
+      {
+        "word": "arrive",
+        "ipa": "/əˈraɪv/",
+        "meaning": "(v) đến nơi"
+      },
+      {
+        "word": "leave",
+        "ipa": "/liːv/",
+        "meaning": "(v) rời đi"
+      },
+      {
+        "word": "return",
+        "ipa": "/rɪˈtɝːn/",
+        "meaning": "(v, n) trở về"
+      },
+      {
+        "word": "abroad",
+        "ipa": "/əˈbrɔːd/",
+        "meaning": "(adv) ở nước ngoài"
+      },
+      {
+        "word": "foreign",
+        "ipa": "/ˈfɔːr.ən/",
+        "meaning": "(adj) nước ngoài"
+      },
+      {
+        "word": "camping",
+        "ipa": "/ˈkæm.pɪŋ/",
+        "meaning": "(n) cắm trại"
+      },
+      {
+        "word": "sightseeing",
+        "ipa": "/ˈsaɪtˌsiː.ɪŋ/",
+        "meaning": "(n) tham quan"
+      },
+      {
+        "word": "souvenir",
+        "ipa": "/ˌsuː.vəˈnɪr/",
+        "meaning": "(n) quà lưu niệm"
+      },
+      {
+        "word": "postcard",
+        "ipa": "/ˈpoʊst.kɑːrd/",
+        "meaning": "(n) bưu thiếp"
+      },
+      {
+        "word": "passenger",
+        "ipa": "/ˈpæs.ən.dʒɚ/",
+        "meaning": "(n) hành khách"
+      },
+      {
+        "word": "driver",
+        "ipa": "/ˈdraɪ.vɚ/",
+        "meaning": "(n) tài xế"
+      },
+      {
+        "word": "traffic",
+        "ipa": "/ˈtræf.ɪk/",
+        "meaning": "(n) giao thông"
+      },
+      {
+        "word": "corner",
+        "ipa": "/ˈkɔːr.nɚ/",
+        "meaning": "(n) góc phố"
+      },
+      {
+        "word": "bridge",
+        "ipa": "/brɪdʒ/",
+        "meaning": "(n) cây cầu"
+      },
+      {
+        "word": "motorbike",
+        "ipa": "/ˈmoʊ.t̬ɚ.baɪk/",
+        "meaning": "(n) xe máy"
+      },
+      {
+        "word": "subway",
+        "ipa": "/ˈsʌb.weɪ/",
+        "meaning": "(n) tàu điện ngầm"
+      },
+      {
+        "word": "platform",
+        "ipa": "/ˈplæt.fɔːrm/",
+        "meaning": "(n) sân ga"
+      },
+      {
+        "word": "reservation",
+        "ipa": "/ˌrez.ɚˈveɪ.ʃən/",
+        "meaning": "(n) sự đặt chỗ trước"
+      },
+      {
+        "word": "direction",
+        "ipa": "/dɪˈrek.ʃən/",
+        "meaning": "(n) hướng đi"
+      },
+      {
+        "word": "destination",
+        "ipa": "/ˌdes.təˈneɪ.ʃən/",
+        "meaning": "(n) điểm đến"
+      },
+      {
+        "word": "itinerary",
+        "ipa": "/aɪˈtɪn.ə.rer.i/",
+        "meaning": "(n) lịch trình"
+      },
+      {
+        "word": "departure",
+        "ipa": "/dɪˈpɑːr.tʃɚ/",
+        "meaning": "(n) sự khởi hành"
+      },
+      {
+        "word": "delay",
+        "ipa": "/dɪˈleɪ/",
+        "meaning": "(n, v) sự chậm trễ; trì hoãn"
+      },
+      {
+        "word": "cancel",
+        "ipa": "/ˈkæn.səl/",
+        "meaning": "(v) hủy"
+      },
+      {
+        "word": "check-in",
+        "ipa": "/ˈtʃek.ɪn/",
+        "meaning": "(n) thủ tục nhận phòng, làm thủ tục lên máy bay"
+      },
+      {
+        "word": "customs",
+        "ipa": "/ˈkʌs.təmz/",
+        "meaning": "(n) hải quan"
+      },
+      {
+        "word": "visa",
+        "ipa": "/ˈviː.zə/",
+        "meaning": "(n) thị thực"
+      },
+      {
+        "word": "currency",
+        "ipa": "/ˈkɝː.ən.si/",
+        "meaning": "(n) tiền tệ"
+      },
+      {
+        "word": "exchange",
+        "ipa": "/ɪksˈtʃeɪndʒ/",
+        "meaning": "(v) đổi (tiền)"
+      },
+      {
+        "word": "guidebook",
+        "ipa": "/ˈɡaɪd.bʊk/",
+        "meaning": "(n) sách hướng dẫn du lịch"
+      },
+      {
+        "word": "resort",
+        "ipa": "/rɪˈzɔːrt/",
+        "meaning": "(n) khu nghỉ dưỡng"
+      },
+      {
+        "word": "cruise",
+        "ipa": "/kruːz/",
+        "meaning": "(n) chuyến du thuyền"
+      },
+      {
+        "word": "expedition",
+        "ipa": "/ˌek.spəˈdɪʃ.ən/",
+        "meaning": "(n) cuộc thám hiểm"
+      },
+      {
+        "word": "commute",
+        "ipa": "/kəˈmjuːt/",
+        "meaning": "(v, n) đi lại hằng ngày"
+      },
+      {
+        "word": "highway",
+        "ipa": "/ˈhaɪ.weɪ/",
+        "meaning": "(n) đường cao tốc"
+      },
+      {
+        "word": "pedestrian",
+        "ipa": "/pəˈdes.tri.ən/",
+        "meaning": "(n) người đi bộ"
+      },
+      {
+        "word": "roundabout",
+        "ipa": "/ˈraʊnd.ə.baʊt/",
+        "meaning": "(n) bùng binh"
+      },
+      {
+        "word": "fare",
+        "ipa": "/fer/",
+        "meaning": "(n) giá vé"
+      },
+      {
+        "word": "transport",
+        "ipa": "/ˈtræn.spɔːrt/",
+        "meaning": "(n) giao thông, vận tải"
+      },
+      {
+        "word": "backpacker",
+        "ipa": "/ˈbækˌpæk.ɚ/",
+        "meaning": "(n) khách du lịch bụi"
+      },
+      {
+        "word": "accommodation",
+        "ipa": "/əˌkɑː.məˈdeɪ.ʃən/",
+        "meaning": "(n) chỗ ở"
+      },
+      {
+        "word": "excursion",
+        "ipa": "/ɪkˈskɝː.ʒən/",
+        "meaning": "(n) chuyến tham quan ngắn"
+      },
+      {
+        "word": "layover",
+        "ipa": "/ˈleɪˌoʊ.vɚ/",
+        "meaning": "(n) thời gian quá cảnh"
+      },
+      {
+        "word": "transit",
+        "ipa": "/ˈtræn.zɪt/",
+        "meaning": "(n) sự quá cảnh"
+      },
+      {
+        "word": "baggage",
+        "ipa": "/ˈbæɡ.ɪdʒ/",
+        "meaning": "(n) hành lý"
+      },
+      {
+        "word": "terminal",
+        "ipa": "/ˈtɝː.mən.əl/",
+        "meaning": "(n) nhà ga (sân bay)"
+      },
+      {
+        "word": "embark",
+        "ipa": "/ɪmˈbɑːrk/",
+        "meaning": "(v) lên tàu, bắt đầu"
+      },
+      {
+        "word": "disembark",
+        "ipa": "/ˌdɪs.ɪmˈbɑːrk/",
+        "meaning": "(v) xuống tàu, xuống máy bay"
+      },
+      {
+        "word": "tourism",
+        "ipa": "/ˈtʊr.ɪ.zəm/",
+        "meaning": "(n) ngành du lịch"
+      },
+      {
+        "word": "landmark",
+        "ipa": "/ˈlænd.mɑːrk/",
+        "meaning": "(n) địa danh nổi tiếng"
+      },
+      {
+        "word": "scenic",
+        "ipa": "/ˈsiː.nɪk/",
+        "meaning": "(adj) có phong cảnh đẹp"
+      },
+      {
+        "word": "remote",
+        "ipa": "/rɪˈmoʊt/",
+        "meaning": "(adj) xa xôi, hẻo lánh"
+      },
+      {
+        "word": "detour",
+        "ipa": "/ˈdiː.tʊr/",
+        "meaning": "(n) đường vòng"
+      },
+      {
+        "word": "congestion",
+        "ipa": "/kənˈdʒes.tʃən/",
+        "meaning": "(n) sự tắc nghẽn"
+      },
+      {
+        "word": "vehicle",
+        "ipa": "/ˈviː.ə.kəl/",
+        "meaning": "(n) phương tiện"
+      },
+      {
+        "word": "navigate",
+        "ipa": "/ˈnæv.ə.ɡeɪt/",
+        "meaning": "(v) định hướng, điều hướng"
+      },
+      {
+        "word": "hospitality",
+        "ipa": "/ˌhɑː.spɪˈtæl.ə.t̬i/",
+        "meaning": "(n) lòng hiếu khách"
+      },
+      {
+        "word": "sojourn",
+        "ipa": "/ˈsoʊ.dʒɝːn/",
+        "meaning": "(n) thời gian lưu lại"
+      },
+      {
+        "word": "wanderlust",
+        "ipa": "/ˈwɑːn.dɚ.lʌst/",
+        "meaning": "(n) niềm đam mê du lịch"
+      },
+      {
+        "word": "nomadic",
+        "ipa": "/noʊˈmæd.ɪk/",
+        "meaning": "(adj) du mục, sống du cư"
+      },
+      {
+        "word": "voyage",
+        "ipa": "/ˈvɔɪ.ɪdʒ/",
+        "meaning": "(n) chuyến hải hành dài"
+      },
+      {
+        "word": "pilgrimage",
+        "ipa": "/ˈpɪl.ɡrɪ.mɪdʒ/",
+        "meaning": "(n) cuộc hành hương"
+      },
+      {
+        "word": "trek",
+        "ipa": "/trek/",
+        "meaning": "(n, v) chuyến đi bộ đường dài"
+      },
+      {
+        "word": "arduous",
+        "ipa": "/ˈɑːr.dʒu.əs/",
+        "meaning": "(adj) gian nan"
+      },
+      {
+        "word": "secluded",
+        "ipa": "/sɪˈkluː.dɪd/",
+        "meaning": "(adj) hẻo lánh, biệt lập"
+      },
+      {
+        "word": "quarantine",
+        "ipa": "/ˈkwɔːr.ən.tiːn/",
+        "meaning": "(n) sự cách ly"
+      },
+      {
+        "word": "itinerant",
+        "ipa": "/aɪˈtɪn.ɚ.ənt/",
+        "meaning": "(adj) đi lưu động"
+      },
+      {
+        "word": "cosmopolitan",
+        "ipa": "/ˌkɑːz.məˈpɑː.lə.t̬ən/",
+        "meaning": "(adj) mang tính quốc tế"
+      },
+      {
+        "word": "vagabond",
+        "ipa": "/ˈvæɡ.ə.bɑːnd/",
+        "meaning": "(n) kẻ lang thang"
+      }
+    ]
+  },
+  {
+    "topic": "Health & Body",
+    "words": [
+      {
+        "word": "body",
+        "ipa": "/ˈbɑː.di/",
+        "meaning": "(n) cơ thể"
+      },
+      {
+        "word": "head",
+        "ipa": "/hed/",
+        "meaning": "(n) đầu"
+      },
+      {
+        "word": "face",
+        "ipa": "/feɪs/",
+        "meaning": "(n) khuôn mặt"
+      },
+      {
+        "word": "eye",
+        "ipa": "/aɪ/",
+        "meaning": "(n) mắt"
+      },
+      {
+        "word": "ear",
+        "ipa": "/ɪr/",
+        "meaning": "(n) tai"
+      },
+      {
+        "word": "nose",
+        "ipa": "/noʊz/",
+        "meaning": "(n) mũi"
+      },
+      {
+        "word": "mouth",
+        "ipa": "/maʊθ/",
+        "meaning": "(n) miệng"
+      },
+      {
+        "word": "hand",
+        "ipa": "/hænd/",
+        "meaning": "(n) bàn tay"
+      },
+      {
+        "word": "arm",
+        "ipa": "/ɑːrm/",
+        "meaning": "(n) cánh tay"
+      },
+      {
+        "word": "leg",
+        "ipa": "/leɡ/",
+        "meaning": "(n) chân"
+      },
+      {
+        "word": "foot",
+        "ipa": "/fʊt/",
+        "meaning": "(n) bàn chân"
+      },
+      {
+        "word": "hair",
+        "ipa": "/her/",
+        "meaning": "(n) tóc"
+      },
+      {
+        "word": "tooth",
+        "ipa": "/tuːθ/",
+        "meaning": "(n) răng"
+      },
+      {
+        "word": "back",
+        "ipa": "/bæk/",
+        "meaning": "(n) lưng"
+      },
+      {
+        "word": "finger",
+        "ipa": "/ˈfɪŋ.ɡɚ/",
+        "meaning": "(n) ngón tay"
+      },
+      {
+        "word": "sick",
+        "ipa": "/sɪk/",
+        "meaning": "(adj) ốm"
+      },
+      {
+        "word": "ill",
+        "ipa": "/ɪl/",
+        "meaning": "(adj) bị bệnh"
+      },
+      {
+        "word": "healthy",
+        "ipa": "/ˈhel.θi/",
+        "meaning": "(adj) khỏe mạnh"
+      },
+      {
+        "word": "doctor",
+        "ipa": "/ˈdɑːk.tɚ/",
+        "meaning": "(n) bác sĩ"
+      },
+      {
+        "word": "nurse",
+        "ipa": "/nɝːs/",
+        "meaning": "(n) y tá"
+      },
+      {
+        "word": "hospital",
+        "ipa": "/ˈhɑː.spɪ.t̬əl/",
+        "meaning": "(n) bệnh viện"
+      },
+      {
+        "word": "medicine",
+        "ipa": "/ˈmed.ə.sən/",
+        "meaning": "(n) thuốc"
+      },
+      {
+        "word": "pain",
+        "ipa": "/peɪn/",
+        "meaning": "(n) cơn đau"
+      },
+      {
+        "word": "sleep",
+        "ipa": "/sliːp/",
+        "meaning": "(v, n) ngủ; giấc ngủ"
+      },
+      {
+        "word": "tired",
+        "ipa": "/taɪrd/",
+        "meaning": "(adj) mệt mỏi"
+      },
+      {
+        "word": "headache",
+        "ipa": "/ˈhed.eɪk/",
+        "meaning": "(n) đau đầu"
+      },
+      {
+        "word": "toothache",
+        "ipa": "/ˈtuːθ.eɪk/",
+        "meaning": "(n) đau răng"
+      },
+      {
+        "word": "stomachache",
+        "ipa": "/ˈstʌm.ək.eɪk/",
+        "meaning": "(n) đau bụng"
+      },
+      {
+        "word": "cold",
+        "ipa": "/koʊld/",
+        "meaning": "(n) cảm lạnh"
+      },
+      {
+        "word": "cough",
+        "ipa": "/kɑːf/",
+        "meaning": "(n, v) ho"
+      },
+      {
+        "word": "fever",
+        "ipa": "/ˈfiː.vɚ/",
+        "meaning": "(n) sốt"
+      },
+      {
+        "word": "flu",
+        "ipa": "/fluː/",
+        "meaning": "(n) cảm cúm"
+      },
+      {
+        "word": "temperature",
+        "ipa": "/ˈtem.pɚ.ə.tʃɚ/",
+        "meaning": "(n) nhiệt độ cơ thể"
+      },
+      {
+        "word": "dentist",
+        "ipa": "/ˈden.t̬ɪst/",
+        "meaning": "(n) nha sĩ"
+      },
+      {
+        "word": "pharmacy",
+        "ipa": "/ˈfɑːr.mə.si/",
+        "meaning": "(n) hiệu thuốc"
+      },
+      {
+        "word": "patient",
+        "ipa": "/ˈpeɪ.ʃənt/",
+        "meaning": "(n) bệnh nhân"
+      },
+      {
+        "word": "appointment",
+        "ipa": "/əˈpɔɪnt.mənt/",
+        "meaning": "(n) cuộc hẹn khám"
+      },
+      {
+        "word": "exercise",
+        "ipa": "/ˈek.sɚ.saɪz/",
+        "meaning": "(n, v) bài tập thể dục; tập thể dục"
+      },
+      {
+        "word": "fit",
+        "ipa": "/fɪt/",
+        "meaning": "(adj) cân đối, khỏe"
+      },
+      {
+        "word": "weight",
+        "ipa": "/weɪt/",
+        "meaning": "(n) cân nặng"
+      },
+      {
+        "word": "height",
+        "ipa": "/haɪt/",
+        "meaning": "(n) chiều cao"
+      },
+      {
+        "word": "shoulder",
+        "ipa": "/ˈʃoʊl.dɚ/",
+        "meaning": "(n) vai"
+      },
+      {
+        "word": "knee",
+        "ipa": "/niː/",
+        "meaning": "(n) đầu gối"
+      },
+      {
+        "word": "neck",
+        "ipa": "/nek/",
+        "meaning": "(n) cổ"
+      },
+      {
+        "word": "stomach",
+        "ipa": "/ˈstʌm.ək/",
+        "meaning": "(n) dạ dày, bụng"
+      },
+      {
+        "word": "heart",
+        "ipa": "/hɑːrt/",
+        "meaning": "(n) tim"
+      },
+      {
+        "word": "skin",
+        "ipa": "/skɪn/",
+        "meaning": "(n) da"
+      },
+      {
+        "word": "bone",
+        "ipa": "/boʊn/",
+        "meaning": "(n) xương"
+      },
+      {
+        "word": "rest",
+        "ipa": "/rest/",
+        "meaning": "(n, v) nghỉ ngơi"
+      },
+      {
+        "word": "hurt",
+        "ipa": "/hɝːt/",
+        "meaning": "(v) làm đau"
+      },
+      {
+        "word": "symptom",
+        "ipa": "/ˈsɪmp.təm/",
+        "meaning": "(n) triệu chứng"
+      },
+      {
+        "word": "disease",
+        "ipa": "/dɪˈziːz/",
+        "meaning": "(n) bệnh tật"
+      },
+      {
+        "word": "illness",
+        "ipa": "/ˈɪl.nəs/",
+        "meaning": "(n) bệnh"
+      },
+      {
+        "word": "injury",
+        "ipa": "/ˈɪn.dʒɚ.i/",
+        "meaning": "(n) chấn thương"
+      },
+      {
+        "word": "wound",
+        "ipa": "/wuːnd/",
+        "meaning": "(n) vết thương"
+      },
+      {
+        "word": "bandage",
+        "ipa": "/ˈbæn.dɪdʒ/",
+        "meaning": "(n) băng gạc"
+      },
+      {
+        "word": "prescription",
+        "ipa": "/prɪˈskrɪp.ʃən/",
+        "meaning": "(n) đơn thuốc"
+      },
+      {
+        "word": "treatment",
+        "ipa": "/ˈtriːt.mənt/",
+        "meaning": "(n) sự điều trị"
+      },
+      {
+        "word": "cure",
+        "ipa": "/kjʊr/",
+        "meaning": "(n, v) phương thuốc; chữa khỏi"
+      },
+      {
+        "word": "recover",
+        "ipa": "/rɪˈkʌv.ɚ/",
+        "meaning": "(v) hồi phục"
+      },
+      {
+        "word": "infection",
+        "ipa": "/ɪnˈfek.ʃən/",
+        "meaning": "(n) sự nhiễm trùng"
+      },
+      {
+        "word": "virus",
+        "ipa": "/ˈvaɪ.rəs/",
+        "meaning": "(n) vi-rút"
+      },
+      {
+        "word": "vaccine",
+        "ipa": "/vækˈsiːn/",
+        "meaning": "(n) vắc-xin"
+      },
+      {
+        "word": "surgery",
+        "ipa": "/ˈsɝː.dʒɚ.i/",
+        "meaning": "(n) phẫu thuật"
+      },
+      {
+        "word": "ambulance",
+        "ipa": "/ˈæm.bjə.ləns/",
+        "meaning": "(n) xe cứu thương"
+      },
+      {
+        "word": "blood",
+        "ipa": "/blʌd/",
+        "meaning": "(n) máu"
+      },
+      {
+        "word": "muscle",
+        "ipa": "/ˈmʌs.əl/",
+        "meaning": "(n) cơ bắp"
+      },
+      {
+        "word": "stress",
+        "ipa": "/stres/",
+        "meaning": "(n) căng thẳng"
+      },
+      {
+        "word": "allergic",
+        "ipa": "/əˈlɝː.dʒɪk/",
+        "meaning": "(adj) bị dị ứng"
+      },
+      {
+        "word": "dizzy",
+        "ipa": "/ˈdɪz.i/",
+        "meaning": "(adj) chóng mặt"
+      },
+      {
+        "word": "diagnose",
+        "ipa": "/ˌdaɪ.əɡˈnoʊs/",
+        "meaning": "(v) chẩn đoán"
+      },
+      {
+        "word": "diagnosis",
+        "ipa": "/ˌdaɪ.əɡˈnoʊ.sɪs/",
+        "meaning": "(n) sự chẩn đoán"
+      },
+      {
+        "word": "immune",
+        "ipa": "/ɪˈmjuːn/",
+        "meaning": "(adj) miễn dịch"
+      },
+      {
+        "word": "immunity",
+        "ipa": "/ɪˈmjuː.nə.t̬i/",
+        "meaning": "(n) khả năng miễn dịch"
+      },
+      {
+        "word": "chronic",
+        "ipa": "/ˈkrɑː.nɪk/",
+        "meaning": "(adj) mãn tính"
+      },
+      {
+        "word": "acute",
+        "ipa": "/əˈkjuːt/",
+        "meaning": "(adj) cấp tính"
+      },
+      {
+        "word": "contagious",
+        "ipa": "/kənˈteɪ.dʒəs/",
+        "meaning": "(adj) lây nhiễm"
+      },
+      {
+        "word": "fatigue",
+        "ipa": "/fəˈtiːɡ/",
+        "meaning": "(n) sự mệt mỏi"
+      },
+      {
+        "word": "obesity",
+        "ipa": "/oʊˈbiː.sə.t̬i/",
+        "meaning": "(n) béo phì"
+      },
+      {
+        "word": "addiction",
+        "ipa": "/əˈdɪk.ʃən/",
+        "meaning": "(n) sự nghiện"
+      },
+      {
+        "word": "rehabilitation",
+        "ipa": "/ˌriː.əˌbɪl.əˈteɪ.ʃən/",
+        "meaning": "(n) sự phục hồi chức năng"
+      },
+      {
+        "word": "physician",
+        "ipa": "/fɪˈzɪʃ.ən/",
+        "meaning": "(n) bác sĩ nội khoa"
+      },
+      {
+        "word": "specialist",
+        "ipa": "/ˈspeʃ.ə.lɪst/",
+        "meaning": "(n) chuyên gia"
+      },
+      {
+        "word": "well-being",
+        "ipa": "/ˌwelˈbiː.ɪŋ/",
+        "meaning": "(n) sức khỏe và hạnh phúc"
+      },
+      {
+        "word": "hygiene",
+        "ipa": "/ˈhaɪ.dʒiːn/",
+        "meaning": "(n) vệ sinh"
+      },
+      {
+        "word": "sanitation",
+        "ipa": "/ˌsæn.əˈteɪ.ʃən/",
+        "meaning": "(n) điều kiện vệ sinh"
+      },
+      {
+        "word": "insomnia",
+        "ipa": "/ɪnˈsɑːm.ni.ə/",
+        "meaning": "(n) chứng mất ngủ"
+      },
+      {
+        "word": "dehydration",
+        "ipa": "/ˌdiː.haɪˈdreɪ.ʃən/",
+        "meaning": "(n) sự mất nước"
+      },
+      {
+        "word": "ailment",
+        "ipa": "/ˈeɪl.mənt/",
+        "meaning": "(n) bệnh nhẹ"
+      },
+      {
+        "word": "remedy",
+        "ipa": "/ˈrem.ə.di/",
+        "meaning": "(n) biện pháp chữa trị"
+      },
+      {
+        "word": "malady",
+        "ipa": "/ˈmæl.ə.di/",
+        "meaning": "(n) bệnh tật"
+      },
+      {
+        "word": "vulnerable",
+        "ipa": "/ˈvʌl.nɚ.ə.bəl/",
+        "meaning": "(adj) dễ bị tổn thương"
+      },
+      {
+        "word": "epidemic",
+        "ipa": "/ˌep.əˈdem.ɪk/",
+        "meaning": "(n) dịch bệnh"
+      },
+      {
+        "word": "pandemic",
+        "ipa": "/pænˈdem.ɪk/",
+        "meaning": "(n) đại dịch"
+      },
+      {
+        "word": "pathogen",
+        "ipa": "/ˈpæθ.ə.dʒən/",
+        "meaning": "(n) mầm bệnh"
+      },
+      {
+        "word": "prognosis",
+        "ipa": "/prɑːɡˈnoʊ.sɪs/",
+        "meaning": "(n) tiên lượng bệnh"
+      },
+      {
+        "word": "holistic",
+        "ipa": "/hoʊˈlɪs.tɪk/",
+        "meaning": "(adj) toàn diện"
+      },
+      {
+        "word": "mortality",
+        "ipa": "/mɔːrˈtæl.ə.t̬i/",
+        "meaning": "(n) tỷ lệ tử vong"
+      },
+      {
+        "word": "longevity",
+        "ipa": "/lɑːnˈdʒev.ə.t̬i/",
+        "meaning": "(n) tuổi thọ"
+      },
+      {
+        "word": "debilitating",
+        "ipa": "/dɪˈbɪl.ə.teɪ.t̬ɪŋ/",
+        "meaning": "(adj) làm suy nhược"
+      }
+    ]
+  }
+]
