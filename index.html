@@ -16,24 +16,57 @@
         }
         .card {
             background: white;
-            padding: 40px;
+            padding: 30px;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.1);
             text-align: center;
             max-width: 400px;
             width: 90%;
         }
-        .word {
-            font-size: 36px;
+        
+        /* Cố định chiều cao cho khu vực hiển thị từ vựng để giao diện không bị giật khi đổi từ */
+        .content-area {
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            background-color: #ecf0f1;
             font-weight: bold;
             color: #2c3e50;
+            cursor: pointer;
+        }
+        select:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .word {
+            font-size: 40px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .ipa {
+            font-size: 22px;
+            color: #e67e22; /* Màu cam nổi bật cho IPA */
+            font-family: 'Times New Roman', Times, serif;
             margin-bottom: 10px;
         }
         .meaning {
             font-size: 20px;
             color: #7f8c8d;
-            margin-bottom: 30px;
         }
+        
         button {
             padding: 12px 20px;
             font-size: 16px;
@@ -44,32 +77,43 @@
             margin: 5px;
             transition: transform 0.1s, opacity 0.3s;
         }
-        button:active {
-            transform: scale(0.95);
-        }
-        button:hover {
-            opacity: 0.85;
-        }
+        button:active { transform: scale(0.95); }
+        button:hover { opacity: 0.85; }
+        
         .btn-listen { background-color: #27ae60; color: white; }
         .btn-speak { background-color: #2980b9; color: white; }
-        .btn-next { background-color: #f39c12; color: white; margin-top: 20px; width: 100%; }
+        .btn-next { background-color: #8e44ad; color: white; margin-top: 20px; width: 100%; }
         
         #result {
-            margin-top: 25px;
+            margin-top: 20px;
             font-weight: bold;
-            font-size: 18px;
-            min-height: 27px;
+            font-size: 16px;
+            min-height: 40px;
         }
         .correct { color: #27ae60; }
         .incorrect { color: #c0392b; }
         .listening { color: #2980b9; font-style: italic; }
+        
+        /* Hiển thị số đếm từ */
+        .counter {
+            font-size: 14px;
+            color: #95a5a6;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <div class="word" id="wordDisplay">Loading...</div>
-    <div class="meaning" id="meaningDisplay">Đang tải...</div>
+    <!-- Menu chọn chủ điểm -->
+    <select id="topicSelect" onchange="changeTopic()"></select>
+    
+    <div class="content-area">
+        <div class="word" id="wordDisplay">Loading...</div>
+        <!-- Thêm thẻ hiển thị IPA -->
+        <div class="ipa" id="ipaDisplay">/.../</div>
+        <div class="meaning" id="meaningDisplay">Đang tải...</div>
+    </div>
     
     <div>
         <button class="btn-listen" onclick="listenWord()">🔊 Nghe mẫu</button>
@@ -79,25 +123,75 @@
     <p id="result"></p>
     
     <button class="btn-next" onclick="nextWord()">⏭️ Chuyển từ tiếp theo</button>
+    
+    <div class="counter" id="counterDisplay">Từ 1 / 5</div>
 </div>
 
 <script>
-    // Ngân hàng từ vựng (Giáo viên có thể thêm/bớt từ tại đây)
-    const vocabList = [
-        { word: "Environment", meaning: "Môi trường" },
-        { word: "Education", meaning: "Giáo dục" },
-        { word: "Knowledge", meaning: "Kiến thức" },
-        { word: "Development", meaning: "Sự phát triển" },
-        { word: "Opportunity", meaning: "Cơ hội" }
-    ];
+    // NGÂN HÀNG DỮ LIỆU: Cấu trúc theo Chủ điểm -> Danh sách từ vựng (Có IPA)
+    // Giáo viên có thể copy/paste thêm hàng trăm từ vào đây
+    const vocabData = {
+        "Unit 1: School Life (Trường học)": [
+            { word: "Education", ipa: "/ˌedʒuˈkeɪʃn/", meaning: "Giáo dục" },
+            { word: "Knowledge", ipa: "/ˈnɒlɪdʒ/", meaning: "Kiến thức" },
+            { word: "Assignment", ipa: "/əˈsaɪnmənt/", meaning: "Bài tập về nhà" },
+            { word: "Schedule", ipa: "/ˈʃedjuːl/", meaning: "Thời khóa biểu" }
+        ],
+        "Unit 2: The Environment (Môi trường)": [
+            { word: "Environment", ipa: "/ɪnˈvaɪrənmənt/", meaning: "Môi trường" },
+            { word: "Pollution", ipa: "/pəˈluːʃn/", meaning: "Sự ô nhiễm" },
+            { word: "Recycle", ipa: "/ˌriːˈsaɪkl/", meaning: "Tái chế" },
+            { word: "Protect", ipa: "/prəˈtekt/", meaning: "Bảo vệ" }
+        ],
+        "Unit 3: Family (Gia đình)": [
+            { word: "Generation", ipa: "/ˌdʒenəˈreɪʃn/", meaning: "Thế hệ" },
+            { word: "Sibling", ipa: "/ˈsɪblɪŋ/", meaning: "Anh chị em ruột" },
+            { word: "Relative", ipa: "/ˈrelətɪv/", meaning: "Họ hàng" }
+        ]
+    };
 
+    let currentTopic = "";
+    let vocabList = [];
     let currentIndex = 0;
 
-    // Tải từ vựng lên giao diện
+    // Hàm khởi tạo trang web
+    function initApp() {
+        const selectElement = document.getElementById("topicSelect");
+        
+        // Nạp các chủ điểm vào menu thả xuống
+        for (const topic in vocabData) {
+            const option = document.createElement("option");
+            option.value = topic;
+            option.innerText = topic;
+            selectElement.appendChild(option);
+        }
+
+        // Đặt chủ điểm mặc định là chủ điểm đầu tiên
+        currentTopic = selectElement.value;
+        vocabList = vocabData[currentTopic];
+        
+        loadWord();
+    }
+
+    // Hàm chạy khi học sinh chọn chủ điểm khác
+    function changeTopic() {
+        currentTopic = document.getElementById("topicSelect").value;
+        vocabList = vocabData[currentTopic]; // Lấy danh sách từ của chủ điểm mới
+        currentIndex = 0; // Quay về từ đầu tiên
+        loadWord();
+    }
+
+    // Tải từ vựng, IPA và Nghĩa lên giao diện
     function loadWord() {
-        document.getElementById("wordDisplay").innerText = vocabList[currentIndex].word;
-        document.getElementById("meaningDisplay").innerText = vocabList[currentIndex].meaning;
+        const currentWordData = vocabList[currentIndex];
+        
+        document.getElementById("wordDisplay").innerText = currentWordData.word;
+        document.getElementById("ipaDisplay").innerText = currentWordData.ipa;
+        document.getElementById("meaningDisplay").innerText = currentWordData.meaning;
         document.getElementById("result").innerText = "";
+        
+        // Cập nhật bộ đếm
+        document.getElementById("counterDisplay").innerText = `Từ ${currentIndex + 1} / ${vocabList.length}`;
     }
 
     // Tính năng đọc phát âm mẫu
@@ -105,7 +199,7 @@
         const word = vocabList[currentIndex].word;
         const utterance = new SpeechSynthesisUtterance(word);
         utterance.lang = 'en-US'; 
-        utterance.rate = 0.9; // Tốc độ đọc hơi chậm lại để học sinh dễ nghe
+        utterance.rate = 0.85; // Đọc chậm rãi để dễ nghe IPA
         window.speechSynthesis.speak(utterance);
     }
 
@@ -115,7 +209,6 @@
         resultDisplay.innerText = "Đang nghe... (Hãy nói vào micro)";
         resultDisplay.className = "listening";
 
-        // Khởi tạo bộ nhận diện giọng nói của trình duyệt
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         if (!SpeechRecognition) {
             resultDisplay.innerText = "Trình duyệt không hỗ trợ micro. Vui lòng dùng Google Chrome!";
@@ -128,20 +221,19 @@
         recognition.start();
 
         recognition.onresult = function(event) {
-            // Lấy từ học sinh vừa đọc, chuyển thành chữ thường và xóa khoảng trắng/dấu câu
-            const spokenWord = event.results[0][0].transcript.toLowerCase().trim().replace(/[^a-z]/g, '');
-            const targetWord = vocabList[currentIndex].word.toLowerCase().trim().replace(/[^a-z]/g, '');
+            const spokenWord = event.results[0][0].transcript.toLowerCase().trim().replace(/[^a-z\s]/g, '');
+            const targetWord = vocabList[currentIndex].word.toLowerCase().trim().replace(/[^a-z\s]/g, '');
 
             if (spokenWord === targetWord) {
-                resultDisplay.innerText = "🎉 Tuyệt vời! Bạn phát âm rất chuẩn.";
+                resultDisplay.innerText = "🎉 Chính xác!";
                 resultDisplay.className = "correct";
             } else {
-                resultDisplay.innerText = `Chưa đúng. Trình duyệt nghe thành: "${event.results[0][0].transcript}". Thử lại nhé!`;
+                resultDisplay.innerText = `Chưa đúng. Bạn vừa đọc là: "${event.results[0][0].transcript}"`;
                 resultDisplay.className = "incorrect";
             }
         };
 
-        recognition.onerror = function(event) {
+        recognition.onerror = function() {
             resultDisplay.innerText = "Không nghe rõ tiếng, hãy bấm nút và thử lại!";
             resultDisplay.className = "incorrect";
         };
@@ -153,8 +245,8 @@
         loadWord();
     }
 
-    // Gọi hàm loadWord ngay khi mở trang web
-    window.onload = loadWord;
+    // Khởi động ứng dụng ngay khi tải xong trang
+    window.onload = initApp;
 </script>
 
 </body>
