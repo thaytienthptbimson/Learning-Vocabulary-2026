@@ -6,7 +6,7 @@
     <title>Hệ thống Ôn tập Từ vựng Toàn diện</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f4f8; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .container { max-width: 500px; width: 100%; }
+        .container { max-width: 500px; width: 100%; display: none; }
         .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); text-align: center; margin-bottom: 20px; }
         select, input { width: 100%; padding: 10px; font-size: 15px; border: 2px solid #bdc3c7; border-radius: 8px; background-color: #ecf0f1; font-weight: bold; color: #2c3e50; box-sizing: border-box; margin-bottom: 15px;}
         select:focus, input:focus { outline: none; border-color: #3498db; }
@@ -30,13 +30,27 @@
         .teacher-area h3 { margin-top: 0; color: #856404; text-align: center; }
         .form-group { margin-bottom: 10px; }
         .btn-add { background-color: #d35400; color: white; width: 100%; margin-top: 10px; }
+        #lockScreen { display: none; width: 100%; max-width: 500px; margin-top: 50px; }
+        .lock-card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); text-align: center; border-top: 5px solid #c0392b; }
+        .lock-card h2 { color: #c0392b; margin-top: 0; }
+        .btn-unlock { background-color: #c0392b; color: white; width: 100%; margin-top: 10px; }
+        #trialNotice { text-align: center; color: #d35400; font-size: 14px; font-weight: bold; margin-top: 15px; }
     </style>
 </head>
 <body>
 
-<div class="container">
+<div id="lockScreen">
+    <div class="lock-card">
+        <h2>🔒 HẾT HẠN DÙNG THỬ</h2>
+        <p style="color: #7f8c8d; font-size: 15px; margin-bottom: 20px;">Thời gian dùng thử 30 ngày của bạn đã kết thúc. Vui lòng nhập mật khẩu để mở khóa phần mềm vĩnh viễn.</p>
+        <input type="password" id="passwordInput" placeholder="Nhập mật khẩu bản quyền...">
+        <button class="btn-unlock" onclick="checkPassword()">🔓 Mở Khóa Phần Mềm</button>
+        <p id="lockErrorMsg" style="color: #c0392b; font-weight: bold; margin-top: 15px; font-size: 14px;"></p>
+    </div>
+</div>
+
+<div class="container" id="appScreen">
     <div class="card">
-        <!-- Menu chọn Chủ đề (đã bao gồm Cấp độ) -->
         <select id="topicSelect" onchange="changeTopic()"></select>
         
         <div class="content-area">
@@ -59,137 +73,1888 @@
         <p id="counterDisplay" style="color: #95a5a6; font-size: 14px; text-align: center;"></p>
     </div>
 
-    <!-- Khu vực nhập liệu của Giáo viên -->
-    <button class="btn-toggle-teacher" onclick="toggleTeacherArea()">👨‍🏫 Bật/Tắt Chế độ Giáo viên (Thêm từ)</button>
+    <button class="btn-toggle-teacher" onclick="toggleTeacherArea()">👨‍🏫 Bật/Tắt Chế độ Giáo viên (Thêm từ lẻ)</button>
     <div class="teacher-area" id="teacherArea">
-        <h3>Thêm Từ Vựng Mới</h3>
-        <div class="form-group"><label>1. Chọn Chủ đề có sẵn (hoặc gõ mới):</label><input type="text" id="newTopic" placeholder="VD: [A1] - Chủ đề 2: Gia đình"></div>
-        <div class="form-group"><label>2. Từ tiếng Anh:</label><input type="text" id="newWord" placeholder="VD: Dialogue"></div>
-        <div class="form-group"><label>3. Phiên âm IPA:</label><input type="text" id="newIpa" placeholder="VD: /ˈdaɪ.ə.lɒɡ/"></div>
-        <div class="form-group"><label>4. Nghĩa tiếng Việt:</label><input type="text" id="newMeaning" placeholder="VD: Đoạn hội thoại"></div>
+        <h3>Thêm Từ Vựng Lẻ</h3>
+        <div class="form-group"><label>1. Chọn Chủ đề:</label><input type="text" id="newTopic"></div>
+        <div class="form-group"><label>2. Từ tiếng Anh:</label><input type="text" id="newWord"></div>
+        <div class="form-group"><label>3. Phiên âm IPA:</label><input type="text" id="newIpa"></div>
+        <div class="form-group"><label>4. Nghĩa tiếng Việt:</label><input type="text" id="newMeaning"></div>
         <button class="btn-add" onclick="addNewWord()">➕ Lưu Từ Vựng</button>
         <p id="saveMsg" style="color: #27ae60; text-align: center; font-weight: bold; font-size: 14px;"></p>
     </div>
+
+    <p id="trialNotice"></p>
 </div>
 
 <script>
-    // TOÀN BỘ DỮ LIỆU NẰM TRONG NÀY (Có bổ sung câu ví dụ cho Chủ đề 1)
-    const defaultData = {
-        "[A1] - Chủ đề 1: Cuộc sống hằng ngày": [
-            { "word": "wake up", "ipa": "/ˈweɪk ʌp/", "meaning": "thức dậy", "example": "I wake up early every morning. (Tôi thức dậy sớm mỗi sáng.)" },
-            { "word": "brush", "ipa": "/brʌʃ/", "meaning": "đánh răng/chải tóc", "example": "I brush my teeth twice a day. (Tôi đánh răng hai lần một ngày.)" },
-            { "word": "shower", "ipa": "/ˈʃaʊ.ɚ/", "meaning": "tắm vòi sen", "example": "She takes a shower before bed. (Cô ấy tắm trước khi đi ngủ.)" },
-            { "word": "breakfast", "ipa": "/ˈbrek.fəst/", "meaning": "bữa sáng", "example": "We eat breakfast at 7 AM. (Chúng tôi ăn sáng lúc 7 giờ sáng.)" },
-            { "word": "dress", "ipa": "/dres/", "meaning": "mặc quần áo", "example": "He gets dressed quickly. (Anh ấy mặc quần áo nhanh chóng.)" },
-            { "word": "work", "ipa": "/wɝːk/", "meaning": "làm việc", "example": "My father goes to work by bus. (Bố tôi đi làm bằng xe buýt.)" },
-            { "word": "commute", "ipa": "/kəˈmjuːt/", "meaning": "đi lại (từ nhà đến chỗ làm)", "example": "My daily commute takes 30 minutes. (Việc đi lại hằng ngày của tôi mất 30 phút.)" },
-            { "word": "lunch", "ipa": "/lʌntʃ/", "meaning": "bữa trưa", "example": "I have lunch with my friends. (Tôi ăn trưa với bạn bè.)" },
-            { "word": "dinner", "ipa": "/ˈdɪn.ɚ/", "meaning": "bữa tối", "example": "We cook dinner together. (Chúng tôi nấu bữa tối cùng nhau.)" },
-            { "word": "sleep", "ipa": "/sliːp/", "meaning": "ngủ", "example": "Babies need to sleep a lot. (Trẻ sơ sinh cần ngủ rất nhiều.)" },
-            { "word": "clean", "ipa": "/kliːn/", "meaning": "dọn dẹp", "example": "I clean my room on weekends. (Tôi dọn phòng vào cuối tuần.)" },
-            { "word": "cook", "ipa": "/kʊk/", "meaning": "nấu ăn", "example": "Mom cooks delicious food. (Mẹ nấu những món ăn rất ngon.)" },
-            { "word": "wash", "ipa": "/wɑːʃ/", "meaning": "giặt/rửa", "example": "Please wash your hands. (Làm ơn rửa tay của bạn.)" },
-            { "word": "sweep", "ipa": "/swiːp/", "meaning": "quét nhà", "example": "She sweeps the floor every day. (Cô ấy quét nhà mỗi ngày.)" },
-            { "word": "mop", "ipa": "/mɑːp/", "meaning": "lau nhà", "example": "He mops the kitchen floor. (Anh ấy lau sàn bếp.)" },
-            { "word": "laundry", "ipa": "/ˈlɑːn.dri/", "meaning": "việc giặt giũ", "example": "I do the laundry on Sundays. (Tôi giặt quần áo vào Chủ Nhật.)" },
-            { "word": "trash", "ipa": "/træʃ/", "meaning": "rác", "example": "Please take out the trash. (Làm ơn đem rác đi đổ.)" },
-            { "word": "grocery", "ipa": "/ˈɡroʊ.sɚ.i/", "meaning": "thực phẩm/tạp hóa", "example": "We buy groceries at the supermarket. (Chúng tôi mua thực phẩm ở siêu thị.)" },
-            { "word": "shop", "ipa": "/ʃɑːp/", "meaning": "mua sắm", "example": "She likes to shop for clothes. (Cô ấy thích mua sắm quần áo.)" },
-            { "word": "buy", "ipa": "/baɪ/", "meaning": "mua", "example": "I want to buy a new book. (Tôi muốn mua một cuốn sách mới.)" },
-            { "word": "money", "ipa": "/ˈmʌn.i/", "meaning": "tiền", "example": "I don't have much money. (Tôi không có nhiều tiền.)" },
-            { "word": "pay", "ipa": "/peɪ/", "meaning": "trả tiền", "example": "How do you want to pay? (Bạn muốn thanh toán bằng gì?)" },
-            { "word": "phone", "ipa": "/foʊn/", "meaning": "điện thoại", "example": "My phone is ringing. (Điện thoại của tôi đang kêu.)" },
-            { "word": "call", "ipa": "/kɑːl/", "meaning": "gọi điện", "example": "I will call you later. (Tôi sẽ gọi cho bạn sau.)" },
-            { "word": "message", "ipa": "/ˈmes.ɪdʒ/", "meaning": "tin nhắn", "example": "She sent me a text message. (Cô ấy gửi cho tôi một tin nhắn.)" },
-            { "word": "watch", "ipa": "/wɑːtʃ/", "meaning": "xem", "example": "We watch movies on Friday nights. (Chúng tôi xem phim vào tối thứ Sáu.)" },
-            { "word": "television", "ipa": "/ˈtel.ə.vɪʒ.ən/", "meaning": "tivi", "example": "They are watching television. (Họ đang xem tivi.)" },
-            { "word": "internet", "ipa": "/ˈɪn.t̬ɚ.net/", "meaning": "mạng internet", "example": "I use the internet for studying. (Tôi sử dụng internet để học tập.)" },
-            { "word": "read", "ipa": "/riːd/", "meaning": "đọc", "example": "He likes to read books. (Anh ấy thích đọc sách.)" },
-            { "word": "book", "ipa": "/bʊk/", "meaning": "sách", "example": "This is an interesting book. (Đây là một cuốn sách hay.)" },
-            { "word": "relax", "ipa": "/rɪˈlæks/", "meaning": "thư giãn", "example": "I like to relax on the beach. (Tôi thích thư giãn trên bãi biển.)" },
-            { "word": "exercise", "ipa": "/ˈek.sɚ.saɪz/", "meaning": "tập thể dục", "example": "I exercise in the morning. (Tôi tập thể dục vào buổi sáng.)" },
-            { "word": "walk", "ipa": "/wɑːk/", "meaning": "đi bộ", "example": "Let's take a walk in the park. (Hãy đi dạo trong công viên.)" },
-            { "word": "run", "ipa": "/rʌn/", "meaning": "chạy", "example": "He runs very fast. (Anh ấy chạy rất nhanh.)" },
-            { "word": "drink", "ipa": "/drɪŋk/", "meaning": "uống", "example": "I drink a glass of milk. (Tôi uống một ly sữa.)" },
-            { "word": "eat", "ipa": "/iːt/", "meaning": "ăn", "example": "Children love to eat fruit. (Trẻ con thích ăn trái cây.)" },
-            { "word": "water", "ipa": "/ˈwɑː.t̬ɚ/", "meaning": "nước", "example": "Drinking water is good for health. (Uống nước tốt cho sức khỏe.)" },
-            { "word": "coffee", "ipa": "/ˈkɑː.fi/", "meaning": "cà phê", "example": "She drinks coffee every morning. (Cô ấy uống cà phê mỗi sáng.)" },
-            { "word": "tea", "ipa": "/tiː/", "meaning": "trà", "example": "Would you like some tea? (Bạn có muốn uống chút trà không?)" },
-            { "word": "family", "ipa": "/ˈfæm.əl.i/", "meaning": "gia đình", "example": "I love my family very much. (Tôi rất yêu gia đình mình.)" },
-            { "word": "friend", "ipa": "/frend/", "meaning": "bạn bè", "example": "He is my best friend. (Anh ấy là bạn thân của tôi.)" },
-            { "word": "talk", "ipa": "/tɑːk/", "meaning": "nói chuyện", "example": "We love to talk and laugh. (Chúng tôi thích nói chuyện và cười đùa.)" },
-            { "word": "listen", "ipa": "/ˈlɪs.ən/", "meaning": "lắng nghe", "example": "Please listen to the teacher. (Hãy lắng nghe giáo viên.)" },
-            { "word": "hear", "ipa": "/hɪr/", "meaning": "nghe thấy", "example": "Can you hear that sound? (Bạn có nghe thấy âm thanh đó không?)" },
-            { "word": "see", "ipa": "/siː/", "meaning": "nhìn thấy", "example": "I can see the sea from here. (Tôi có thể nhìn thấy biển từ đây.)" },
-            { "word": "look", "ipa": "/lʊk/", "meaning": "nhìn", "example": "Look at the beautiful flowers. (Hãy nhìn những bông hoa đẹp kìa.)" },
-            { "word": "feel", "ipa": "/fiːl/", "meaning": "cảm thấy", "example": "I feel happy today. (Tôi cảm thấy vui vẻ hôm nay.)" },
-            { "word": "think", "ipa": "/θɪŋk/", "meaning": "suy nghĩ", "example": "I think English is fun. (Tôi nghĩ tiếng Anh rất thú vị.)" },
-            { "word": "smile", "ipa": "/smaɪl/", "meaning": "mỉm cười", "example": "She has a nice smile. (Cô ấy có nụ cười đẹp.)" },
-            { "word": "laugh", "ipa": "/læf/", "meaning": "cười to", "example": "His joke made everyone laugh. (Câu đùa của anh ấy làm mọi người cười to.)" }
-        ],
-        "[A1] - Chủ đề 2: Gia đình & Bạn bè": [],
-        "[A1] - Chủ đề 3: Nhà cửa & Đồ đạc": [],
-        "[A1] - Chủ đề 4: Đồ ăn & Thức uống": [],
-        "[A1] - Chủ đề 5: Màu sắc & Số đếm": [],
-        "[A1] - Chủ đề 6: Quần áo & Thời trang": [],
-        "[A1] - Chủ đề 7: Cơ thể người": [],
-        "[A1] - Chủ đề 8: Thời gian & Ngày tháng": [],
-        
-        "[A2] - Chủ đề 9: Du lịch & Giao thông": [],
-        "[A2] - Chủ đề 10: Mua sắm & Tiền bạc": [],
-        "[A2] - Chủ đề 11: Sức khỏe & Y tế": [],
-        "[A2] - Chủ đề 12: Sở thích & Giải trí": [],
-        "[A2] - Chủ đề 13: Thời tiết & Khí hậu": [],
-        "[A2] - Chủ đề 14: Nghề nghiệp & Công việc": [],
-        "[A2] - Chủ đề 15: Động vật & Thú cưng": [],
-        "[A2] - Chủ đề 16: Công nghệ cơ bản": [],
-
-        "[B1] - Chủ đề 17: Giáo dục & Trường học": [],
-        "[B1] - Chủ đề 18: Môi trường tự nhiên": [],
-        "[B1] - Chủ đề 19: Thể thao & Vận động": [],
-        "[B1] - Chủ đề 20: Truyền thông & Báo chí": [],
-        "[B1] - Chủ đề 21: Văn hóa & Phong tục": [],
-        "[B1] - Chủ đề 22: Các mối quan hệ": [],
-        "[B1] - Chủ đề 23: Dịch vụ công cộng": [],
-        "[B1] - Chủ đề 24: Khách sạn & Nhà hàng": [],
-        "[B1] - Chủ đề 25: Lễ hội & Kỷ niệm": [],
-
-        "[B2] - Chủ đề 26: Kinh doanh & Doanh nghiệp": [],
-        "[B2] - Chủ đề 27: Khoa học & Khám phá": [],
-        "[B2] - Chủ đề 28: Chính trị & Xã hội": [],
-        "[B2] - Chủ đề 29: Tội phạm & Pháp luật": [],
-        "[B2] - Chủ đề 30: Nghệ thuật & Sáng tạo": [],
-        "[B2] - Chủ đề 31: Tâm lý học cơ bản": [],
-        "[B2] - Chủ đề 32: Lịch sử & Thời đại": [],
-        "[B2] - Chủ đề 33: Xu hướng tương lai": [],
-        "[B2] - Chủ đề 34: Công nghệ thông tin": [],
-
-        "[C1] - Chủ đề 35: Các khái niệm trừu tượng": [],
-        "[C1] - Chủ đề 36: Đổi mới & Phát minh": [],
-        "[C1] - Chủ đề 37: Toàn cầu hóa": [],
-        "[C1] - Chủ đề 38: Đạo đức & Triết học": [],
-        "[C1] - Chủ đề 39: Kinh tế vĩ mô": [],
-        "[C1] - Chủ đề 40: Kiến trúc & Xây dựng": [],
-        "[C1] - Chủ đề 41: Ngoại giao & Quốc tế": [],
-        "[C1] - Chủ đề 42: Nghiên cứu học thuật": [],
-
-        "[C2] - Chủ đề 43: Thành ngữ (Idioms 1)": [],
-        "[C2] - Chủ đề 44: Thành ngữ (Idioms 2)": [],
-        "[C2] - Chủ đề 45: Cụm động từ (Phrasal Verbs 1)": [],
-        "[C2] - Chủ đề 46: Cụm động từ (Phrasal Verbs 2)": [],
-        "[C2] - Chủ đề 47: Cụm từ cố định (Collocations)": [],
-        "[C2] - Chủ đề 48: Tiếng lóng (Slang)": [],
-        "[C2] - Chủ đề 49: Biểu đạt sắc thái cảm xúc": [],
-        "[C2] - Chủ đề 50: Từ vựng Viết luận Cấp cao": []
-    };
-
+    const TRIAL_DAYS = 30;
+    const SECRET_PASSWORD = "tienhuong28011981@";
     let vocabData = {};
     let currentTopic = "";
     let vocabList = [];
     let currentIndex = 0;
 
-    function loadDataFromStorage() {
-        vocabData = JSON.parse(JSON.stringify(defaultData));
+    function checkLicense() {
+        const isUnlocked = localStorage.getItem('vocabApp_Unlocked');
+        if (isUnlocked === 'true') {
+            showApp();
+            return;
+        }
+
+        let trialStart = localStorage.getItem('vocabApp_TrialStart');
+        if (!trialStart) {
+            trialStart = Date.now();
+            localStorage.setItem('vocabApp_TrialStart', trialStart);
+        }
+
+        const msPassed = Date.now() - parseInt(trialStart);
+        const daysPassed = Math.floor(msPassed / (1000 * 60 * 60 * 24));
+        const daysLeft = TRIAL_DAYS - daysPassed;
+
+        if (daysLeft > 0) {
+            showApp();
+            document.getElementById("trialNotice").innerText = `⏳ Bạn còn ${daysLeft} ngày dùng thử miễn phí.`;
+        } else {
+            document.getElementById("appScreen").style.display = "none";
+            document.getElementById("lockScreen").style.display = "block";
+        }
+    }
+
+    function checkPassword() {
+        const input = document.getElementById("passwordInput").value;
+        if (input === SECRET_PASSWORD) {
+            localStorage.setItem('vocabApp_Unlocked', 'true');
+            document.getElementById("lockScreen").style.display = "none";
+            showApp();
+        } else {
+            document.getElementById("lockErrorMsg").innerText = "❌ Mật khẩu không chính xác, vui lòng thử lại!";
+        }
+    }
+
+    function showApp() {
+        document.getElementById("appScreen").style.display = "block";
+        initAppLogic();
+    }
+
+    // DỮ LIỆU TỪ VỰNG (đã gộp từ file vocabulary.json)
+    const VOCAB_DATA = {
+  "[A1] - Chủ đề 1: Gia đình và Các mối quan hệ": [
+    {
+      "word": "mother",
+      "ipa": "/ˈmʌð.ɚ/",
+      "meaning": "mẹ",
+      "example": "My mother is very kind."
+    },
+    {
+      "word": "father",
+      "ipa": "/ˈfɑː.ðɚ/",
+      "meaning": "bố",
+      "example": "My father is a doctor."
+    },
+    {
+      "word": "parents",
+      "ipa": "/ˈper.ənts/",
+      "meaning": "bố mẹ",
+      "example": "I live with my parents."
+    },
+    {
+      "word": "brother",
+      "ipa": "/ˈbrʌð.ɚ/",
+      "meaning": "anh/em trai",
+      "example": "He is my older brother."
+    },
+    {
+      "word": "sister",
+      "ipa": "/ˈsɪs.tɚ/",
+      "meaning": "chị/em gái",
+      "example": "My sister likes reading."
+    },
+    {
+      "word": "son",
+      "ipa": "/sʌn/",
+      "meaning": "con trai",
+      "example": "They have one son."
+    },
+    {
+      "word": "daughter",
+      "ipa": "/ˈdɑː.t̬ɚ/",
+      "meaning": "con gái",
+      "example": "Her daughter is five years old."
+    },
+    {
+      "word": "baby",
+      "ipa": "/ˈbeɪ.bi/",
+      "meaning": "em bé",
+      "example": "The baby is sleeping now."
+    },
+    {
+      "word": "child",
+      "ipa": "/tʃaɪld/",
+      "meaning": "đứa trẻ",
+      "example": "She is a happy child."
+    },
+    {
+      "word": "children",
+      "ipa": "/ˈtʃɪl.drən/",
+      "meaning": "những đứa trẻ",
+      "example": "The children play in the park."
+    },
+    {
+      "word": "grandfather",
+      "ipa": "/ˈɡrænd.fɑː.ðɚ/",
+      "meaning": "ông",
+      "example": "My grandfather is 80."
+    },
+    {
+      "word": "grandmother",
+      "ipa": "/ˈɡrænd.mʌð.ɚ/",
+      "meaning": "bà",
+      "example": "My grandmother makes great cake."
+    },
+    {
+      "word": "grandparents",
+      "ipa": "/ˈɡrænd.per.ənts/",
+      "meaning": "ông bà",
+      "example": "I visit my grandparents on Sunday."
+    },
+    {
+      "word": "grandson",
+      "ipa": "/ˈɡrænd.sʌn/",
+      "meaning": "cháu trai",
+      "example": "He loves his grandson."
+    },
+    {
+      "word": "granddaughter",
+      "ipa": "/ˈɡrænd.dɑː.t̬ɚ/",
+      "meaning": "cháu gái",
+      "example": "She plays with her granddaughter."
+    },
+    {
+      "word": "uncle",
+      "ipa": "/ˈʌŋ.kəl/",
+      "meaning": "chú, bác, cậu",
+      "example": "My uncle lives in London."
+    },
+    {
+      "word": "aunt",
+      "ipa": "/ænt/",
+      "meaning": "cô, dì, bác gái",
+      "example": "My aunt is a teacher."
+    },
+    {
+      "word": "cousin",
+      "ipa": "/ˈkʌz.ən/",
+      "meaning": "anh chị em họ",
+      "example": "I am playing with my cousin."
+    },
+    {
+      "word": "nephew",
+      "ipa": "/ˈnef.juː/",
+      "meaning": "cháu trai (con của anh/chị)",
+      "example": "My nephew is very cute."
+    },
+    {
+      "word": "niece",
+      "ipa": "/niːs/",
+      "meaning": "cháu gái (con của anh/chị)",
+      "example": "My niece likes singing."
+    },
+    {
+      "word": "husband",
+      "ipa": "/ˈhʌz.bənd/",
+      "meaning": "chồng",
+      "example": "Her husband works hard."
+    },
+    {
+      "word": "wife",
+      "ipa": "/waɪf/",
+      "meaning": "vợ",
+      "example": "His wife is beautiful."
+    },
+    {
+      "word": "family",
+      "ipa": "/ˈfæm.əl.i/",
+      "meaning": "gia đình",
+      "example": "I love my family."
+    },
+    {
+      "word": "friend",
+      "ipa": "/frend/",
+      "meaning": "người bạn",
+      "example": "She is my best friend."
+    },
+    {
+      "word": "boy",
+      "ipa": "/bɔɪ/",
+      "meaning": "con trai",
+      "example": "The boy is running."
+    },
+    {
+      "word": "girl",
+      "ipa": "/ɡɝːl/",
+      "meaning": "con gái",
+      "example": "The girl has long hair."
+    },
+    {
+      "word": "man",
+      "ipa": "/mæn/",
+      "meaning": "đàn ông",
+      "example": "That man is my teacher."
+    },
+    {
+      "word": "woman",
+      "ipa": "/ˈwʊm.ən/",
+      "meaning": "phụ nữ",
+      "example": "The woman is reading a book."
+    },
+    {
+      "word": "people",
+      "ipa": "/ˈpiː.pəl/",
+      "meaning": "mọi người",
+      "example": "Many people are here."
+    },
+    {
+      "word": "person",
+      "ipa": "/ˈpɝː.sən/",
+      "meaning": "một người",
+      "example": "He is a good person."
+    },
+    {
+      "word": "marry",
+      "ipa": "/ˈmer.i/",
+      "meaning": "kết hôn",
+      "example": "They will marry next year."
+    },
+    {
+      "word": "love",
+      "ipa": "/lʌv/",
+      "meaning": "yêu thương",
+      "example": "I love my brother."
+    },
+    {
+      "word": "like",
+      "ipa": "/laɪk/",
+      "meaning": "thích",
+      "example": "I like spending time with family."
+    },
+    {
+      "word": "live",
+      "ipa": "/lɪv/",
+      "meaning": "sống",
+      "example": "We live in a big house."
+    },
+    {
+      "word": "meet",
+      "ipa": "/miːt/",
+      "meaning": "gặp gỡ",
+      "example": "Nice to meet you."
+    },
+    {
+      "word": "visit",
+      "ipa": "/ˈvɪz.ɪt/",
+      "meaning": "thăm",
+      "example": "I visit my aunt often."
+    },
+    {
+      "word": "help",
+      "ipa": "/help/",
+      "meaning": "giúp đỡ",
+      "example": "I help my mother cook."
+    },
+    {
+      "word": "play",
+      "ipa": "/pleɪ/",
+      "meaning": "chơi",
+      "example": "We play together."
+    },
+    {
+      "word": "talk",
+      "ipa": "/tɑːk/",
+      "meaning": "nói chuyện",
+      "example": "We talk every day."
+    },
+    {
+      "word": "call",
+      "ipa": "/kɑːl/",
+      "meaning": "gọi điện",
+      "example": "Call me tonight."
+    },
+    {
+      "word": "name",
+      "ipa": "/neɪm/",
+      "meaning": "tên",
+      "example": "My name is John."
+    },
+    {
+      "word": "old",
+      "ipa": "/oʊld/",
+      "meaning": "già, lớn tuổi",
+      "example": "My grandfather is old."
+    },
+    {
+      "word": "young",
+      "ipa": "/jʌŋ/",
+      "meaning": "trẻ tuổi",
+      "example": "She is very young."
+    },
+    {
+      "word": "tall",
+      "ipa": "/tɑːl/",
+      "meaning": "cao",
+      "example": "My father is tall."
+    },
+    {
+      "word": "short",
+      "ipa": "/ʃɔːrt/",
+      "meaning": "thấp, lùn",
+      "example": "My sister is short."
+    },
+    {
+      "word": "happy",
+      "ipa": "/ˈhæp.i/",
+      "meaning": "vui vẻ",
+      "example": "We are a happy family."
+    },
+    {
+      "word": "sad",
+      "ipa": "/sæd/",
+      "meaning": "buồn bã",
+      "example": "She is sad today."
+    },
+    {
+      "word": "big",
+      "ipa": "/bɪɡ/",
+      "meaning": "lớn, đông",
+      "example": "I have a big family."
+    },
+    {
+      "word": "small",
+      "ipa": "/smɑːl/",
+      "meaning": "nhỏ, ít người",
+      "example": "It is a small family."
+    },
+    {
+      "word": "home",
+      "ipa": "/hoʊm/",
+      "meaning": "tổ ấm, nhà",
+      "example": "I feel safe at home."
+    }
+  ],
+  "[A2] - Chủ đề 1: Gia đình và Các mối quan hệ": [
+    {
+      "word": "relative",
+      "ipa": "/ˈrel.ə.t̬ɪv/",
+      "meaning": "họ hàng",
+      "example": "All my relatives came to the party."
+    },
+    {
+      "word": "neighbor",
+      "ipa": "/ˈneɪ.bɚ/",
+      "meaning": "hàng xóm",
+      "example": "Our neighbor is very friendly."
+    },
+    {
+      "word": "guest",
+      "ipa": "/ɡest/",
+      "meaning": "khách",
+      "example": "We have guests for dinner."
+    },
+    {
+      "word": "partner",
+      "ipa": "/ˈpɑːrt.nɚ/",
+      "meaning": "người bạn đời, đối tác",
+      "example": "He is my life partner."
+    },
+    {
+      "word": "boyfriend",
+      "ipa": "/ˈbɔɪ.frend/",
+      "meaning": "bạn trai",
+      "example": "She went to the cinema with her boyfriend."
+    },
+    {
+      "word": "girlfriend",
+      "ipa": "/ˈɡɝːl.frend/",
+      "meaning": "bạn gái",
+      "example": "His girlfriend bought him a gift."
+    },
+    {
+      "word": "adult",
+      "ipa": "/əˈdʌlt/",
+      "meaning": "người lớn",
+      "example": "The movie is for adults only."
+    },
+    {
+      "word": "teenager",
+      "ipa": "/ˈtiːnˌeɪ.dʒɚ/",
+      "meaning": "thanh thiếu niên",
+      "example": "My brother is a teenager."
+    },
+    {
+      "word": "couple",
+      "ipa": "/ˈkʌp.əl/",
+      "meaning": "cặp đôi",
+      "example": "They are a cute couple."
+    },
+    {
+      "word": "marriage",
+      "ipa": "/ˈmer.ɪdʒ/",
+      "meaning": "hôn nhân",
+      "example": "Their marriage is very happy."
+    },
+    {
+      "word": "wedding",
+      "ipa": "/ˈwed.ɪŋ/",
+      "meaning": "đám cưới",
+      "example": "We are invited to their wedding."
+    },
+    {
+      "word": "single",
+      "ipa": "/ˈsɪŋ.ɡəl/",
+      "meaning": "độc thân",
+      "example": "He is single."
+    },
+    {
+      "word": "married",
+      "ipa": "/ˈmer.ɪd/",
+      "meaning": "đã kết hôn",
+      "example": "She is married to a doctor."
+    },
+    {
+      "word": "divorced",
+      "ipa": "/dɪˈvɔːrst/",
+      "meaning": "đã ly hôn",
+      "example": "They got divorced last year."
+    },
+    {
+      "word": "share",
+      "ipa": "/ʃer/",
+      "meaning": "chia sẻ",
+      "example": "I share my room with my sister."
+    },
+    {
+      "word": "care",
+      "ipa": "/ker/",
+      "meaning": "quan tâm, chăm sóc",
+      "example": "Parents care for their children."
+    },
+    {
+      "word": "hug",
+      "ipa": "/hʌɡ/",
+      "meaning": "ôm",
+      "example": "She gave her mom a big hug."
+    },
+    {
+      "word": "kiss",
+      "ipa": "/kɪs/",
+      "meaning": "hôn",
+      "example": "He kissed his wife goodbye."
+    },
+    {
+      "word": "smile",
+      "ipa": "/smaɪl/",
+      "meaning": "mỉm cười",
+      "example": "She has a beautiful smile."
+    },
+    {
+      "word": "laugh",
+      "ipa": "/læf/",
+      "meaning": "cười to",
+      "example": "We always laugh together."
+    },
+    {
+      "word": "cry",
+      "ipa": "/kraɪ/",
+      "meaning": "khóc",
+      "example": "The baby started to cry."
+    },
+    {
+      "word": "angry",
+      "ipa": "/ˈæŋ.ɡri/",
+      "meaning": "tức giận",
+      "example": "Don't be angry with me."
+    },
+    {
+      "word": "friendly",
+      "ipa": "/ˈfrend.li/",
+      "meaning": "thân thiện",
+      "example": "He is a very friendly boy."
+    },
+    {
+      "word": "kind",
+      "ipa": "/kaɪnd/",
+      "meaning": "tốt bụng",
+      "example": "It is kind of you to help."
+    },
+    {
+      "word": "polite",
+      "ipa": "/pəˈlaɪt/",
+      "meaning": "lịch sự",
+      "example": "She is polite to older people."
+    },
+    {
+      "word": "quiet",
+      "ipa": "/ˈkwaɪ.ət/",
+      "meaning": "ít nói, trầm tính",
+      "example": "My brother is very quiet."
+    },
+    {
+      "word": "loud",
+      "ipa": "/laʊd/",
+      "meaning": "ồn ào",
+      "example": "They are too loud."
+    },
+    {
+      "word": "funny",
+      "ipa": "/ˈfʌn.i/",
+      "meaning": "hài hước",
+      "example": "My uncle is a funny man."
+    },
+    {
+      "word": "smart",
+      "ipa": "/smɑːrt/",
+      "meaning": "thông minh",
+      "example": "She is a smart student."
+    },
+    {
+      "word": "strict",
+      "ipa": "/strɪkt/",
+      "meaning": "nghiêm khắc",
+      "example": "My parents are strict."
+    },
+    {
+      "word": "promise",
+      "ipa": "/ˈprɑː.mɪs/",
+      "meaning": "lời hứa, hứa hẹn",
+      "example": "I promise to call you."
+    },
+    {
+      "word": "trust",
+      "ipa": "/trʌst/",
+      "meaning": "tin tưởng",
+      "example": "I trust my best friend."
+    },
+    {
+      "word": "argue",
+      "ipa": "/ˈɑːrɡ.juː/",
+      "meaning": "cãi vã",
+      "example": "They sometimes argue about money."
+    },
+    {
+      "word": "agree",
+      "ipa": "/əˈɡriː/",
+      "meaning": "đồng ý",
+      "example": "I agree with your idea."
+    },
+    {
+      "word": "miss",
+      "ipa": "/mɪs/",
+      "meaning": "nhớ nhung",
+      "example": "I miss my family."
+    },
+    {
+      "word": "invite",
+      "ipa": "/ɪnˈvaɪt/",
+      "meaning": "mời",
+      "example": "I will invite them to dinner."
+    },
+    {
+      "word": "introduce",
+      "ipa": "/ˌɪn.trəˈduːs/",
+      "meaning": "giới thiệu",
+      "example": "Let me introduce my friend."
+    },
+    {
+      "word": "welcome",
+      "ipa": "/ˈwel.kəm/",
+      "meaning": "chào đón",
+      "example": "Welcome to our home!"
+    },
+    {
+      "word": "join",
+      "ipa": "/dʒɔɪn/",
+      "meaning": "tham gia",
+      "example": "Will you join us for lunch?"
+    },
+    {
+      "word": "support",
+      "ipa": "/səˈpɔːrt/",
+      "meaning": "ủng hộ",
+      "example": "My family always supports me."
+    },
+    {
+      "word": "respect",
+      "ipa": "/rɪˈspekt/",
+      "meaning": "tôn trọng",
+      "example": "Respect your elders."
+    },
+    {
+      "word": "protect",
+      "ipa": "/prəˈtekt/",
+      "meaning": "bảo vệ",
+      "example": "Parents protect their kids."
+    },
+    {
+      "word": "forgive",
+      "ipa": "/fɚˈɡɪv/",
+      "meaning": "tha thứ",
+      "example": "Please forgive my mistake."
+    },
+    {
+      "word": "apologize",
+      "ipa": "/əˈpɑː.lə.dʒaɪz/",
+      "meaning": "xin lỗi",
+      "example": "You should apologize to her."
+    },
+    {
+      "word": "accept",
+      "ipa": "/əkˈsept/",
+      "meaning": "chấp nhận",
+      "example": "He accepted my apology."
+    },
+    {
+      "word": "refuse",
+      "ipa": "/rɪˈfjuːz/",
+      "meaning": "từ chối",
+      "example": "She refused his invitation."
+    },
+    {
+      "word": "celebrate",
+      "ipa": "/ˈsel.ə.breɪt/",
+      "meaning": "kỷ niệm, ăn mừng",
+      "example": "We celebrate my birthday today."
+    },
+    {
+      "word": "together",
+      "ipa": "/təˈɡeð.ɚ/",
+      "meaning": "cùng nhau",
+      "example": "We spend time together."
+    },
+    {
+      "word": "relationship",
+      "ipa": "/rɪˈleɪ.ʃən.ʃɪp/",
+      "meaning": "mối quan hệ",
+      "example": "They have a good relationship."
+    },
+    {
+      "word": "connect",
+      "ipa": "/kəˈnekt/",
+      "meaning": "kết nối",
+      "example": "We connect through social media."
+    }
+  ],
+  "[B1] - Chủ đề 1: Gia đình và Các mối quan hệ": [
+    {
+      "word": "generation",
+      "ipa": "/ˌdʒen.əˈreɪ.ʃən/",
+      "meaning": "thế hệ",
+      "example": "Three generations live in this house."
+    },
+    {
+      "word": "ancestor",
+      "ipa": "/ˈæn.ses.tɚ/",
+      "meaning": "tổ tiên",
+      "example": "Our ancestors built this village."
+    },
+    {
+      "word": "childhood",
+      "ipa": "/ˈtʃaɪld.hʊd/",
+      "meaning": "tuổi thơ",
+      "example": "I had a happy childhood."
+    },
+    {
+      "word": "friendship",
+      "ipa": "/ˈfrend.ʃɪp/",
+      "meaning": "tình bạn",
+      "example": "Their friendship lasted for years."
+    },
+    {
+      "word": "colleague",
+      "ipa": "/ˈkɑː.liːɡ/",
+      "meaning": "đồng nghiệp",
+      "example": "She is my colleague at work."
+    },
+    {
+      "word": "acquaintance",
+      "ipa": "/əˈkweɪn.təns/",
+      "meaning": "người quen",
+      "example": "He is just an acquaintance."
+    },
+    {
+      "word": "roommate",
+      "ipa": "/ˈruːm.meɪt/",
+      "meaning": "bạn cùng phòng",
+      "example": "My roommate is very tidy."
+    },
+    {
+      "word": "engaged",
+      "ipa": "/ɪnˈɡeɪdʒd/",
+      "meaning": "đã đính hôn",
+      "example": "They are engaged to be married."
+    },
+    {
+      "word": "separated",
+      "ipa": "/ˈsep.ə.reɪ.t̬ɪd/",
+      "meaning": "sống ly thân",
+      "example": "My parents are separated."
+    },
+    {
+      "word": "widow",
+      "ipa": "/ˈwɪd.oʊ/",
+      "meaning": "góa phụ",
+      "example": "She has been a widow for ten years."
+    },
+    {
+      "word": "widower",
+      "ipa": "/ˈwɪd.oʊ.ɚ/",
+      "meaning": "người góa vợ",
+      "example": "The old widower lives alone."
+    },
+    {
+      "word": "orphan",
+      "ipa": "/ˈɔːr.fən/",
+      "meaning": "trẻ mồ côi",
+      "example": "The orphan was adopted by a kind family."
+    },
+    {
+      "word": "twin",
+      "ipa": "/twɪn/",
+      "meaning": "trẻ sinh đôi",
+      "example": "My sister and I are twins."
+    },
+    {
+      "word": "adopt",
+      "ipa": "/əˈdɑːpt/",
+      "meaning": "nhận nuôi",
+      "example": "They decided to adopt a child."
+    },
+    {
+      "word": "inherit",
+      "ipa": "/ɪnˈher.ɪt/",
+      "meaning": "thừa kế",
+      "example": "He will inherit the family house."
+    },
+    {
+      "word": "pregnant",
+      "ipa": "/ˈpreɡ.nənt/",
+      "meaning": "mang thai",
+      "example": "My older sister is pregnant."
+    },
+    {
+      "word": "birth",
+      "ipa": "/bɝːθ/",
+      "meaning": "sự sinh đẻ",
+      "example": "We celebrated the birth of her son."
+    },
+    {
+      "word": "funeral",
+      "ipa": "/ˈfjuː.nɚ.əl/",
+      "meaning": "đám tang",
+      "example": "Many people attended his funeral."
+    },
+    {
+      "word": "compromise",
+      "ipa": "/ˈkɑːm.prə.maɪz/",
+      "meaning": "thỏa hiệp",
+      "example": "Couples need to learn how to compromise."
+    },
+    {
+      "word": "appreciate",
+      "ipa": "/əˈpriː.ʃi.eɪt/",
+      "meaning": "trân trọng, đánh giá cao",
+      "example": "I appreciate your help."
+    },
+    {
+      "word": "encourage",
+      "ipa": "/ɪnˈkɝː.ɪdʒ/",
+      "meaning": "động viên",
+      "example": "My parents always encourage me."
+    },
+    {
+      "word": "rely",
+      "ipa": "/rɪˈlaɪ/",
+      "meaning": "dựa dẫm, tin cậy",
+      "example": "You can rely on me."
+    },
+    {
+      "word": "depend",
+      "ipa": "/dɪˈpend/",
+      "meaning": "phụ thuộc",
+      "example": "Children depend on their parents."
+    },
+    {
+      "word": "betray",
+      "ipa": "/bɪˈtreɪ/",
+      "meaning": "phản bội",
+      "example": "He betrayed his best friend's trust."
+    },
+    {
+      "word": "jealous",
+      "ipa": "/ˈdʒel.əs/",
+      "meaning": "ghen tị",
+      "example": "He was jealous of his brother's success."
+    },
+    {
+      "word": "proud",
+      "ipa": "/praʊd/",
+      "meaning": "tự hào",
+      "example": "I am so proud of my daughter."
+    },
+    {
+      "word": "disappointed",
+      "ipa": "/ˌdɪs.əˈpɔɪn.t̬ɪd/",
+      "meaning": "thất vọng",
+      "example": "She was disappointed in his behavior."
+    },
+    {
+      "word": "grateful",
+      "ipa": "/ˈɡreɪt.fəl/",
+      "meaning": "biết ơn",
+      "example": "I am grateful for my family."
+    },
+    {
+      "word": "patient",
+      "ipa": "/ˈpeɪ.ʃənt/",
+      "meaning": "kiên nhẫn",
+      "example": "You must be patient with kids."
+    },
+    {
+      "word": "sympathetic",
+      "ipa": "/ˌsɪm.pəˈθet̬.ɪk/",
+      "meaning": "đồng cảm",
+      "example": "She was very sympathetic to my problems."
+    },
+    {
+      "word": "selfish",
+      "ipa": "/ˈsel.fɪʃ/",
+      "meaning": "ích kỷ",
+      "example": "Don't be so selfish."
+    },
+    {
+      "word": "generous",
+      "ipa": "/ˈdʒen.ɚ.əs/",
+      "meaning": "hào phóng",
+      "example": "He is generous with his time and money."
+    },
+    {
+      "word": "reliable",
+      "ipa": "/rɪˈlaɪ.ə.bəl/",
+      "meaning": "đáng tin cậy",
+      "example": "She is a very reliable friend."
+    },
+    {
+      "word": "honest",
+      "ipa": "/ˈɑː.nɪst/",
+      "meaning": "thành thật",
+      "example": "To be honest, I don't like him."
+    },
+    {
+      "word": "loyal",
+      "ipa": "/ˈlɔɪ.əl/",
+      "meaning": "trung thành",
+      "example": "He remained a loyal friend."
+    },
+    {
+      "word": "affectionate",
+      "ipa": "/əˈfek.ʃən.ət/",
+      "meaning": "âu yếm, tình cảm",
+      "example": "She is very affectionate towards her cat."
+    },
+    {
+      "word": "bond",
+      "ipa": "/bɑːnd/",
+      "meaning": "sự gắn kết",
+      "example": "The bond between mother and child is strong."
+    },
+    {
+      "word": "conflict",
+      "ipa": "/ˈkɑːn.flɪkt/",
+      "meaning": "xung đột",
+      "example": "They had a conflict over money."
+    },
+    {
+      "word": "reunion",
+      "ipa": "/ˌriːˈjuːn.jən/",
+      "meaning": "cuộc đoàn tụ",
+      "example": "We have a family reunion every summer."
+    },
+    {
+      "word": "stepmother",
+      "ipa": "/ˈstepˌmʌð.ɚ/",
+      "meaning": "mẹ kế",
+      "example": "His stepmother treats him very well."
+    },
+    {
+      "word": "get along",
+      "ipa": "/ɡet əˈlɑːŋ/",
+      "meaning": "hòa thuận",
+      "example": "I don't get along with my sister."
+    },
+    {
+      "word": "break up",
+      "ipa": "/breɪk ʌp/",
+      "meaning": "chia tay",
+      "example": "They decided to break up last week."
+    },
+    {
+      "word": "make up",
+      "ipa": "/meɪk ʌp/",
+      "meaning": "làm hòa",
+      "example": "They argued but later made up."
+    },
+    {
+      "word": "fall out",
+      "ipa": "/fɑːl aʊt/",
+      "meaning": "cãi nhau tuyệt giao",
+      "example": "He fell out with his brother over the business."
+    },
+    {
+      "word": "hang out",
+      "ipa": "/hæŋ aʊt/",
+      "meaning": "đi chơi, la cà",
+      "example": "We used to hang out a lot."
+    },
+    {
+      "word": "keep in touch",
+      "ipa": "/kiːp ɪn tʌtʃ/",
+      "meaning": "giữ liên lạc",
+      "example": "Let's keep in touch!"
+    },
+    {
+      "word": "stranger",
+      "ipa": "/ˈstreɪn.dʒɚ/",
+      "meaning": "người lạ",
+      "example": "Don't talk to strangers."
+    },
+    {
+      "word": "youth",
+      "ipa": "/juːθ/",
+      "meaning": "tuổi trẻ, thanh niên",
+      "example": "In my youth, I traveled a lot."
+    },
+    {
+      "word": "elder",
+      "ipa": "/ˈel.dɚ/",
+      "meaning": "người lớn tuổi hơn",
+      "example": "You should listen to your elders."
+    },
+    {
+      "word": "stepchild",
+      "ipa": "/ˈstep.tʃaɪld/",
+      "meaning": "con riêng (của vợ/chồng)",
+      "example": "He loves his stepchild as his own."
+    }
+  ],
+  "[B2] - Chủ đề 1: Gia đình và Các mối quan hệ": [
+    {
+      "word": "kinship",
+      "ipa": "/ˈkɪn.ʃɪp/",
+      "meaning": "tình máu mủ, họ hàng",
+      "example": "They felt a strong sense of kinship."
+    },
+    {
+      "word": "sibling",
+      "ipa": "/ˈsɪb.lɪŋ/",
+      "meaning": "anh chị em ruột",
+      "example": "Do you have any siblings?"
+    },
+    {
+      "word": "maternal",
+      "ipa": "/məˈtɝː.nəl/",
+      "meaning": "thuộc về họ ngoại, như người mẹ",
+      "example": "She has strong maternal instincts."
+    },
+    {
+      "word": "paternal",
+      "ipa": "/pəˈtɝː.nəl/",
+      "meaning": "thuộc về họ nội, như người cha",
+      "example": "My paternal grandmother is from Italy."
+    },
+    {
+      "word": "nuclear family",
+      "ipa": "/ˌnuː.kli.ɚ ˈfæm.əl.i/",
+      "meaning": "gia đình hạt nhân (chỉ có bố mẹ & con)",
+      "example": "A traditional nuclear family consists of parents and children."
+    },
+    {
+      "word": "extended family",
+      "ipa": "/ɪkˌsten.dɪd ˈfæm.əl.i/",
+      "meaning": "đại gia đình",
+      "example": "My extended family is very large."
+    },
+    {
+      "word": "breadwinner",
+      "ipa": "/ˈbredˌwɪn.ɚ/",
+      "meaning": "trụ cột gia đình",
+      "example": "He is the sole breadwinner of the family."
+    },
+    {
+      "word": "spouse",
+      "ipa": "/spaʊs/",
+      "meaning": "người bạn đời (vợ/chồng)",
+      "example": "Employees can bring their spouses to the party."
+    },
+    {
+      "word": "toddler",
+      "ipa": "/ˈtɑːd.lɚ/",
+      "meaning": "trẻ mới biết đi",
+      "example": "The toddler is learning to walk."
+    },
+    {
+      "word": "adolescent",
+      "ipa": "/ˌæd.əˈles.ənt/",
+      "meaning": "tuổi vị thành niên",
+      "example": "Dealing with adolescent behavior can be tough."
+    },
+    {
+      "word": "stepfather",
+      "ipa": "/ˈstepˌfɑː.ðɚ/",
+      "meaning": "bố dượng",
+      "example": "Her stepfather raised her from childhood."
+    },
+    {
+      "word": "half-brother",
+      "ipa": "/ˈhæfˌbrʌð.ɚ/",
+      "meaning": "anh/em trai cùng cha khác mẹ (hoặc ngược lại)",
+      "example": "He is my half-brother from my dad's first marriage."
+    },
+    {
+      "word": "peer",
+      "ipa": "/pɪr/",
+      "meaning": "người đồng trang lứa",
+      "example": "Peer pressure is common among teens."
+    },
+    {
+      "word": "mentor",
+      "ipa": "/ˈmen.tɔːr/",
+      "meaning": "người cố vấn, người thầy",
+      "example": "She was a great mentor to me."
+    },
+    {
+      "word": "rival",
+      "ipa": "/ˈraɪ.vəl/",
+      "meaning": "đối thủ",
+      "example": "He is my biggest rival in the competition."
+    },
+    {
+      "word": "companion",
+      "ipa": "/kəmˈpæn.jən/",
+      "meaning": "người đồng hành",
+      "example": "My dog is my loyal companion."
+    },
+    {
+      "word": "intimate",
+      "ipa": "/ˈɪn.t̬ə.mət/",
+      "meaning": "thân mật, riêng tư",
+      "example": "They shared an intimate conversation."
+    },
+    {
+      "word": "platonic",
+      "ipa": "/pləˈtɑː.nɪk/",
+      "meaning": "trong sáng (không có tình dục)",
+      "example": "They have a purely platonic relationship."
+    },
+    {
+      "word": "superficial",
+      "ipa": "/ˌsuː.pɚˈfɪʃ.əl/",
+      "meaning": "hời hợt, ngoài lề",
+      "example": "We only have a superficial acquaintance."
+    },
+    {
+      "word": "mutual",
+      "ipa": "/ˈmjuː.tʃu.əl/",
+      "meaning": "lẫn nhau, chung",
+      "example": "We have a mutual respect for each other."
+    },
+    {
+      "word": "dysfunctional",
+      "ipa": "/dɪsˈfʌŋk.ʃən.əl/",
+      "meaning": "bất thường, không êm ấm",
+      "example": "He grew up in a dysfunctional family."
+    },
+    {
+      "word": "harmonious",
+      "ipa": "/hɑːrˈmoʊ.ni.əs/",
+      "meaning": "hòa thuận, êm ấm",
+      "example": "They have a harmonious marriage."
+    },
+    {
+      "word": "inseparable",
+      "ipa": "/ɪnˈsep.ɚ.ə.bəl/",
+      "meaning": "không thể tách rời",
+      "example": "Those two friends are inseparable."
+    },
+    {
+      "word": "devoted",
+      "ipa": "/dɪˈvoʊ.t̬ɪd/",
+      "meaning": "tận tâm, hết lòng",
+      "example": "She is a devoted mother."
+    },
+    {
+      "word": "hostile",
+      "ipa": "/ˈhɑː.stəl/",
+      "meaning": "thù địch",
+      "example": "The atmosphere at dinner was openly hostile."
+    },
+    {
+      "word": "resentful",
+      "ipa": "/rɪˈzent.fəl/",
+      "meaning": "oán giận, hậm hực",
+      "example": "She felt resentful of her brother's success."
+    },
+    {
+      "word": "compassionate",
+      "ipa": "/kəmˈpæʃ.ən.ət/",
+      "meaning": "động lòng trắc ẩn, từ bi",
+      "example": "He is a compassionate and caring person."
+    },
+    {
+      "word": "empathetic",
+      "ipa": "/ˌem.pəˈθet̬.ɪk/",
+      "meaning": "thấu cảm",
+      "example": "A good counselor needs to be empathetic."
+    },
+    {
+      "word": "outgoing",
+      "ipa": "/ˈaʊtˌɡoʊ.ɪŋ/",
+      "meaning": "cởi mở, dễ gần",
+      "example": "She has a very outgoing personality."
+    },
+    {
+      "word": "introverted",
+      "ipa": "/ˈɪn.trə.vɝː.t̬ɪd/",
+      "meaning": "hướng nội",
+      "example": "As an introverted child, he preferred reading."
+    },
+    {
+      "word": "extroverted",
+      "ipa": "/ˈek.strə.vɝː.t̬ɪd/",
+      "meaning": "hướng ngoại",
+      "example": "Extroverted people enjoy large social gatherings."
+    },
+    {
+      "word": "nurture",
+      "ipa": "/ˈnɝː.tʃɚ/",
+      "meaning": "nuôi dưỡng",
+      "example": "Parents should nurture their children's talents."
+    },
+    {
+      "word": "neglect",
+      "ipa": "/nɪˈɡlekt/",
+      "meaning": "sao nhãng, bỏ bê",
+      "example": "He neglected his family for his career."
+    },
+    {
+      "word": "discipline",
+      "ipa": "/ˈdɪs.ə.plɪn/",
+      "meaning": "kỷ luật",
+      "example": "Maintaining discipline in the classroom is hard."
+    },
+    {
+      "word": "obedient",
+      "ipa": "/oʊˈbiː.di.ənt/",
+      "meaning": "ngoan ngoãn, vâng lời",
+      "example": "The children were very obedient."
+    },
+    {
+      "word": "rebellious",
+      "ipa": "/rɪˈbel.i.əs/",
+      "meaning": "nổi loạn",
+      "example": "She was a rebellious teenager."
+    },
+    {
+      "word": "interact",
+      "ipa": "/ˌɪn.t̬ɚˈækt/",
+      "meaning": "tương tác",
+      "example": "It's important to interact with other children."
+    },
+    {
+      "word": "communicate",
+      "ipa": "/kəˈmjuː.nə.keɪt/",
+      "meaning": "giao tiếp",
+      "example": "Couples must communicate openly."
+    },
+    {
+      "word": "confide",
+      "ipa": "/kənˈfaɪd/",
+      "meaning": "thổ lộ, tâm sự",
+      "example": "She confides in her best friend."
+    },
+    {
+      "word": "console",
+      "ipa": "/kənˈsoʊl/",
+      "meaning": "an ủi",
+      "example": "I tried to console her when she cried."
+    },
+    {
+      "word": "alienate",
+      "ipa": "/ˈeɪ.li.ə.neɪt/",
+      "meaning": "làm xa lánh",
+      "example": "His bad temper alienated his friends."
+    },
+    {
+      "word": "reconcile",
+      "ipa": "/ˈrek.ən.saɪl/",
+      "meaning": "hòa giải, làm lành",
+      "example": "They finally reconciled after years of fighting."
+    },
+    {
+      "word": "empathy",
+      "ipa": "/ˈem.pə.θi/",
+      "meaning": "sự thấu cảm",
+      "example": "She showed a lack of empathy for others."
+    },
+    {
+      "word": "tolerance",
+      "ipa": "/ˈtɑː.lɚ.əns/",
+      "meaning": "sự khoan dung",
+      "example": "Tolerance is key to a peaceful society."
+    },
+    {
+      "word": "commitment",
+      "ipa": "/kəˈmɪt.mənt/",
+      "meaning": "sự cam kết",
+      "example": "Marriage requires a lot of commitment."
+    },
+    {
+      "word": "boundary",
+      "ipa": "/ˈbaʊn.dər.i/",
+      "meaning": "ranh giới",
+      "example": "It is healthy to set boundaries in relationships."
+    },
+    {
+      "word": "trait",
+      "ipa": "/treɪt/",
+      "meaning": "đặc điểm tính cách",
+      "example": "Patience is a good trait to have."
+    },
+    {
+      "word": "characteristic",
+      "ipa": "/ˌker.ək.təˈrɪs.tɪk/",
+      "meaning": "đặc trưng",
+      "example": "Generosity is his best characteristic."
+    },
+    {
+      "word": "overprotective",
+      "ipa": "/ˌoʊ.vɚ.prəˈtek.tɪv/",
+      "meaning": "bao bọc quá mức",
+      "example": "Her overprotective parents never let her go out."
+    },
+    {
+      "word": "distant",
+      "ipa": "/ˈdɪs.tənt/",
+      "meaning": "xa cách",
+      "example": "He became distant after the argument."
+    }
+  ],
+  "[C1] - Chủ đề 1: Gia đình và Các mối quan hệ": [
+    {
+      "word": "lineage",
+      "ipa": "/ˈlɪn.i.ɪdʒ/",
+      "meaning": "dòng dõi, huyết thống",
+      "example": "She comes from a noble lineage."
+    },
+    {
+      "word": "genealogy",
+      "ipa": "/ˌdʒiː.niˈɑː.lə.dʒi/",
+      "meaning": "gia phả học",
+      "example": "He is researching his family's genealogy."
+    },
+    {
+      "word": "offspring",
+      "ipa": "/ˈɑːf.sprɪŋ/",
+      "meaning": "con cái (nói chung)",
+      "example": "They have three offspring."
+    },
+    {
+      "word": "progeny",
+      "ipa": "/ˈprɑː.dʒə.ni/",
+      "meaning": "hậu duệ",
+      "example": "He was proud of his progeny."
+    },
+    {
+      "word": "matrimony",
+      "ipa": "/ˈmæt.rə.moʊ.ni/",
+      "meaning": "hôn thú, tình trạng kết hôn",
+      "example": "They were joined in holy matrimony."
+    },
+    {
+      "word": "nuptials",
+      "ipa": "/ˈnʌp.ʃəlz/",
+      "meaning": "lễ cưới (trang trọng)",
+      "example": "The nuptials will take place in a cathedral."
+    },
+    {
+      "word": "prenuptial",
+      "ipa": "/ˌpriːˈnʌp.ʃəl/",
+      "meaning": "tiền hôn nhân",
+      "example": "They signed a prenuptial agreement."
+    },
+    {
+      "word": "alimony",
+      "ipa": "/ˈæl.ə.moʊ.ni/",
+      "meaning": "tiền cấp dưỡng (sau ly hôn)",
+      "example": "He has to pay alimony to his ex-wife."
+    },
+    {
+      "word": "custody",
+      "ipa": "/ˈkʌs.tə.di/",
+      "meaning": "quyền nuôi con",
+      "example": "The mother got full custody of the child."
+    },
+    {
+      "word": "guardian",
+      "ipa": "/ˈɡɑːr.di.ən/",
+      "meaning": "người giám hộ",
+      "example": "Her uncle became her legal guardian."
+    },
+    {
+      "word": "camaraderie",
+      "ipa": "/ˌkæm.əˈrɑː.dɚ.i/",
+      "meaning": "tình đồng chí, sự thân thiết",
+      "example": "There is a great camaraderie among the team."
+    },
+    {
+      "word": "solidarity",
+      "ipa": "/ˌsɑː.lɪˈder.ə.t̬i/",
+      "meaning": "sự đoàn kết",
+      "example": "The community showed immense solidarity."
+    },
+    {
+      "word": "rapport",
+      "ipa": "/ræˈpɔːr/",
+      "meaning": "mối quan hệ hòa hợp",
+      "example": "She established a good rapport with her clients."
+    },
+    {
+      "word": "affinity",
+      "ipa": "/əˈfɪn.ə.t̬i/",
+      "meaning": "sự gắn bó, sự giống nhau",
+      "example": "He felt a strong affinity for his grandfather."
+    },
+    {
+      "word": "alienation",
+      "ipa": "/ˌeɪ.li.əˈneɪ.ʃən/",
+      "meaning": "sự xa lánh, cảm giác lạc lõng",
+      "example": "Many teenagers experience feelings of alienation."
+    },
+    {
+      "word": "estrangement",
+      "ipa": "/ɪˈstreɪndʒ.mənt/",
+      "meaning": "tình trạng ly thân, sự ghẻ lạnh",
+      "example": "Their dispute led to a long estrangement."
+    },
+    {
+      "word": "animosity",
+      "ipa": "/ˌæn.əˈmɑː.sə.t̬i/",
+      "meaning": "sự hận thù",
+      "example": "There is no animosity between the two sisters."
+    },
+    {
+      "word": "friction",
+      "ipa": "/ˈfrɪk.ʃən/",
+      "meaning": "sự ma sát, bất hòa",
+      "example": "Money is a constant source of friction in their marriage."
+    },
+    {
+      "word": "rift",
+      "ipa": "/rɪft/",
+      "meaning": "sự rạn nứt",
+      "example": "The argument caused a deep rift in their friendship."
+    },
+    {
+      "word": "foster",
+      "ipa": "/ˈfɑː.stɚ/",
+      "meaning": "nhận nuôi (tạm thời), bồi dưỡng",
+      "example": "They decided to foster a homeless child."
+    },
+    {
+      "word": "emancipate",
+      "ipa": "/ɪˈmæn.sə.peɪt/",
+      "meaning": "giải phóng, tự lập",
+      "example": "The teenager sought to emancipate himself from his parents."
+    },
+    {
+      "word": "codependent",
+      "ipa": "/ˌkoʊ.dɪˈpen.dənt/",
+      "meaning": "phụ thuộc lẫn nhau (độc hại)",
+      "example": "They are trapped in a codependent relationship."
+    },
+    {
+      "word": "narcissistic",
+      "ipa": "/ˌnɑːr.səˈsɪs.tɪk/",
+      "meaning": "tự mãn, ái kỷ",
+      "example": "His narcissistic behavior ruined his marriage."
+    },
+    {
+      "word": "altruistic",
+      "ipa": "/ˌæl.truˈɪs.tɪk/",
+      "meaning": "vị tha",
+      "example": "Her altruistic acts inspired the whole family."
+    },
+    {
+      "word": "cynical",
+      "ipa": "/ˈsɪn.ɪ.kəl/",
+      "meaning": "hoài nghi, yếm thế",
+      "example": "He became cynical about love after the divorce."
+    },
+    {
+      "word": "hypocritical",
+      "ipa": "/ˌhɪp.əˈkrɪt̬.ɪ.kəl/",
+      "meaning": "đạo đức giả",
+      "example": "It's hypocritical to criticize her for doing the same thing."
+    },
+    {
+      "word": "pretentious",
+      "ipa": "/prɪˈten.ʃəs/",
+      "meaning": "tự phụ, khoe khoang",
+      "example": "His pretentious attitude alienated his old friends."
+    },
+    {
+      "word": "obstinate",
+      "ipa": "/ˈɑːb.stə.nət/",
+      "meaning": "bướng bỉnh, ngoan cố",
+      "example": "The obstinate child refused to eat vegetables."
+    },
+    {
+      "word": "impulsive",
+      "ipa": "/ɪmˈpʌl.sɪv/",
+      "meaning": "bốc đồng",
+      "example": "She made an impulsive decision to get married."
+    },
+    {
+      "word": "pragmatic",
+      "ipa": "/præɡˈmæt̬.ɪk/",
+      "meaning": "thực dụng",
+      "example": "They took a pragmatic approach to raising their kids."
+    },
+    {
+      "word": "stoic",
+      "ipa": "/ˈstoʊ.ɪk/",
+      "meaning": "khắc kỷ, chịu đựng",
+      "example": "He remained stoic despite the family tragedy."
+    },
+    {
+      "word": "vulnerable",
+      "ipa": "/ˈvʌl.nɚ.ə.bəl/",
+      "meaning": "dễ bị tổn thương",
+      "example": "Children are highly vulnerable to abuse."
+    },
+    {
+      "word": "validate",
+      "ipa": "/ˈvæl.ə.deɪt/",
+      "meaning": "công nhận (cảm xúc)",
+      "example": "It is important to validate your partner's feelings."
+    },
+    {
+      "word": "gaslight",
+      "ipa": "/ˈɡæs.laɪt/",
+      "meaning": "thao túng tâm lý",
+      "example": "He tried to gaslight her into doubting her own memory."
+    },
+    {
+      "word": "manipulate",
+      "ipa": "/məˈnɪp.jə.leɪt/",
+      "meaning": "lợi dụng, thao túng",
+      "example": "She knows how to manipulate her parents."
+    },
+    {
+      "word": "patronize",
+      "ipa": "/ˈpeɪ.trə.naɪz/",
+      "meaning": "ra vẻ bề trên",
+      "example": "Please don't patronize me; I am an adult."
+    },
+    {
+      "word": "undermine",
+      "ipa": "/ˌʌn.dɚˈmaɪn/",
+      "meaning": "làm suy yếu, phá hoại ngầm",
+      "example": "He constantly undermines his wife's authority."
+    },
+    {
+      "word": "collaborate",
+      "ipa": "/kəˈlæb.ə.reɪt/",
+      "meaning": "cộng tác, hợp tác",
+      "example": "They collaborated to plan the family reunion."
+    },
+    {
+      "word": "reciprocate",
+      "ipa": "/rɪˈsɪp.rə.keɪt/",
+      "meaning": "đáp lại (tình cảm, hành động)",
+      "example": "Sadly, his love was not reciprocated."
+    },
+    {
+      "word": "resonate",
+      "ipa": "/ˈrez.ən.eɪt/",
+      "meaning": "gây tiếng vang, đồng điệu",
+      "example": "Her story resonated deeply with her daughter."
+    },
+    {
+      "word": "innate",
+      "ipa": "/ɪˈneɪt/",
+      "meaning": "bẩm sinh",
+      "example": "Mothers often have an innate desire to protect their young."
+    },
+    {
+      "word": "profound",
+      "ipa": "/prəˈfaʊnd/",
+      "meaning": "sâu sắc",
+      "example": "The loss had a profound impact on the family."
+    },
+    {
+      "word": "superficiality",
+      "ipa": "/ˌsuː.pɚˌfɪʃ.iˈæl.ə.t̬i/",
+      "meaning": "sự hời hợt",
+      "example": "She was tired of the superficiality of modern dating."
+    },
+    {
+      "word": "prevalent",
+      "ipa": "/ˈprev.əl.ənt/",
+      "meaning": "phổ biến",
+      "example": "Divorce is increasingly prevalent in modern society."
+    },
+    {
+      "word": "interpersonal",
+      "ipa": "/ˌɪn.t̬ɚˈpɝː.sən.əl/",
+      "meaning": "giữa các cá nhân",
+      "example": "He lacks basic interpersonal skills."
+    },
+    {
+      "word": "dynamic",
+      "ipa": "/daɪˈnæm.ɪk/",
+      "meaning": "động lực học, sự năng động",
+      "example": "The family dynamic changed when the baby was born."
+    },
+    {
+      "word": "nepotism",
+      "ipa": "/ˈnep.ə.tɪ.zəm/",
+      "meaning": "sự gia đình trị, ô dù",
+      "example": "He got the job through nepotism, not merit."
+    },
+    {
+      "word": "favoritism",
+      "ipa": "/ˈfeɪ.vɚ.ɪ.tɪ.zəm/",
+      "meaning": "sự thiên vị",
+      "example": "Parents should avoid showing favoritism."
+    },
+    {
+      "word": "inheritance",
+      "ipa": "/ɪnˈher.ɪ.təns/",
+      "meaning": "tài sản thừa kế",
+      "example": "They fought bitterly over their grandfather's inheritance."
+    },
+    {
+      "word": "compatible",
+      "ipa": "/kəmˈpæt̬.ə.bəl/",
+      "meaning": "tương thích, hợp nhau",
+      "example": "They divorced because they were simply not compatible."
+    }
+  ],
+  "[C2] - Chủ đề 1: Gia đình và Các mối quan hệ": [
+    {
+      "word": "consanguinity",
+      "ipa": "/ˌkɑːn.sæŋˈɡwɪn.ə.t̬i/",
+      "meaning": "quan hệ huyết thống",
+      "example": "The law prohibits marriage based on close consanguinity."
+    },
+    {
+      "word": "progenitor",
+      "ipa": "/proʊˈdʒen.ə.t̬ɚ/",
+      "meaning": "bậc tiền bối, tổ tiên",
+      "example": "He is the progenitor of a famous dynasty."
+    },
+    {
+      "word": "scion",
+      "ipa": "/ˈsaɪ.ən/",
+      "meaning": "con cháu (gia đình quyền quý)",
+      "example": "He is a scion of a wealthy banking family."
+    },
+    {
+      "word": "primogeniture",
+      "ipa": "/ˌpraɪ.moʊˈdʒen.ə.tʃɚ/",
+      "meaning": "quyền con trưởng",
+      "example": "The estate was passed down through primogeniture."
+    },
+    {
+      "word": "monogamy",
+      "ipa": "/məˈnɑː.ɡə.mi/",
+      "meaning": "chế độ một vợ một chồng",
+      "example": "Monogamy is the norm in most Western societies."
+    },
+    {
+      "word": "polygamy",
+      "ipa": "/pəˈlɪɡ.ə.mi/",
+      "meaning": "chế độ đa thê/đa phu",
+      "example": "Polygamy is illegal in this country."
+    },
+    {
+      "word": "matriarchy",
+      "ipa": "/ˈmeɪ.tri.ɑːr.ki/",
+      "meaning": "chế độ mẫu hệ",
+      "example": "Some ancient tribes operated as a matriarchy."
+    },
+    {
+      "word": "patriarchy",
+      "ipa": "/ˈpeɪ.tri.ɑːr.ki/",
+      "meaning": "chế độ phụ hệ",
+      "example": "Feminists challenge the structures of patriarchy."
+    },
+    {
+      "word": "filial",
+      "ipa": "/ˈfɪl.i.əl/",
+      "meaning": "đạo làm con",
+      "example": "Filial piety is a core virtue in Confucianism."
+    },
+    {
+      "word": "fraternal",
+      "ipa": "/frəˈtɝː.nəl/",
+      "meaning": "thuộc về anh em",
+      "example": "They share a deep fraternal bond."
+    },
+    {
+      "word": "egalitarian",
+      "ipa": "/ɪˌɡæl.ɪˈter.i.ən/",
+      "meaning": "bình đẳng",
+      "example": "They strive for an egalitarian marriage."
+    },
+    {
+      "word": "symbiotic",
+      "ipa": "/ˌsɪm.baɪˈɑː.t̬ɪk/",
+      "meaning": "cộng sinh",
+      "example": "A mother and newborn have a symbiotic relationship."
+    },
+    {
+      "word": "parasitic",
+      "ipa": "/ˌper.əˈsɪt̬.ɪk/",
+      "meaning": "ăn bám, ký sinh",
+      "example": "He was living a parasitic existence off his parents."
+    },
+    {
+      "word": "sycophant",
+      "ipa": "/ˈsɪk.ə.fænt/",
+      "meaning": "kẻ nịnh bợ",
+      "example": "The wealthy heir was surrounded by sycophants."
+    },
+    {
+      "word": "confidante",
+      "ipa": "/ˈkɑːn.fə.dænt/",
+      "meaning": "người tri kỷ, bạn tâm giao",
+      "example": "Her sister remained her closest confidante."
+    },
+    {
+      "word": "nemesis",
+      "ipa": "/ˈnem.ə.sɪs/",
+      "meaning": "kẻ thù không đội trời chung",
+      "example": "He finally defeated his lifelong nemesis."
+    },
+    {
+      "word": "paramour",
+      "ipa": "/ˈper.ə.mʊr/",
+      "meaning": "nhân tình",
+      "example": "The scandal involved the politician's secret paramour."
+    },
+    {
+      "word": "unrequited",
+      "ipa": "/ˌʌn.rɪˈkwaɪ.t̬ɪd/",
+      "meaning": "đơn phương, không được đáp lại",
+      "example": "She suffered from unrequited love for years."
+    },
+    {
+      "word": "infatuation",
+      "ipa": "/ɪnˌfætʃ.uˈeɪ.ʃən/",
+      "meaning": "sự say mê mù quáng",
+      "example": "It wasn't true love, just a brief infatuation."
+    },
+    {
+      "word": "amorous",
+      "ipa": "/ˈæm.ɚ.əs/",
+      "meaning": "đa tình, say đắm",
+      "example": "He sent her an amorous letter."
+    },
+    {
+      "word": "gregarious",
+      "ipa": "/ɡrɪˈɡer.i.əs/",
+      "meaning": "thích giao du, hòa đồng",
+      "example": "He is a highly gregarious individual."
+    },
+    {
+      "word": "misanthrope",
+      "ipa": "/ˈmɪz.ən.θroʊp/",
+      "meaning": "kẻ ghét nhân loại",
+      "example": "The old man turned into a bitter misanthrope."
+    },
+    {
+      "word": "reclusive",
+      "ipa": "/rɪˈkluː.sɪv/",
+      "meaning": "ẩn dật",
+      "example": "She lived a reclusive life after her husband died."
+    },
+    {
+      "word": "cantankerous",
+      "ipa": "/kænˈtæŋ.kɚ.əs/",
+      "meaning": "khó tính, hay gắt gỏng",
+      "example": "He is a cantankerous old man."
+    },
+    {
+      "word": "affable",
+      "ipa": "/ˈæf.ə.bəl/",
+      "meaning": "niềm nở, ân cần",
+      "example": "She is an affable host who makes everyone comfortable."
+    },
+    {
+      "word": "amiable",
+      "ipa": "/ˈeɪ.mi.ə.bəl/",
+      "meaning": "dễ thương, thân thiện",
+      "example": "He seemed an amiable young man."
+    },
+    {
+      "word": "obsequious",
+      "ipa": "/əbˈsiː.kwi.əs/",
+      "meaning": "khúm núm, xun xoe",
+      "example": "She is disgustingly obsequious to anyone in authority."
+    },
+    {
+      "word": "domineering",
+      "ipa": "/ˌdɑː.məˈnɪr.ɪŋ/",
+      "meaning": "độc đoán, áp bức",
+      "example": "I thought he was arrogant and domineering."
+    },
+    {
+      "word": "submissive",
+      "ipa": "/səbˈmɪs.ɪv/",
+      "meaning": "dễ phục tùng, ngoan ngoãn",
+      "example": "He expected his wife to be completely submissive."
+    },
+    {
+      "word": "assertive",
+      "ipa": "/əˈsɝː.t̬ɪv/",
+      "meaning": "quả quyết, quyết đoán",
+      "example": "You need to be more assertive in your relationships."
+    },
+    {
+      "word": "steadfast",
+      "ipa": "/ˈsted.fæst/",
+      "meaning": "kiên định, không thay đổi",
+      "example": "She remained a steadfast friend through difficult times."
+    },
+    {
+      "word": "unwavering",
+      "ipa": "/ʌnˈweɪ.vɚ.ɪŋ/",
+      "meaning": "không dao động, vững chắc",
+      "example": "He had her unwavering support."
+    },
+    {
+      "word": "fleeting",
+      "ipa": "/ˈfliː.t̬ɪŋ/",
+      "meaning": "thoáng qua",
+      "example": "It was just a fleeting romance."
+    },
+    {
+      "word": "ephemeral",
+      "ipa": "/ɪˈfem.ɚ.əl/",
+      "meaning": "phù du, chóng tàn",
+      "example": "Fame and popularity in high school are ephemeral."
+    },
+    {
+      "word": "enduring",
+      "ipa": "/ɪnˈdʊr.ɪŋ/",
+      "meaning": "lâu dài, trường tồn",
+      "example": "They have an enduring relationship."
+    },
+    {
+      "word": "indelible",
+      "ipa": "/ɪnˈdel.ə.bəl/",
+      "meaning": "không thể tẩy xóa",
+      "example": "The childhood trauma left an indelible mark on him."
+    },
+    {
+      "word": "ubiquitous",
+      "ipa": "/juːˈbɪk.wə.t̬əs/",
+      "meaning": "có mặt ở khắp nơi",
+      "example": "Arguments are ubiquitous in any living arrangement."
+    },
+    {
+      "word": "visceral",
+      "ipa": "/ˈvɪs.ɚ.əl/",
+      "meaning": "thuộc về bản năng, sâu thẳm",
+      "example": "She had a visceral reaction to his betrayal."
+    },
+    {
+      "word": "ostracize",
+      "ipa": "/ˈɑː.strə.saɪz/",
+      "meaning": "tẩy chay, khai trừ",
+      "example": "His family ostracized him when he married her."
+    },
+    {
+      "word": "marginalize",
+      "ipa": "/ˈmɑːr.dʒɪ.nə.laɪz/",
+      "meaning": "làm cho ra rìa, gạt ra ngoài lề",
+      "example": "Elderly people often feel marginalized in society."
+    },
+    {
+      "word": "emulate",
+      "ipa": "/ˈem.jə.leɪt/",
+      "meaning": "bắt chước, noi gương",
+      "example": "Sons often try to emulate their fathers."
+    },
+    {
+      "word": "vindicate",
+      "ipa": "/ˈvɪn.də.keɪt/",
+      "meaning": "minh oan",
+      "example": "The DNA test vindicated him completely."
+    },
+    {
+      "word": "exonerate",
+      "ipa": "/ɪɡˈzɑː.nɚ.eɪt/",
+      "meaning": "giải oan",
+      "example": "The family fought to exonerate their son."
+    },
+    {
+      "word": "absolve",
+      "ipa": "/əbˈzɑːlv/",
+      "meaning": "xá tội, miễn trách",
+      "example": "He cannot be absolved of all responsibility for the divorce."
+    },
+    {
+      "word": "conciliate",
+      "ipa": "/kənˈsɪl.i.eɪt/",
+      "meaning": "hòa giải, xoa dịu",
+      "example": "He tried to conciliate his angry father."
+    },
+    {
+      "word": "pacify",
+      "ipa": "/ˈpæs.ə.faɪ/",
+      "meaning": "dỗ dành, làm cho yên",
+      "example": "She managed to pacify the crying baby."
+    },
+    {
+      "word": "mitigate",
+      "ipa": "/ˈmɪt̬.ə.ɡeɪt/",
+      "meaning": "giảm nhẹ, xoa dịu",
+      "example": "Good communication can mitigate family conflicts."
+    },
+    {
+      "word": "alleviate",
+      "ipa": "/əˈliː.vi.eɪt/",
+      "meaning": "làm thuyên giảm",
+      "example": "A heartfelt apology can alleviate a lot of pain."
+    },
+    {
+      "word": "kindred",
+      "ipa": "/ˈkɪn.drəd/",
+      "meaning": "đồng điệu, cùng họ hàng",
+      "example": "We recognized each other as kindred spirits."
+    },
+    {
+      "word": "soulmate",
+      "ipa": "/ˈsoʊl.meɪt/",
+      "meaning": "bạn tri kỷ, người tâm giao",
+      "example": "I truly believe my wife is my soulmate."
+    }
+  ]
+};
+
+    function initAppLogic() {
+        vocabData = JSON.parse(JSON.stringify(VOCAB_DATA));
         
         const savedData = localStorage.getItem('teacherVocab_AllInOne');
         if (savedData) {
@@ -199,10 +1964,6 @@
                 vocabData[topic] = vocabData[topic].concat(parsedSaved[topic]);
             }
         }
-    }
-
-    function initApp() {
-        loadDataFromStorage();
         
         const topicSelect = document.getElementById("topicSelect");
         topicSelect.innerHTML = ""; 
@@ -218,13 +1979,13 @@
                 option.innerText = topic;
                 topicSelect.appendChild(option);
             });
-            changeTopic(); // Load chủ đề đầu tiên
+            changeTopic(); 
         }
     }
 
     function changeTopic() {
         currentTopic = document.getElementById("topicSelect").value;
-        document.getElementById("newTopic").value = currentTopic; // Tự động điền tên chủ đề vào ô Thêm từ
+        document.getElementById("newTopic").value = currentTopic; 
         vocabList = vocabData[currentTopic] || [];
         currentIndex = 0;
         updateWordDisplay();
@@ -237,7 +1998,7 @@
         if (vocabList.length === 0) {
             document.getElementById("wordDisplay").innerText = "Chưa có từ";
             document.getElementById("ipaDisplay").innerText = "";
-            document.getElementById("meaningDisplay").innerText = "Chủ đề này đang trống. Hãy dùng chế độ Giáo viên để thêm từ.";
+            document.getElementById("meaningDisplay").innerText = "Chủ đề này đang trống. Bạn có thể mở file JSON để thêm dữ liệu.";
             document.getElementById("exampleDisplay").style.display = "none";
             document.getElementById("counterDisplay").innerText = "";
             return;
@@ -323,7 +2084,7 @@
 
         let savedData = JSON.parse(localStorage.getItem('teacherVocab_AllInOne') || '{}');
         if (!savedData[topic]) savedData[topic] = [];
-        savedData[topic].push({ word, ipa, meaning });
+        savedData[topic].push({ word, ipa, meaning, example: "" }); 
         localStorage.setItem('teacherVocab_AllInOne', JSON.stringify(savedData));
 
         document.getElementById("saveMsg").innerText = "✔ Đã thêm từ vựng thành công!";
@@ -332,12 +2093,12 @@
         document.getElementById("newMeaning").value = "";
         setTimeout(() => document.getElementById("saveMsg").innerText = "", 3000);
 
-        initApp(); // Tải lại toàn bộ dữ liệu
-        document.getElementById("topicSelect").value = topic; // Trỏ về chủ đề vừa lưu
+        initAppLogic();
+        document.getElementById("topicSelect").value = topic; 
         changeTopic();
     }
 
-    window.onload = initApp;
+    window.onload = checkLicense;
 </script>
 
 </body>
