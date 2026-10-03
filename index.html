@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Ôn tập Từ vựng Toàn diện</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f4f8; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .container { max-width: 500px; width: 100%; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); text-align: center; margin-bottom: 20px; }
+        select, input { width: 100%; padding: 10px; font-size: 15px; border: 2px solid #bdc3c7; border-radius: 8px; background-color: #ecf0f1; font-weight: bold; color: #2c3e50; box-sizing: border-box; margin-bottom: 15px;}
+        select:focus, input:focus { outline: none; border-color: #3498db; }
+        .content-area { min-height: 160px; display: flex; flex-direction: column; justify-content: center; margin-bottom: 20px; padding: 20px; background: #fdfdfd; border-radius: 10px; border: 1px dashed #ccc; text-align: left; }
+        .word-group { text-align: center; }
+        .word { font-size: 38px; font-weight: bold; color: #2c3e50; margin-bottom: 5px; }
+        .ipa { font-size: 22px; color: #e67e22; font-family: 'Times New Roman', Times, serif; margin-bottom: 10px; }
+        .meaning { font-size: 20px; color: #7f8c8d; text-align: center; margin-bottom: 15px; }
+        .example { font-size: 15px; color: #34495e; font-style: italic; background: #ebf5fb; padding: 10px; border-radius: 6px; border-left: 4px solid #3498db; display: none; }
+        button { padding: 12px 15px; font-size: 15px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; margin: 5px; transition: 0.2s; }
+        button:active { transform: scale(0.95); }
+        button:hover { opacity: 0.85; }
+        .btn-listen { background-color: #27ae60; color: white; width: 45%; }
+        .btn-speak { background-color: #2980b9; color: white; width: 45%; }
+        .btn-next { background-color: #8e44ad; color: white; margin-top: 15px; width: 100%; }
+        .btn-toggle-teacher { background-color: #34495e; color: white; width: 100%; margin-top: 10px;}
+        #result { margin-top: 15px; font-weight: bold; font-size: 16px; min-height: 40px; text-align: center; }
+        .correct { color: #27ae60; }
+        .incorrect { color: #c0392b; }
+        .teacher-area { background: #fff3cd; padding: 20px; border-radius: 15px; border: 2px solid #ffe69c; display: none; text-align: left; }
+        .teacher-area h3 { margin-top: 0; color: #856404; text-align: center; }
+        .form-group { margin-bottom: 10px; }
+        .btn-add { background-color: #d35400; color: white; width: 100%; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <!-- Menu chọn Chủ đề (đã bao gồm Cấp độ) -->
+        <select id="topicSelect" onchange="changeTopic()"></select>
+        
+        <div class="content-area">
+            <div class="word-group">
+                <div class="word" id="wordDisplay">Loading...</div>
+                <div class="ipa" id="ipaDisplay">/.../</div>
+                <div class="meaning" id="meaningDisplay">Đang tải dữ liệu...</div>
+            </div>
+            <div class="example" id="exampleDisplay"></div>
+        </div>
+        
+        <div>
+            <button class="btn-listen" onclick="listenWord()">🔊 Nghe</button>
+            <button class="btn-speak" onclick="speakWord()">🎙 Đọc</button>
+        </div>
+        
+        <p id="result"></p>
+        
+        <button class="btn-next" onclick="nextWord()">⏭️ Chuyển từ</button>
+        <p id="counterDisplay" style="color: #95a5a6; font-size: 14px; text-align: center;"></p>
+    </div>
+
+    <!-- Khu vực nhập liệu của Giáo viên -->
+    <button class="btn-toggle-teacher" onclick="toggleTeacherArea()">👨‍🏫 Bật/Tắt Chế độ Giáo viên (Thêm từ)</button>
+    <div class="teacher-area" id="teacherArea">
+        <h3>Thêm Từ Vựng Mới</h3>
+        <div class="form-group"><label>1. Chọn Chủ đề có sẵn (hoặc gõ mới):</label><input type="text" id="newTopic" placeholder="VD: [A1] - Chủ đề 2: Gia đình"></div>
+        <div class="form-group"><label>2. Từ tiếng Anh:</label><input type="text" id="newWord" placeholder="VD: Dialogue"></div>
+        <div class="form-group"><label>3. Phiên âm IPA:</label><input type="text" id="newIpa" placeholder="VD: /ˈdaɪ.ə.lɒɡ/"></div>
+        <div class="form-group"><label>4. Nghĩa tiếng Việt:</label><input type="text" id="newMeaning" placeholder="VD: Đoạn hội thoại"></div>
+        <button class="btn-add" onclick="addNewWord()">➕ Lưu Từ Vựng</button>
+        <p id="saveMsg" style="color: #27ae60; text-align: center; font-weight: bold; font-size: 14px;"></p>
+    </div>
+</div>
+
+<script>
+    // TOÀN BỘ DỮ LIỆU NẰM TRONG NÀY (Có bổ sung câu ví dụ cho Chủ đề 1)
+    const defaultData = {
+        "[A1] - Chủ đề 1: Cuộc sống hằng ngày": [
+            { "word": "wake up", "ipa": "/ˈweɪk ʌp/", "meaning": "thức dậy", "example": "I wake up early every morning. (Tôi thức dậy sớm mỗi sáng.)" },
+            { "word": "brush", "ipa": "/brʌʃ/", "meaning": "đánh răng/chải tóc", "example": "I brush my teeth twice a day. (Tôi đánh răng hai lần một ngày.)" },
+            { "word": "shower", "ipa": "/ˈʃaʊ.ɚ/", "meaning": "tắm vòi sen", "example": "She takes a shower before bed. (Cô ấy tắm trước khi đi ngủ.)" },
+            { "word": "breakfast", "ipa": "/ˈbrek.fəst/", "meaning": "bữa sáng", "example": "We eat breakfast at 7 AM. (Chúng tôi ăn sáng lúc 7 giờ sáng.)" },
+            { "word": "dress", "ipa": "/dres/", "meaning": "mặc quần áo", "example": "He gets dressed quickly. (Anh ấy mặc quần áo nhanh chóng.)" },
+            { "word": "work", "ipa": "/wɝːk/", "meaning": "làm việc", "example": "My father goes to work by bus. (Bố tôi đi làm bằng xe buýt.)" },
+            { "word": "commute", "ipa": "/kəˈmjuːt/", "meaning": "đi lại (từ nhà đến chỗ làm)", "example": "My daily commute takes 30 minutes. (Việc đi lại hằng ngày của tôi mất 30 phút.)" },
+            { "word": "lunch", "ipa": "/lʌntʃ/", "meaning": "bữa trưa", "example": "I have lunch with my friends. (Tôi ăn trưa với bạn bè.)" },
+            { "word": "dinner", "ipa": "/ˈdɪn.ɚ/", "meaning": "bữa tối", "example": "We cook dinner together. (Chúng tôi nấu bữa tối cùng nhau.)" },
+            { "word": "sleep", "ipa": "/sliːp/", "meaning": "ngủ", "example": "Babies need to sleep a lot. (Trẻ sơ sinh cần ngủ rất nhiều.)" },
+            { "word": "clean", "ipa": "/kliːn/", "meaning": "dọn dẹp", "example": "I clean my room on weekends. (Tôi dọn phòng vào cuối tuần.)" },
+            { "word": "cook", "ipa": "/kʊk/", "meaning": "nấu ăn", "example": "Mom cooks delicious food. (Mẹ nấu những món ăn rất ngon.)" },
+            { "word": "wash", "ipa": "/wɑːʃ/", "meaning": "giặt/rửa", "example": "Please wash your hands. (Làm ơn rửa tay của bạn.)" },
+            { "word": "sweep", "ipa": "/swiːp/", "meaning": "quét nhà", "example": "She sweeps the floor every day. (Cô ấy quét nhà mỗi ngày.)" },
+            { "word": "mop", "ipa": "/mɑːp/", "meaning": "lau nhà", "example": "He mops the kitchen floor. (Anh ấy lau sàn bếp.)" },
+            { "word": "laundry", "ipa": "/ˈlɑːn.dri/", "meaning": "việc giặt giũ", "example": "I do the laundry on Sundays. (Tôi giặt quần áo vào Chủ Nhật.)" },
+            { "word": "trash", "ipa": "/træʃ/", "meaning": "rác", "example": "Please take out the trash. (Làm ơn đem rác đi đổ.)" },
+            { "word": "grocery", "ipa": "/ˈɡroʊ.sɚ.i/", "meaning": "thực phẩm/tạp hóa", "example": "We buy groceries at the supermarket. (Chúng tôi mua thực phẩm ở siêu thị.)" },
+            { "word": "shop", "ipa": "/ʃɑːp/", "meaning": "mua sắm", "example": "She likes to shop for clothes. (Cô ấy thích mua sắm quần áo.)" },
+            { "word": "buy", "ipa": "/baɪ/", "meaning": "mua", "example": "I want to buy a new book. (Tôi muốn mua một cuốn sách mới.)" },
+            { "word": "money", "ipa": "/ˈmʌn.i/", "meaning": "tiền", "example": "I don't have much money. (Tôi không có nhiều tiền.)" },
+            { "word": "pay", "ipa": "/peɪ/", "meaning": "trả tiền", "example": "How do you want to pay? (Bạn muốn thanh toán bằng gì?)" },
+            { "word": "phone", "ipa": "/foʊn/", "meaning": "điện thoại", "example": "My phone is ringing. (Điện thoại của tôi đang kêu.)" },
+            { "word": "call", "ipa": "/kɑːl/", "meaning": "gọi điện", "example": "I will call you later. (Tôi sẽ gọi cho bạn sau.)" },
+            { "word": "message", "ipa": "/ˈmes.ɪdʒ/", "meaning": "tin nhắn", "example": "She sent me a text message. (Cô ấy gửi cho tôi một tin nhắn.)" },
+            { "word": "watch", "ipa": "/wɑːtʃ/", "meaning": "xem", "example": "We watch movies on Friday nights. (Chúng tôi xem phim vào tối thứ Sáu.)" },
+            { "word": "television", "ipa": "/ˈtel.ə.vɪʒ.ən/", "meaning": "tivi", "example": "They are watching television. (Họ đang xem tivi.)" },
+            { "word": "internet", "ipa": "/ˈɪn.t̬ɚ.net/", "meaning": "mạng internet", "example": "I use the internet for studying. (Tôi sử dụng internet để học tập.)" },
+            { "word": "read", "ipa": "/riːd/", "meaning": "đọc", "example": "He likes to read books. (Anh ấy thích đọc sách.)" },
+            { "word": "book", "ipa": "/bʊk/", "meaning": "sách", "example": "This is an interesting book. (Đây là một cuốn sách hay.)" },
+            { "word": "relax", "ipa": "/rɪˈlæks/", "meaning": "thư giãn", "example": "I like to relax on the beach. (Tôi thích thư giãn trên bãi biển.)" },
+            { "word": "exercise", "ipa": "/ˈek.sɚ.saɪz/", "meaning": "tập thể dục", "example": "I exercise in the morning. (Tôi tập thể dục vào buổi sáng.)" },
+            { "word": "walk", "ipa": "/wɑːk/", "meaning": "đi bộ", "example": "Let's take a walk in the park. (Hãy đi dạo trong công viên.)" },
+            { "word": "run", "ipa": "/rʌn/", "meaning": "chạy", "example": "He runs very fast. (Anh ấy chạy rất nhanh.)" },
+            { "word": "drink", "ipa": "/drɪŋk/", "meaning": "uống", "example": "I drink a glass of milk. (Tôi uống một ly sữa.)" },
+            { "word": "eat", "ipa": "/iːt/", "meaning": "ăn", "example": "Children love to eat fruit. (Trẻ con thích ăn trái cây.)" },
+            { "word": "water", "ipa": "/ˈwɑː.t̬ɚ/", "meaning": "nước", "example": "Drinking water is good for health. (Uống nước tốt cho sức khỏe.)" },
+            { "word": "coffee", "ipa": "/ˈkɑː.fi/", "meaning": "cà phê", "example": "She drinks coffee every morning. (Cô ấy uống cà phê mỗi sáng.)" },
+            { "word": "tea", "ipa": "/tiː/", "meaning": "trà", "example": "Would you like some tea? (Bạn có muốn uống chút trà không?)" },
+            { "word": "family", "ipa": "/ˈfæm.əl.i/", "meaning": "gia đình", "example": "I love my family very much. (Tôi rất yêu gia đình mình.)" },
+            { "word": "friend", "ipa": "/frend/", "meaning": "bạn bè", "example": "He is my best friend. (Anh ấy là bạn thân của tôi.)" },
+            { "word": "talk", "ipa": "/tɑːk/", "meaning": "nói chuyện", "example": "We love to talk and laugh. (Chúng tôi thích nói chuyện và cười đùa.)" },
+            { "word": "listen", "ipa": "/ˈlɪs.ən/", "meaning": "lắng nghe", "example": "Please listen to the teacher. (Hãy lắng nghe giáo viên.)" },
+            { "word": "hear", "ipa": "/hɪr/", "meaning": "nghe thấy", "example": "Can you hear that sound? (Bạn có nghe thấy âm thanh đó không?)" },
+            { "word": "see", "ipa": "/siː/", "meaning": "nhìn thấy", "example": "I can see the sea from here. (Tôi có thể nhìn thấy biển từ đây.)" },
+            { "word": "look", "ipa": "/lʊk/", "meaning": "nhìn", "example": "Look at the beautiful flowers. (Hãy nhìn những bông hoa đẹp kìa.)" },
+            { "word": "feel", "ipa": "/fiːl/", "meaning": "cảm thấy", "example": "I feel happy today. (Tôi cảm thấy vui vẻ hôm nay.)" },
+            { "word": "think", "ipa": "/θɪŋk/", "meaning": "suy nghĩ", "example": "I think English is fun. (Tôi nghĩ tiếng Anh rất thú vị.)" },
+            { "word": "smile", "ipa": "/smaɪl/", "meaning": "mỉm cười", "example": "She has a nice smile. (Cô ấy có nụ cười đẹp.)" },
+            { "word": "laugh", "ipa": "/læf/", "meaning": "cười to", "example": "His joke made everyone laugh. (Câu đùa của anh ấy làm mọi người cười to.)" }
+        ],
+        "[A1] - Chủ đề 2: Gia đình & Bạn bè": [],
+        "[A1] - Chủ đề 3: Nhà cửa & Đồ đạc": [],
+        "[A1] - Chủ đề 4: Đồ ăn & Thức uống": [],
+        "[A1] - Chủ đề 5: Màu sắc & Số đếm": [],
+        "[A1] - Chủ đề 6: Quần áo & Thời trang": [],
+        "[A1] - Chủ đề 7: Cơ thể người": [],
+        "[A1] - Chủ đề 8: Thời gian & Ngày tháng": [],
+        
+        "[A2] - Chủ đề 9: Du lịch & Giao thông": [],
+        "[A2] - Chủ đề 10: Mua sắm & Tiền bạc": [],
+        "[A2] - Chủ đề 11: Sức khỏe & Y tế": [],
+        "[A2] - Chủ đề 12: Sở thích & Giải trí": [],
+        "[A2] - Chủ đề 13: Thời tiết & Khí hậu": [],
+        "[A2] - Chủ đề 14: Nghề nghiệp & Công việc": [],
+        "[A2] - Chủ đề 15: Động vật & Thú cưng": [],
+        "[A2] - Chủ đề 16: Công nghệ cơ bản": [],
+
+        "[B1] - Chủ đề 17: Giáo dục & Trường học": [],
+        "[B1] - Chủ đề 18: Môi trường tự nhiên": [],
+        "[B1] - Chủ đề 19: Thể thao & Vận động": [],
+        "[B1] - Chủ đề 20: Truyền thông & Báo chí": [],
+        "[B1] - Chủ đề 21: Văn hóa & Phong tục": [],
+        "[B1] - Chủ đề 22: Các mối quan hệ": [],
+        "[B1] - Chủ đề 23: Dịch vụ công cộng": [],
+        "[B1] - Chủ đề 24: Khách sạn & Nhà hàng": [],
+        "[B1] - Chủ đề 25: Lễ hội & Kỷ niệm": [],
+
+        "[B2] - Chủ đề 26: Kinh doanh & Doanh nghiệp": [],
+        "[B2] - Chủ đề 27: Khoa học & Khám phá": [],
+        "[B2] - Chủ đề 28: Chính trị & Xã hội": [],
+        "[B2] - Chủ đề 29: Tội phạm & Pháp luật": [],
+        "[B2] - Chủ đề 30: Nghệ thuật & Sáng tạo": [],
+        "[B2] - Chủ đề 31: Tâm lý học cơ bản": [],
+        "[B2] - Chủ đề 32: Lịch sử & Thời đại": [],
+        "[B2] - Chủ đề 33: Xu hướng tương lai": [],
+        "[B2] - Chủ đề 34: Công nghệ thông tin": [],
+
+        "[C1] - Chủ đề 35: Các khái niệm trừu tượng": [],
+        "[C1] - Chủ đề 36: Đổi mới & Phát minh": [],
+        "[C1] - Chủ đề 37: Toàn cầu hóa": [],
+        "[C1] - Chủ đề 38: Đạo đức & Triết học": [],
+        "[C1] - Chủ đề 39: Kinh tế vĩ mô": [],
+        "[C1] - Chủ đề 40: Kiến trúc & Xây dựng": [],
+        "[C1] - Chủ đề 41: Ngoại giao & Quốc tế": [],
+        "[C1] - Chủ đề 42: Nghiên cứu học thuật": [],
+
+        "[C2] - Chủ đề 43: Thành ngữ (Idioms 1)": [],
+        "[C2] - Chủ đề 44: Thành ngữ (Idioms 2)": [],
+        "[C2] - Chủ đề 45: Cụm động từ (Phrasal Verbs 1)": [],
+        "[C2] - Chủ đề 46: Cụm động từ (Phrasal Verbs 2)": [],
+        "[C2] - Chủ đề 47: Cụm từ cố định (Collocations)": [],
+        "[C2] - Chủ đề 48: Tiếng lóng (Slang)": [],
+        "[C2] - Chủ đề 49: Biểu đạt sắc thái cảm xúc": [],
+        "[C2] - Chủ đề 50: Từ vựng Viết luận Cấp cao": []
+    };
+
+    let vocabData = {};
+    let currentTopic = "";
+    let vocabList = [];
+    let currentIndex = 0;
+
+    function loadDataFromStorage() {
+        vocabData = JSON.parse(JSON.stringify(defaultData));
+        
+        const savedData = localStorage.getItem('teacherVocab_AllInOne');
+        if (savedData) {
+            const parsedSaved = JSON.parse(savedData);
+            for (const topic in parsedSaved) {
+                if (!vocabData[topic]) vocabData[topic] = [];
+                vocabData[topic] = vocabData[topic].concat(parsedSaved[topic]);
+            }
+        }
+    }
+
+    function initApp() {
+        loadDataFromStorage();
+        
+        const topicSelect = document.getElementById("topicSelect");
+        topicSelect.innerHTML = ""; 
+        const topicNames = Object.keys(vocabData);
+
+        if (topicNames.length === 0) {
+            topicSelect.innerHTML = "<option value=''>Chưa có từ vựng</option>";
+            vocabList = [];
+        } else {
+            topicNames.forEach(topic => {
+                const option = document.createElement("option");
+                option.value = topic;
+                option.innerText = topic;
+                topicSelect.appendChild(option);
+            });
+            changeTopic(); // Load chủ đề đầu tiên
+        }
+    }
+
+    function changeTopic() {
+        currentTopic = document.getElementById("topicSelect").value;
+        document.getElementById("newTopic").value = currentTopic; // Tự động điền tên chủ đề vào ô Thêm từ
+        vocabList = vocabData[currentTopic] || [];
+        currentIndex = 0;
+        updateWordDisplay();
+    }
+
+    function updateWordDisplay() {
+        const resultDisplay = document.getElementById("result");
+        resultDisplay.innerText = "";
+
+        if (vocabList.length === 0) {
+            document.getElementById("wordDisplay").innerText = "Chưa có từ";
+            document.getElementById("ipaDisplay").innerText = "";
+            document.getElementById("meaningDisplay").innerText = "Chủ đề này đang trống. Hãy dùng chế độ Giáo viên để thêm từ.";
+            document.getElementById("exampleDisplay").style.display = "none";
+            document.getElementById("counterDisplay").innerText = "";
+            return;
+        }
+
+        const data = vocabList[currentIndex];
+        document.getElementById("wordDisplay").innerText = data.word;
+        document.getElementById("ipaDisplay").innerText = data.ipa;
+        document.getElementById("meaningDisplay").innerText = data.meaning;
+        
+        const exampleDisplay = document.getElementById("exampleDisplay");
+        if (data.example) {
+            exampleDisplay.style.display = "block";
+            exampleDisplay.innerHTML = "💡 <b>Ví dụ:</b> " + data.example;
+        } else {
+            exampleDisplay.style.display = "none";
+            exampleDisplay.innerHTML = "";
+        }
+
+        document.getElementById("counterDisplay").innerText = `Từ ${currentIndex + 1} / ${vocabList.length}`;
+    }
+
+    function nextWord() {
+        if (vocabList.length > 0) {
+            currentIndex = (currentIndex + 1) % vocabList.length;
+            updateWordDisplay();
+        }
+    }
+
+    function listenWord() {
+        if (vocabList.length === 0) return;
+        const utterance = new SpeechSynthesisUtterance(vocabList[currentIndex].word);
+        utterance.lang = 'en-US'; 
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+    }
+
+    function speakWord() {
+        if (vocabList.length === 0) return;
+        const resultDisplay = document.getElementById("result");
+        resultDisplay.innerText = "Đang nghe... (Nói vào micro)";
+        resultDisplay.style.color = "#2980b9";
+
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            resultDisplay.innerText = "Trình duyệt không hỗ trợ. Hãy dùng Google Chrome!";
+            return;
+        }
+
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.start();
+
+        recognition.onresult = function(event) {
+            const spokenWord = event.results[0][0].transcript.toLowerCase().trim().replace(/[^a-z\s]/g, '');
+            const targetWord = vocabList[currentIndex].word.toLowerCase().trim().replace(/[^a-z\s]/g, '');
+
+            if (spokenWord === targetWord) {
+                resultDisplay.innerHTML = "🎉 Chính xác!";
+                resultDisplay.className = "correct";
+            } else {
+                resultDisplay.innerHTML = `Chưa đúng. Bạn đọc là: "<b>${event.results[0][0].transcript}</b>"`;
+                resultDisplay.className = "incorrect";
+            }
+        };
+    }
+
+    function toggleTeacherArea() {
+        const area = document.getElementById("teacherArea");
+        area.style.display = area.style.display === "none" || area.style.display === "" ? "block" : "none";
+    }
+
+    function addNewWord() {
+        const topic = document.getElementById("newTopic").value.trim();
+        const word = document.getElementById("newWord").value.trim();
+        const ipa = document.getElementById("newIpa").value.trim();
+        const meaning = document.getElementById("newMeaning").value.trim();
+
+        if (!topic || !word || !meaning) {
+            alert("Vui lòng điền đầy đủ Chủ đề, Từ tiếng Anh và Nghĩa!");
+            return;
+        }
+
+        let savedData = JSON.parse(localStorage.getItem('teacherVocab_AllInOne') || '{}');
+        if (!savedData[topic]) savedData[topic] = [];
+        savedData[topic].push({ word, ipa, meaning });
+        localStorage.setItem('teacherVocab_AllInOne', JSON.stringify(savedData));
+
+        document.getElementById("saveMsg").innerText = "✔ Đã thêm từ vựng thành công!";
+        document.getElementById("newWord").value = "";
+        document.getElementById("newIpa").value = "";
+        document.getElementById("newMeaning").value = "";
+        setTimeout(() => document.getElementById("saveMsg").innerText = "", 3000);
+
+        initApp(); // Tải lại toàn bộ dữ liệu
+        document.getElementById("topicSelect").value = topic; // Trỏ về chủ đề vừa lưu
+        changeTopic();
+    }
+
+    window.onload = initApp;
+</script>
+
+</body>
+</html>
